@@ -13,7 +13,7 @@ case class Authenticator(token: Option[Token], tokenService: TokenService)(
 
   def authorized: Future[AuthenticatedUser] = token match {
     case Some(tokenValue) =>
-      payloadFromToken(tokenValue).map(payload => AuthenticatedUser(???, ???)) // TODO:bcm
+      payloadFromToken(tokenValue)
     case None =>
       Future.failed(AuthenticationException)
   }

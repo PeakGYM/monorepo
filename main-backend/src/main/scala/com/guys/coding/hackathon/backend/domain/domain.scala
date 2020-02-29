@@ -5,7 +5,7 @@ import java.time.ZonedDateTime
 sealed trait UserId
 
 object UserId {
-  case class ClientId(value: String)  extends  UserId
+  case class ClientId(value: String)  extends UserId
   case class TrainerId(value: String) extends UserId
 }
 
