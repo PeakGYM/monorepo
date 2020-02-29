@@ -1,0 +1,1 @@
+let toJSON = Json.Encode.float;
