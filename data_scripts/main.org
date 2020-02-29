@@ -1,0 +1,6 @@
+* GetData
+
+#+BEGIN_SRC bash
+query="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?parameters"
+
+#+END_SRC

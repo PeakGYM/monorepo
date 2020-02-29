@@ -122,9 +122,8 @@
 [@react.component] [@bs.module "antd"]
 external make:
   (
-    ~dateCellRender: float => React.element,
-    ~format: string=?,
-    ~disabledDate: MomentRe.Moment.t => bool=?,
+    ~dateCellRender: MomentRe.Moment.t => React.element,
+    ~onChange: MomentRe.Moment.t => unit,
     ~disabledTime: Js.Nullable.t(MomentRe.Moment.t) => 'a=?,
     ~timePicker: React.element=?,
     ~showTime: bool=?,

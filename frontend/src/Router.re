@@ -1,12 +1,16 @@
 type t =
   | Main
-  | Schedule(string);
+  | Schedule
+  | Day(string)
+  | Map;
 
 let toRoute = (v: ReasonReactRouter.url) => {
   let {path, _}: ReasonReactRouter.url = v;
 
   switch (path) {
-  | ["schedules", id] => Schedule(id)
+  | ["schedule"] => Schedule
+  | ["trainings", day] => Day(day)
+  | ["map"] => Map
   | _ => Main
   };
 };
@@ -15,7 +19,9 @@ let toUrl =
   fun
   | Main => "/"
 
-  | Schedule(id) => {j|/schedules/$id|j};
+  | Schedule => {j|/schedule|j}
+  | Day(day) => {j|/trainings/$day|j}
+  | Map => "/map";
 
 // let toKey =
 //   fun

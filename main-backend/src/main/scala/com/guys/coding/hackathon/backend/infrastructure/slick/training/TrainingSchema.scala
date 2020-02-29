@@ -39,6 +39,7 @@ object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscod
       clientId: ClientId,
       dateFrom: ZonedDateTime,
       dateTo: ZonedDateTime,
+      plannedExercises: List[PlannedExercise],
       inperson: Boolean
   ) {
     def toDomain = Training(
@@ -49,6 +50,7 @@ object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscod
       clientId = clientId,
       dateFrom = dateFrom,
       dateTo = dateTo,
+      exercises = plannedExercises,
       inperson = inperson
     )
   }
@@ -57,6 +59,7 @@ object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscod
     id = t.id,
     name = t.name,
     muscleGroup = t.muscleGroup.map(muscleGroupToDTO),
+    plannedExercises = t.exercises,
     coachId = t.coachId,
     clientId = t.clientId,
     dateFrom = t.dateFrom,
@@ -107,6 +110,7 @@ object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscod
         client,
         dateFrom,
         dateTo,
+        plannedExercises,
         inperson
       ) <> (TrainingDTO.tupled, TrainingDTO.unapply)
   }

@@ -23,6 +23,7 @@ case class Training(
     coachId: Option[CoachId],
     clientId: ClientId,
     dateFrom: ZonedDateTime,
+    exercises: List[PlannedExercise],
     dateTo: ZonedDateTime,
     inperson: Boolean
 )

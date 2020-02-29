@@ -6,6 +6,7 @@ import hero.common.logging.Logger
 import hero.common.logging.slf4j.LoggingConfigurator
 import com.guys.coding.hackathon.backend.infrastructure.slick.example.ExampleSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo
+import org.http4s.server.staticcontent._
 import com.guys.coding.hackathon.backend.api.graphql.core.GraphqlRoute
 import com.guys.coding.hackathon.backend.infrastructure.jwt.JwtTokenService
 import hero.common.crypto.KeyReaders.{PrivateKeyReader, PublicKeyReader}
@@ -13,7 +14,11 @@ import org.http4s.server.Router
 import org.http4s.server.blaze.BlazeServerBuilder
 import org.http4s.server.middleware.CORS
 import org.http4s.syntax.kleisli._
-
+import cats.implicits._
+import cats.effect.Blocker
+import cats.effect.Resource
+import org.http4s.server.Server
+import cats.effect.ExitCode
 import scala.concurrent.ExecutionContext
 import hero.common.util.LoggingExt
 import com.guys.coding.hackathon.backend.infrastructure.slick.gym.GymSchema
@@ -74,22 +79,25 @@ class Application(config: ConfigValues)(
 
   val graphqlRoute = new GraphqlRoute(services)
 
-  private val routes = Router(
-    "/graphql" -> graphqlRoute.route
-  ).orNotFound
+  def start()(implicit t: Timer[IO]): IO[ExitCode] = {
 
-  def start()(implicit t: Timer[IO]): IO[Unit] = {
-
-    for {
-      _ <- appLogger.info(s"Started server at ${config.app.bindHost}:${config.app.bindPort}")
-      _ <- BlazeServerBuilder[IO]
-            .bindHttp(config.app.bindPort, config.app.bindHost)
-            .withHttpApp(CORS(routes))
-            .serve
-            .compile
-            .drain
-    } yield ()
-
+    val app: Resource[IO, Server[IO]] =
+      for {
+        blocker <- Blocker[IO]
+        server <- BlazeServerBuilder[IO]
+                   .bindHttp(8080)
+                   .bindHttp(config.app.bindPort, config.app.bindHost)
+                   .withHttpApp(
+                     CORS(
+                       Router(
+                         "/graphql" -> graphqlRoute.route,
+                         "/assets"  -> fileService[IO](FileService.Config("/assets", blocker))
+                       ).orNotFound
+                     )
+                   )
+                   .resource
+      } yield server
+    app.use(_ => appLogger.info(s"Started server at ${config.app.bindHost}:${config.app.bindPort}").flatMap(_ => IO.never)).as(ExitCode.Success)
   }
 
 }
