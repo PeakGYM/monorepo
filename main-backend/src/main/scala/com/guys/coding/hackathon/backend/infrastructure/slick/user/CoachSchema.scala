@@ -6,7 +6,7 @@ import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._
 import slick.jdbc.JdbcType
 import slick.lifted.{TableQuery, Tag}
 
-class Coacheschema extends SlickSchemas {
+class CoachSchema extends SlickSchemas {
   implicit val CoachIdMap: JdbcType[CoachId] = MappedColumnType.base[CoachId, String](_.value, CoachId)
 
   case class CoachDTO(
