@@ -130,7 +130,7 @@ def coachIds() = scala.util.Random.shuffle((1 to 30).toList.map(_.toString)).tak
 
 
 def gymLine(i:Int,g:Gym) ={
-  val coaches = "[" + coachIds().map(c => s""""$c",""" ).mkString + "]"
+  val coaches = "[" + coachIds().map(c => s""""$c",""" ).mkString.stripSuffix(",") + "]"
   val img = g.imageUrl.map(i => s"'$i'").getOrElse("NULL")
   s"""insert into gym(id, name, location,imgurl, "coachIds") values ('$i', '${g.name}', ST_SetSRID(ST_Point(${g.lat}, ${g.lng}), 4326),$img , '$coaches');"""
 }
