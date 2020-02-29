@@ -1,0 +1,109 @@
+.ant-picker-calendar {
+  font-size: 36px;
+}
+
+.ant-picker-calendar .ant-picker-body {
+  padding: 0 !important;
+}
+.ant-picker-calendar .ant-radio-button-wrapper {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-picker-calendar .ant-select-item-option-content {
+  font-size: 30px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-picker-calendar .ant-picker-calendar-header {
+  padding: 4rem 0;
+}
+
+.ant-picker-calendar .ant-select-single .ant-select-selector {
+  height: 50px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+}
+
+.ant-picker-calendar-full
+  .ant-picker-calendar-header
+  .ant-picker-calendar-year-select {
+  width: 200px;
+  height: 50px;
+  font-size: 30px;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+}
+
+.ant-picker-calendar-full
+  .ant-picker-calendar-header
+  .ant-picker-calendar-month-select {
+  width: 200px;
+  height: 50px;
+  font-size: 30px;
+}
+
+.ant-picker-calendar-full
+  .ant-picker-calendar-header
+  .ant-picker-calendar-mode-switch {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  font-size: 30px;
+}
+
+.ant-radio-button-wrapper-checked:first-child {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.ant-select-single.ant-select-show-arrow .ant-select-selection-search {
+  height: 50px;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-body th {
+  height: 80px;
+  padding: 0 12px 5px 0;
+  line-height: 18px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.ant-picker-content th {
+  height: 50px;
+}
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+}
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-value {
+  flex: 1;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ant-picker-calendar-date-content {
+  flex: 1;
+}
