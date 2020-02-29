@@ -6,11 +6,12 @@ import com.guys.coding.hackathon.backend.domain.training.Series
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.DtoMappings
 import slick.lifted.{TableQuery, Tag}
 import java.time.ZonedDateTime
+import hero.common.postgres.newtype.NewtypeTranscoders
 import com.guys.coding.hackathon.backend.domain.UserId.CoachId
 import com.guys.coding.hackathon.backend.domain.UserId.ClientId
 import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes._
 
-object TrainingSchema extends SlickSchemas with DtoMappings {
+object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscoders {
   case class TrainingDTO(
       id: String,
       name: String,
@@ -53,6 +54,22 @@ object TrainingSchema extends SlickSchemas with DtoMappings {
         dateTo,
         archived
       ) <> (TrainingDTO.tupled, TrainingDTO.unapply)
+  }
+
+  class PlannedExercises(tag: Tag) extends Table[ExerciseDTO](tag, "planned_exercise") {
+
+    def id            = column[String]("id", O.PrimaryKey)
+    def plannedSeries = column[List[Series]]("planned_series")
+    def doneSeries    = column[List[Series]]("planned_series")
+    def restAfter     = column[Int]("rest_after")
+
+    override def * = ???
+    (
+      id,
+      plannedSeries,
+      doneSeries,
+      restAfter
+    ) <> (PlannedExerciseDTO.tupled, PlannedExerciseDTO.unapply)
   }
 
 }
