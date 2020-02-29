@@ -1,8 +1,8 @@
-version: "3.1"
+version: "3.2"
 
 services:
   backend:
-    image: alamakota/hackathon-backend:0.3
+    image: supernovaunwired/whitewolf-hackathon-backend:0.1
     ports:
       - "8080:8080"
     restart: always
@@ -11,8 +11,9 @@ services:
       PUBLIC_KEY_PATH: /keys/public.der
     volumes:
       - type: bind
-        source: /home/owner/git/foss/scala/hackathon-backend/.private
-        target: /keys # TODO:bcm  read only
+        source: /root/keys
+        target: /keys
+        read_only: true
 
   postgres:
     image: mdillon/postgis:9.6
