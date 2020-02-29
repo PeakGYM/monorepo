@@ -4,7 +4,7 @@ let make = () =>
     className=TW.(
       [Display(Flex), Padding(P8), BackgroundColor(BgGreen400)] |> make
     )>
-    <h1 className=TW.([FontSize(Text5xl), TextColor(TextWhite)] |> make)>
+    <span className=TW.([TextColor(TextWhite)] |> make)>
       "Peak GYM"->React.string
-    </h1>
+    </span>
   </nav>;
