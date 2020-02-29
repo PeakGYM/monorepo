@@ -17,9 +17,9 @@ object CoachSchema extends SlickSchemas {
       pictureId: PictureId
   )
 
-  override def schemas = List(clients)
+  override def schemas = List(coaches)
 
-  val clients = TableQuery[Coaches]
+  val coaches = TableQuery[Coaches]
 
   class Coaches(tag: Tag) extends Table[CoachDTO](tag, "coach") {
 
