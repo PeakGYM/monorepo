@@ -4,6 +4,7 @@ import java.time.ZonedDateTime
 
 import cats.effect.{ContextShift, IO}
 import com.guys.coding.hackathon.backend.domain.MeasurementId.MeasurementId
+import com.guys.coding.hackathon.backend.domain.UserId.ClientId
 import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes.MeasurementIdMap
 import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes.ClientIdMap
 import com.guys.coding.hackathon.backend.domain.user.{Client, Measurement, MeasurementRepository}
@@ -32,11 +33,11 @@ class SlickMeasurementRepository(implicit db: Database, ec: ExecutionContext, cs
       result <- getFirstEntityByMatcherAction(_.id === measurement.id)
     } yield toDomain(result.get))
 
-  override def getAllFor(client: Client): IO[List[Measurement]] =
-    runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, _.clientId === client.id, None)).map(_.map(toDomain).toList)
+  override def getAllFor(clientId: ClientId): IO[List[Measurement]] =
+    runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, _.clientId === clientId, None)).map(_.map(toDomain).toList)
 
-  override def getMostRecentFor(client: Client): IO[Measurement] =
+  override def getMostRecentFor(clientId: ClientId): IO[Measurement] =
     runIO {
-      measurements.sortBy(_.timestamp).take(1).result.head
+      measurements.filter(_.clientId === clientId).sortBy(_.timestamp).take(1).result.head
     }.map(toDomain)
 }

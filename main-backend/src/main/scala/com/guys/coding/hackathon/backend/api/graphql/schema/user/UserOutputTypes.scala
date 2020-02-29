@@ -1,7 +1,7 @@
 package com.guys.coding.hackathon.backend.api.graphql.schema.user
 
 import com.guys.coding.hackathon.backend.api.graphql.schema.CommonOutputTypes
-import com.guys.coding.hackathon.backend.domain.user.{Client, ClientCoachCooperation, Coach, Measurement}
+import com.guys.coding.hackathon.backend.domain.user.{Client, ClientCoachCooperation, Measurement}
 import sangria.macros.derive.deriveObjectType
 import sangria.schema.ObjectType
 
