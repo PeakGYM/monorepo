@@ -1,10 +1,10 @@
-module Training = [%graphql
+module UpdateWorkout = [%graphql
   {|
-  query Trainings(
-    $workoutId: String!,
+  mutation UpdateWorkout(
+    $training: WorkoutInput!,
     ) {
-    workout(
-      workoutId: $workoutId,
+    updateWorkout(
+      training: $training,
     ) {
         id
         name
@@ -39,8 +39,8 @@ module Training = [%graphql
 |}
 ];
 
-let use = (~id) => {
-  let variables = Training.makeVariables(~workoutId=id, ());
+let use = ((), ~training) => {
+  let variables = UpdateWorkout.makeVariables(~training, ());
 
-  ApolloHooks.useQuery(~variables, Training.definition);
+  ApolloHooks.useMutation(~variables, UpdateWorkout.definition);
 } /* module Query = ApolloHooks.Query.Make(Training)*/;

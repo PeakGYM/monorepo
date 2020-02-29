@@ -18,7 +18,6 @@ let toRoute = (v: ReasonReactRouter.url) => {
 let toUrl =
   fun
   | Main => "/"
-
   | Schedule => {j|/schedule|j}
   | Day(day) => {j|/trainings/$day|j}
   | Map => "/map";

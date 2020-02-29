@@ -2,13 +2,16 @@ body {
   font-size: 400%;
 }
 
-<<<<<<< HEAD
 nav {
   background: #1890ff;
-=======
+}
+
 .leaflet-container {
   height: 100%;
   width: auto;
   position: relative;
->>>>>>> 0abb0c10952fe51fa39f3d3923469d4eaf122487
+}
+
+button {
+  outline: none !important;
 }

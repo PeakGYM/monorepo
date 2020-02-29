@@ -6,16 +6,18 @@ let startMonth = date => {
 
 let endMonth = date => date |> Moment.endOf(`month) |> Moment.valueOf;
 
-let mock = {
-  "id": "1",
-  "name": "Trener Paweł",
-  "trainer": "123",
-  "client": "123",
-  "dateFrom": Js.Date.now(),
-  "dateTo": Js.Date.now(),
-  "exercises": [|{"id": 1}|],
-  "muscleGroup": "Back",
-};
+let mock = () => [|
+  {
+    "id": "1",
+    "name": "Trener Paweł",
+    "trainer": "123",
+    "client": "123",
+    "dateFrom": Js.Date.now(),
+    "dateTo": Js.Date.now(),
+    "exercises": [|{"id": 1}|],
+    "muscleGroup": [|`Back|],
+  },
+|];
 
 type muscleGroup =
   | Chest
@@ -26,11 +28,12 @@ type muscleGroup =
 
 let toColor =
   fun
-  | "Back" => "#e53e3e"
-  | "Shoulders" => "#38a169"
-  | "Arms" => "#3182ce"
-  | "Legs" => "#d69e2e"
-  | _ => "transparent";
+  | Some(`Back) => "#e53e3e"
+  | Some(`Shoulders) => "#38a169"
+  | Some(`Arms) => "#3182ce"
+  | Some(`Legs) => "#d69e2e"
+  | Some(`Chest) => "#805AD5"
+  | None => "transparent";
 
 let renderTraining = (~date, ~workout) => {
   let from =
@@ -54,26 +57,32 @@ let make = () => {
   <div className=TW.([Padding(P8)] |> make)>
     <Calendar
       dateCellRender={date => {
-        let hasTrainig = renderTraining(~date, ~workout=mock);
         switch (data) {
-        | Data(_data) => <Text content="Error" />
-        | Error(_) =>
+        | Error(_data) => <Text content="Error" />
+        | Data(data) =>
           let ms = date |> Moment.valueOf |> Js.Float.toString;
+          // data##workouts
+          mock()
+          ->Array.map(w => {
+              let hasTrainig = renderTraining(~date, ~workout=w);
 
-          hasTrainig
-            ? <div
-                onClick={_ => Router.go(Router.Day(ms))}
-                style={ReactDOMRe.Style.make(
-                  ~background=toColor(mock##muscleGroup),
-                  ~width="24px",
-                  ~height="24px",
-                  ~borderRadius="50%",
-                  (),
-                )}
-              />
-            : React.null;
+              hasTrainig
+                ? <div
+                    onClick={_ => Router.go(Router.Day(ms))}
+                    style={ReactDOMRe.Style.make(
+                      ~background=toColor(w##muscleGroup->Array.get(0)),
+                      ~width="24px",
+                      ~height="24px",
+                      ~borderRadius="50%",
+                      (),
+                    )}
+                  />
+                : React.null;
+            })
+          ->React.array;
+
         | _ => React.null
-        };
+        }
       }}
       onChange={date => {
         setTo(_ => date |> endMonth);

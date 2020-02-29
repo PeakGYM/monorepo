@@ -14,8 +14,9 @@ module Training = [%graphql
         name
         coachId
         clientId
-        dateFrom
-        dateTo
+        dateFrom @bsDecoder(fn: "Time.fromJSON")
+        dateTo  @bsDecoder(fn: "Time.fromJSON")
+        muscleGroup
 
     }
   }
