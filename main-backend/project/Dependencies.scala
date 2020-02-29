@@ -30,6 +30,9 @@ object Dependencies {
   private val http4sDependencies = Seq(
     "org.http4s"   %% "http4s-blaze-server" % Http4sVersion,
     "org.http4s"   %% "http4s-circe"        % Http4sVersion,
+
+  "org.http4s" %% "http4s-dsl" % Http4sVersion,
+  "org.http4s" %% "http4s-blaze-client" % Http4sVersion,
     "org.http4s"   %% "http4s-dsl"          % Http4sVersion,
     "io.circe"     %% "circe-generic"       % CirceVersion,
     "io.circe"     %% "circe-optics"        % CirceOpticsVersion,

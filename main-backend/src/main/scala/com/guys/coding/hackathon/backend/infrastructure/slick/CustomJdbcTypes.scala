@@ -30,11 +30,14 @@ object CustomJdbcTypes {
   implicit val SeriesMapper: JdbcType[Series] with BaseTypedType[Series] =
     MappedColumnType.base[Series, Json](seriesToJson, seriesFromJson)
 
+
   implicit val palnnedExerciseDecoder                  = deriveDecoder[PlannedExercise]
   implicit val palnnedExerciseEncoder                  = deriveEncoder[PlannedExercise]
   def palnnedExerciseToJson: PlannedExercise => Json   = _.asJson
   def palnnedExerciseFromJson: Json => PlannedExercise = _.as[PlannedExercise].toOption.get
   implicit val PalnnedExerciseMapper: JdbcType[PlannedExercise] with BaseTypedType[PlannedExercise] =
     MappedColumnType.base[PlannedExercise, Json](palnnedExerciseToJson, palnnedExerciseFromJson)
+
+
 
 }
