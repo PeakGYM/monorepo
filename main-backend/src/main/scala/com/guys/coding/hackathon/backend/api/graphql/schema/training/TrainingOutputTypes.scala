@@ -10,7 +10,7 @@ import cats.data.NonEmptyList
 import scala.concurrent.Future
 import sangria.execution.deferred.HasId
 import com.guys.coding.hackathon.backend.api.graphql.service.GraphqlSecureContext
-import com.guys.coding.hackathon.backend.infrastructure.slick.training.TrainingSchema.Training
+import com.guys.coding.hackathon.backend.infrastructure.slick.training.TrainingSchema.MuscleGroup
 
 object TrainingOutputTypes extends CommonOutputTypes {
 
@@ -44,6 +44,8 @@ object TrainingOutputTypes extends CommonOutputTypes {
       )
     )
   )
+
+  implicit val MuscleGrouptype = deriveEnumType[MuscleGroup]()
 
   implicit val TrainingType: ObjectType[GraphqlSecureContext, Training] = deriveObjectType(ObjectTypeName("Workout"))
 
