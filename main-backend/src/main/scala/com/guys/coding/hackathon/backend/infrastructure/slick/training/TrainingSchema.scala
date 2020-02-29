@@ -15,12 +15,11 @@ object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscod
   case class Training(
       id: String,
       name: String,
-      coach: Option[CoachId],
-      client: ClientId,
+      coachId: Option[CoachId],
+      clientId: ClientId,
       dateFrom: ZonedDateTime,
       dateTo: ZonedDateTime,
-      inperson: Boolean,
-      archived: Boolean
+      inperson: Boolean
   )
 
   override def schemas = List(trainings)
@@ -37,7 +36,6 @@ object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscod
     def dateTo           = column[ZonedDateTime]("time_to")
     def plannedExercises = column[List[PlannedExercise]]("planned_exercises")
     def inperson         = column[Boolean]("inperson")
-    def archived         = column[Boolean]("archived")
 
     override def * =
       (
@@ -47,8 +45,7 @@ object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscod
         client,
         dateFrom,
         dateTo,
-        inperson,
-        archived
+        inperson
       ) <> (Training.tupled, Training.unapply)
   }
 

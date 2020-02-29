@@ -18,7 +18,8 @@
     "re-tailwind",
     "reason-apollo-hooks",
     "reason-apollo",
-    "reason-react"
+    "reason-react",
+    "bs-moment"
   ],
   "warnings": {
     "error": "+101"
