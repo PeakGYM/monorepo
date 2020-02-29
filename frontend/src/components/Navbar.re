@@ -1,10 +1,7 @@
 [@react.component]
 let make = () =>
-  <nav
-    className=TW.(
-      [Display(Flex), Padding(P8), BackgroundColor(BgGreen400)] |> make
-    )>
+  <nav className=TW.([Display(Flex), Padding(P8)] |> make)>
     <span className=TW.([TextColor(TextWhite)] |> make)>
-      "Peak GYM"->React.string
+      <Text content="Peak GYM" />
     </span>
   </nav>;

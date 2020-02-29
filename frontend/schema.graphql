@@ -1,10 +1,5 @@
 # source: https://api-wwh.codevillains.me/graphql
-# timestamp: Sat Feb 29 2020 15:21:27 GMT+0100 (czas środkowoeuropejski standardowy)
-"""
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
-scalar Long
+# timestamp: Sat Feb 29 2020 19:25:21 GMT+0100 (czas środkowoeuropejski standardowy)
 
 type CreateExampleResult {
   result: String
@@ -14,6 +9,12 @@ type CreateExampleResult {
 input ExampleInput {
   id: String!
   value: String!
+}
+
+type Exercise {
+  id: String!
+  imgurl: String!
+  name: String!
 }
 
 type Gym {
@@ -28,37 +29,89 @@ type Location {
   lng: Float!
 }
 
-type Serie {
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+enum MuscleGroup {
+  Arms
+  Legs
+  Shoulders
+  Back
+  Chest
+}
+
+type Mutation {
+  addExample(example: ExampleInput!): CreateExampleResult!
+  addWorkout(training: WorkoutInput!): Workout
+  updateWorkout(training: WorkoutInput!): Workout
+}
+
+type PlannedExercise {
+  trainingId: String!
+  plannedSeries: [Series!]!
+  doneSeries: [Series!]!
+  restAfter: Int!
+  id: String!
+  exercise: Exercise
+}
+
+input PlannedExerciseInput {
+  exerciseId: String!
+  trainingId: String!
+  plannedSeries: [SeriesInput!]!
+  doneSeries: [SeriesInput!]!
+  restAfter: Int!
+}
+
+type Query {
+  gyms(lat: Float!, lng: Float!): [Gym!]!
+  workouts(
+    from: Long!
+    to: Long!
+    coachId: String
+    clientId: String
+  ): [Workout!]!
+  workout(workoutId: String!): Workout
+  exercises: [Exercise!]!
+}
+
+type Series {
   id: String!
   reps: Int!
-  rest: Int! #seconds
+  rest: Int!
   weight: Int
 }
 
-type Exercise {
+input SeriesInput {
   id: String!
-  imageUrl: String!
-  name: String!
-  plannedSeries: [Serie]!
-  doneSeries: [Serie]!
-  restAfter: Int!
+  reps: Int!
+  rest: Int!
+  weight: Int
 }
 
 type Workout {
   id: String!
   name: String!
-  trainer: String!
-  client: String
+  muscleGroup: [MuscleGroup!]!
+  coachId: String
+  clientId: String!
+  dateFrom: Long!
+  exercises: [PlannedExercise!]!
+  dateTo: Long!
+  inperson: Boolean!
+}
+
+input WorkoutInput {
+  id: String!
+  name: String!
+  muscleGroup: [String!]!
+  coachId: String
+  clientId: String!
   dateFrom: Long!
   dateTo: Long!
-  exercises: [Exercise!]!
-}
-
-type Mutation {
-  addExample(example: ExampleInput!): CreateExampleResult!
-}
-
-type Query {
-  gyms(lat: Float!, lng: Float!): [Gym!]!
-  trainings(from: Long!, to: Long!, clientId: String): [Workout!]!
+  exercises: [PlannedExerciseInput!]!
+  inperson: Boolean!
 }

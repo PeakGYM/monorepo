@@ -19,7 +19,8 @@ let make = () => {
         <Navbar />
         {switch (route) {
          | Main => <Main_View />
-         | Schedule(id) => <Schedule_View id />
+         | Schedule => <Schedule_View />
+         | Day(id) => <Day_View id />
          }}
       </div>
     </ApolloHooks.Provider>

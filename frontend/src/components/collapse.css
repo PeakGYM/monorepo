@@ -1,0 +1,23 @@
+/* .ant-collapse .ant-collapse-item {
+  padding: 0;
+  border-width: 0;
+  background-color: transparent;
+}
+
+
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header::after {
+  display: none;
+} */
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  background: white;
+}
+.ant-collapse .anticon.anticon-right.ant-collapse-arrow {
+  display: none;
+}
+
+.ant-collapse-item {
+  display: flex;
+  flex-direction: column-reverse;
+}
