@@ -8,16 +8,20 @@ let lng = 19.9489974;
 let make = () => {
   let (simple, _full) = Gym_Query.use(~lat, ~lng);
 
-  React.useEffect0(() => {
-    loadMap("") |> ignore;
-    None;
-  });
+  let coaches =
+    switch (simple) {
+    | Data(data) => data##gyms
+    | _ => [||]
+    };
 
-  switch (simple) {
-  | Data(data) => Js.log(data)
-  | Error(_) => Js.log("EEEERRRR")
-  | _ => Js.log("ERRROOOR")
-  };
+  React.useEffect1(
+    () => {
+      Js.log(coaches);
+      loadMap(coaches) |> ignore;
+      None;
+    },
+    [|coaches|],
+  );
 
   <div
     id="map-container"
