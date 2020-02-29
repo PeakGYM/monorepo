@@ -1,10 +1,10 @@
 package com.guys.coding.hackathon.backend.infrastructure.slick.gym
 
+import com.guys.coding.hackathon.backend.domain.UserId.CoachId
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.SlickSchemas
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._
 import slick.lifted.{TableQuery, Tag}
 import com.guys.coding.hackathon.backend.domain.gym._
-import com.guys.coding.hackathon.backend.domain.coach._
 import hero.common.postgres.newtype.NewtypeTranscoders
 import io.circe.{Json, _}
 import com.guys.coding.hackathon.backend.domain.Location

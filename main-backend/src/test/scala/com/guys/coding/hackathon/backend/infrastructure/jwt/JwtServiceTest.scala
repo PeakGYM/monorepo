@@ -6,7 +6,7 @@ import hero.common.crypto.KeyReaders.PublicKeyReader
 import hero.common.crypto.KeyReaders.PrivateKeyReader
 import com.guys.coding.hackathon.backend.domain.UserId.ClientId
 import hero.common.util.IdProvider
-import com.guys.coding.hackathon.backend.domain.UserId.TrainerId
+import com.guys.coding.hackathon.backend.domain.UserId.CoachId
 
 class JwtServiceTest extends FlatSpec with Matchers {
 
@@ -23,8 +23,8 @@ class JwtServiceTest extends FlatSpec with Matchers {
     user.id shouldBe id
   }
 
-  it should "work for trainer" in {
-    val id    = TrainerId(IdProvider.id.newId())
+  it should "work for coach" in {
+    val id    = CoachId(IdProvider.id.newId())
     val token = jwtService.generateToken(id)
     val user  = jwtService.validateToken(token.value).get
     user.id shouldBe id

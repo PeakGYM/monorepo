@@ -1,7 +1,7 @@
 package com.guys.coding.hackathon.backend.domain.gym
 
-import com.guys.coding.hackathon.backend.domain.coach.CoachId
 import com.guys.coding.hackathon.backend.domain.Location
+import com.guys.coding.hackathon.backend.domain.UserId.CoachId
 
 case class GymId(value: String) extends AnyVal
 

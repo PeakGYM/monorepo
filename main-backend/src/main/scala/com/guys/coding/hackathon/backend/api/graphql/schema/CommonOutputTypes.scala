@@ -3,7 +3,7 @@ package com.guys.coding.hackathon.backend.api.graphql.schema
 import sangria.macros.derive._
 import sangria.schema._
 import com.guys.coding.hackathon.backend.domain.Location
-import com.guys.coding.hackathon.backend.domain.coach.CoachId
+import com.guys.coding.hackathon.backend.domain.UserId.CoachId
 import com.guys.coding.hackathon.backend.domain.gym.GymId
 
 trait CommonOutputTypes {

@@ -20,7 +20,7 @@ import com.guys.coding.hackathon.backend.domain.UserId
 import com.guys.coding.hackathon.backend.domain.UserId.ClientId
 import io.circe.syntax._
 import io.circe._
-import com.guys.coding.hackathon.backend.domain.UserId.TrainerId
+import com.guys.coding.hackathon.backend.domain.UserId.CoachId
 import hero.common.util.time.TimeUtils
 
 class JwtTokenService(publicKey: PublicKey, privateKey: PrivateKey) extends TokenService {
@@ -32,13 +32,13 @@ class JwtTokenService(publicKey: PublicKey, privateKey: PrivateKey) extends Toke
   private val ROLE           = "ROLE"
 
   private val CLIENT  = "CLIENT"
-  private val TRAINER = "TRAINER"
+  private val COACH = "COACH"
 
   def generateToken(userId: UserId): Token = {
 
     val (role, subject) = userId match {
       case ClientId(value)  => (CLIENT, value)
-      case TrainerId(value) => (TRAINER, value)
+      case CoachId(value) => (COACH, value)
     }
 
     val additionalClaims = Map(
@@ -80,7 +80,7 @@ class JwtTokenService(publicKey: PublicKey, privateKey: PrivateKey) extends Toke
         parser.decode[Map[String, String]](claim.content).getOrElse(throw new IllegalStateException("Invalid additional claims "))
 
       val userId = additional(ROLE) match {
-        case `TRAINER` => TrainerId(id)
+        case `COACH` => CoachId(id)
         case `CLIENT`  => ClientId(id)
       }
 

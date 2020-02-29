@@ -6,7 +6,7 @@ sealed trait UserId
 
 object UserId {
   case class ClientId(value: String)  extends UserId
-  case class TrainerId(value: String) extends UserId
+  case class CoachId(value: String) extends UserId
 }
 
 case class AuthenticatedUser(id: UserId, isuedAt: ZonedDateTime)
