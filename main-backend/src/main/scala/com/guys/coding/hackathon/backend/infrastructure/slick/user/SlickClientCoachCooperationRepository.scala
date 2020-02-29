@@ -2,6 +2,7 @@ package com.guys.coding.hackathon.backend.infrastructure.slick.user
 
 import cats.effect.{ContextShift, IO}
 import com.guys.coding.hackathon.backend.domain.UserId
+import com.guys.coding.hackathon.backend.domain.UserId.{ClientId, CoachId}
 import com.guys.coding.hackathon.backend.domain.user.{Client, ClientCoachCooperation, ClientCoachCooperationRepository, Coach}
 import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes.{ClientIdMap, CoachIdMap}
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo
@@ -26,18 +27,18 @@ class SlickClientCoachCooperationRepository(implicit db: Database, ec: Execution
       result <- getFirstEntityByMatcherAction(_.id === cooperation.id)
     } yield toDomain(result.get))
 
-  override def getClientsForCoach(coach: Coach): IO[List[UserId.ClientId]] =
+  override def getClientsForCoach(coachId: CoachId): IO[List[UserId.ClientId]] =
     runIO(
-      getEntriesAction(limit = Int.MaxValue, offset = 0, _.coachId === coach.id, None)
+      getEntriesAction(limit = Int.MaxValue, offset = 0, _.coachId === coachId, None)
     ).map(coopDTO =>
       coopDTO
         .map(toDomain)
         .map(_.clientId)
     )
 
-  override def getCoachesForClient(client: Client): IO[List[UserId.CoachId]] =
+  override def getCoachesForClient(clientId: ClientId): IO[List[UserId.CoachId]] =
     runIO(
-      getEntriesAction(limit = Int.MaxValue, offset = 0, _.clientId === client.id, None)
+      getEntriesAction(limit = Int.MaxValue, offset = 0, _.clientId === clientId, None)
     ).map(coopDTO =>
       coopDTO
         .map(toDomain)

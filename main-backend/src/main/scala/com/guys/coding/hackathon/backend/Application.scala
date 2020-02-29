@@ -6,7 +6,6 @@ import hero.common.logging.Logger
 import hero.common.logging.slf4j.LoggingConfigurator
 import com.guys.coding.hackathon.backend.infrastructure.slick.example.ExampleSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo
-
 import com.guys.coding.hackathon.backend.api.graphql.core.GraphqlRoute
 import com.guys.coding.hackathon.backend.infrastructure.jwt.JwtTokenService
 import hero.common.crypto.KeyReaders.{PrivateKeyReader, PublicKeyReader}
@@ -23,6 +22,12 @@ import com.guys.coding.hackathon.backend.infrastructure.slick.training.SlickTrai
 import com.guys.coding.hackathon.backend.infrastructure.slick.training.SlickExerciseRepository
 import com.guys.coding.hackathon.backend.infrastructure.slick.training.ExerciseSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.training.TrainingSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.{
+  SlickClientCoachCooperationRepository,
+  SlickClientRepository,
+  SlickCoachRepository,
+  SlickMeasurementRepository
+}
 
 class Application(config: ConfigValues)(
     implicit ec: ExecutionContext,
@@ -45,17 +50,25 @@ class Application(config: ConfigValues)(
 
   schemas.foreach(schema => repo.SchemaUtils.createSchemasIfNotExists(db, schema.schemas))
 
-  private val privateKey      = PrivateKeyReader.get(config.authKeys.privatePath)
-  private val publicKey       = PublicKeyReader.get(config.authKeys.publicPath)
-  private val jwtTokenService = new JwtTokenService(publicKey, privateKey)
-  private val gymRepository   = new SlickGymRepository()
-  val trainingRepository      = new SlickTrainingRepository()
-  val exerciseRepository      = new SlickExerciseRepository()
+  private val privateKey               = PrivateKeyReader.get(config.authKeys.privatePath)
+  private val publicKey                = PublicKeyReader.get(config.authKeys.publicPath)
+  private val jwtTokenService          = new JwtTokenService(publicKey, privateKey)
+  private val gymRepository            = new SlickGymRepository()
+  val trainingRepository               = new SlickTrainingRepository()
+  val exerciseRepository               = new SlickExerciseRepository()
+  val clientCoachCooperationRepository = new SlickClientCoachCooperationRepository()
+  val clientRepository                 = new SlickClientRepository()
+  val coachRepository                  = new SlickCoachRepository()
+  val measurementsRepository            = new SlickMeasurementRepository()
 
   private val services = Services(
     gymRepository,
     trainingRepository,
     exerciseRepository,
+    clientCoachCooperationRepository,
+    clientRepository,
+    coachRepository,
+    measurementsRepository,
     jwtTokenService
   )
 
