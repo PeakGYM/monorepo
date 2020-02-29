@@ -5,7 +5,7 @@ import com.guys.coding.hackathon.backend.api.graphql.schema.QueryHolder
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.UserOutputTypes._
 import com.guys.coding.hackathon.backend.api.graphql.service.GraphqlSecureContext
 import com.guys.coding.hackathon.backend.domain.UserId.{ClientId, CoachId}
-import sangria.schema.{Argument, Field, ListType, StringType, fields}
+import sangria.schema.{fields, Argument, Field, ListType, StringType}
 
 class ClientCoachCooperationQuery(services: Services) extends QueryHolder {
   val CoachIdArg  = Argument("coachId", StringType)
@@ -17,10 +17,10 @@ class ClientCoachCooperationQuery(services: Services) extends QueryHolder {
         "clientsForCoach",
         ListType(ClientIdType),
         arguments = List(CoachIdArg),
-        resolve = c => c.ctx.authorizedF { _ =>
-
+        resolve = c =>
+          c.ctx.authorizedF { _ =>
             services.clientCoachCooperationRepository
-                .getClientsForCoach(CoachId(c.arg(CoachIdArg)))
+              .getClientsForCoach(CoachId(c.arg(CoachIdArg)))
               .unsafeToFuture()
           }
       ),
@@ -28,15 +28,13 @@ class ClientCoachCooperationQuery(services: Services) extends QueryHolder {
         "coachesForClient",
         ListType(CoachIdType),
         arguments = List(ClientIdArg),
-        resolve = c => c.ctx.authorizedF { _ =>
-
-          services.clientCoachCooperationRepository
-            .getCoachesForClient(ClientId(c.arg(ClientIdArg)))
-            .unsafeToFuture()
-        }
+        resolve = c =>
+          c.ctx.authorizedF { _ =>
+            services.clientCoachCooperationRepository
+              .getCoachesForClient(ClientId(c.arg(ClientIdArg)))
+              .unsafeToFuture()
+          }
       )
     )
-
-
 
 }

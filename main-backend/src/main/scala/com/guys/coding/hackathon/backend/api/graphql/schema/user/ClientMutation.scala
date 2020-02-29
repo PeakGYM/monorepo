@@ -4,7 +4,7 @@ import com.guys.coding.hackathon.backend.api.graphql.schema.MutationHolder
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.UserInputTypes._
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.UserOutputTypes._
 import com.guys.coding.hackathon.backend.api.graphql.service.GraphqlSecureContext
-import sangria.schema.{Argument, Field, IntType, StringType, fields}
+import sangria.schema.{fields, Argument, Field, IntType, StringType}
 
 class ClientMutation(services: Services) extends MutationHolder {
   val ClientNameArg       = Argument("clientName", StringType)

@@ -7,8 +7,18 @@ import com.guys.coding.hackathon.backend.infrastructure.jwt.JwtTokenService
 import com.guys.coding.hackathon.backend.infrastructure.slick.example.ExampleSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.gym.{GymSchema, SlickGymRepository}
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo
-import com.guys.coding.hackathon.backend.infrastructure.slick.training.{ExerciseSchema, SlickExerciseRepository, SlickTrainingRepository, TrainingSchema}
-import com.guys.coding.hackathon.backend.infrastructure.slick.user.{SlickClientCoachCooperationRepository, SlickClientRepository, SlickCoachRepository, SlickMeasurementRepository}
+import com.guys.coding.hackathon.backend.infrastructure.slick.training.{
+  ExerciseSchema,
+  SlickExerciseRepository,
+  SlickTrainingRepository,
+  TrainingSchema
+}
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.{
+  SlickClientCoachCooperationRepository,
+  SlickClientRepository,
+  SlickCoachRepository,
+  SlickMeasurementRepository
+}
 import hero.common.crypto.KeyReaders.{PrivateKeyReader, PublicKeyReader}
 import hero.common.logging.Logger
 import hero.common.logging.slf4j.LoggingConfigurator
@@ -64,7 +74,7 @@ class Application(config: ConfigValues)(
     jwtTokenService
   )
 
-  val graphqlRoute = new GraphqlRoute(services)
+  val graphqlRoute   = new GraphqlRoute(services)
   val graphqlContext = new GraphQLContext(services)
 
   def start()(implicit t: Timer[IO]): IO[ExitCode] = {

@@ -20,6 +20,6 @@ case class GraphqlSecureContext(
   def authorized[T](fn: AuthenticatedUser => T): Future[T] =
     authorizedF(Future.successful[T] _ compose fn)
 
-  def authorizedF[T](fn: AuthenticatedUser => Future[T]): Future[T] = fn(AuthenticatedUser(ClientId(""),ZonedDateTime.now().minusMinutes(60))) //HACK
-    // authenticator.authorized.flatMap(fn)
+  def authorizedF[T](fn: AuthenticatedUser => Future[T]): Future[T] = fn(AuthenticatedUser(ClientId(""), ZonedDateTime.now().minusMinutes(60))) //HACK
+  // authenticator.authorized.flatMap(fn)
 }

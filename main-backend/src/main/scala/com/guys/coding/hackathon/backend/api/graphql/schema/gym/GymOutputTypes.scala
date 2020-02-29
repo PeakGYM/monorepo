@@ -11,7 +11,7 @@ object GymOutputTypes extends CommonOutputTypes {
   implicit val GymType: ObjectType[GraphQLContext, Gym] =
     deriveObjectType[GraphQLContext, Gym](
       AddFields(
-Field("coaches", ListType(CoachType), resolve = c => c.ctx.getCoaches(c.value.coachIds))
+        Field("coaches", ListType(CoachType), resolve = c => c.ctx.getCoaches(c.value.coachIds))
       )
     )
 

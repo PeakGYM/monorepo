@@ -13,7 +13,7 @@ import com.guys.coding.hackathon.backend.domain.UserId.CoachId
 import hero.common.util.IdProvider
 import com.guys.coding.hackathon.backend.domain.training.Training
 
-class SlickTrainingRepository()(implicit db: Database, ec: ExecutionContext, cs: ContextShift[IO]) // TODO:bcm
+class SlickTrainingRepository()(implicit db: Database, ec: ExecutionContext, cs: ContextShift[IO])
     extends repo.plain.CrudRepo[String, TrainingSchema.TrainingDTO, TrainingSchema.Trainings](db, TrainingSchema.trainings)
     with CatsIntegration {
 

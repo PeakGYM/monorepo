@@ -8,7 +8,7 @@ import scala.concurrent.ExecutionContext
 import cats.effect.{ContextShift, IO}
 import com.guys.coding.hackathon.backend.domain.training.Exercise
 
-class SlickExerciseRepository()(implicit db: Database, ec: ExecutionContext, cs: ContextShift[IO]) // TODO:bcm
+class SlickExerciseRepository()(implicit db: Database, ec: ExecutionContext, cs: ContextShift[IO])
     extends repo.plain.CrudRepo[String, Exercise, ExerciseSchema.Exercises](db, ExerciseSchema.exercises)
     with CatsIntegration {
 

@@ -7,9 +7,9 @@ import com.typesafe.scalalogging.StrictLogging
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class GraphQLContext(services: Services)(implicit ec: ExecutionContext) extends StrictLogging  {
-  def getCoaches(ids: List[CoachId]): Future[List[Coach]] = {
-    services.coachRepository.getCoachesById(ids)
+class GraphQLContext(services: Services)(implicit ec: ExecutionContext) extends StrictLogging {
+  def getCoaches(ids: List[CoachId]): Future[List[Coach]] =
+    services.coachRepository
+      .getCoachesById(ids)
       .unsafeToFuture()
-  }
 }

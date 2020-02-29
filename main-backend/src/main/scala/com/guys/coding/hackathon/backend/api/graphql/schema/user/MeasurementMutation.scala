@@ -5,7 +5,7 @@ import com.guys.coding.hackathon.backend.api.graphql.schema.MutationHolder
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.UserInputTypes._
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.UserOutputTypes._
 import com.guys.coding.hackathon.backend.api.graphql.service.GraphqlSecureContext
-import sangria.schema.{Argument, Field, FloatType, LongType, OptionInputType, StringType, fields}
+import sangria.schema.{fields, Argument, Field, FloatType, LongType, OptionInputType, StringType}
 
 class MeasurementMutation(services: Services) extends MutationHolder {
   val ClientIdArg     = Argument("clientId", StringType)

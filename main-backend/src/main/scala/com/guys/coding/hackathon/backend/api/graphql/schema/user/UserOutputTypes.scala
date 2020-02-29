@@ -5,11 +5,10 @@ import com.guys.coding.hackathon.backend.domain.user.{Client, ClientCoachCoopera
 import sangria.macros.derive.deriveObjectType
 import sangria.schema.ObjectType
 
-object UserOutputTypes extends CommonOutputTypes{
+object UserOutputTypes extends CommonOutputTypes {
 
-  implicit val ClientCoachCooperationType: ObjectType[Unit, ClientCoachCooperation]   = deriveObjectType[Unit, ClientCoachCooperation]()
-  implicit val ClientType: ObjectType[Unit, Client]   = deriveObjectType[Unit, Client]()
-  implicit val MeasurementType: ObjectType[Unit, Measurement]   = deriveObjectType[Unit, Measurement]()
-
+  implicit val ClientCoachCooperationType: ObjectType[Unit, ClientCoachCooperation] = deriveObjectType[Unit, ClientCoachCooperation]()
+  implicit val ClientType: ObjectType[Unit, Client]                                 = deriveObjectType[Unit, Client]()
+  implicit val MeasurementType: ObjectType[Unit, Measurement]                       = deriveObjectType[Unit, Measurement]()
 
 }
