@@ -1,16 +1,23 @@
 package com.guys.coding.hackathon.backend.infrastructure.slick.user
 
+import java.time.ZonedDateTime
+
 import com.guys.coding.hackathon.backend.domain.MeasurementId.MeasurementId
-import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes.MeasurementIdMap
+import com.guys.coding.hackathon.backend.domain.UserId.ClientId
+import com.guys.coding.hackathon.backend.domain.user.Measurement
+import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes.{ClientIdMap, MeasurementIdMap}
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.SlickSchemas
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._
+import com.guys.coding.hackathon.backend.infrastructure.slick.repo.DtoMappings
 import slick.lifted.{TableQuery, Tag}
 
-object MeasurementsSchema extends SlickSchemas {
+
+object MeasurementsSchema extends SlickSchemas with DtoMappings  {
   case class MeasurementDTO(
       //weight in kg, measurements in cm
       id: MeasurementId,
-      timestamp: Long,
+      clientId: ClientId,
+      timestamp: ZonedDateTime,
       weight: Double,
       neck: Double,
       leftBicep: Double,
@@ -26,14 +33,57 @@ object MeasurementsSchema extends SlickSchemas {
       leftCalf: Double
   )
 
-  override def schemas = List(clients)
+  def toDomain(measurement: MeasurementDTO): Measurement = {
+    Measurement(
+      MeasurementId(measurement.id.value),
+      measurement.clientId,
+      measurement.timestamp,
+      measurement.weight,
+      measurement.neck,
+      measurement.leftBicep,
+      measurement.rightBicep,
+      measurement.leftForearm,
+      measurement.rightForearm,
+      measurement.chest,
+      measurement.waist,
+      measurement.hip,
+      measurement.rightThigh,
+      measurement.leftThigh,
+      measurement.rightCalf,
+      measurement.leftCalf
+    )
+  }
 
-  val clients = TableQuery[Measurements]
+  def toDTO(measurement: Measurement): MeasurementDTO = {
+    MeasurementDTO(
+      MeasurementId(measurement.id.value),
+      measurement.clientId,
+      measurement.timestamp,
+      measurement.weight,
+      measurement.neck,
+      measurement.leftBicep,
+      measurement.rightBicep,
+      measurement.leftForearm,
+      measurement.rightForearm,
+      measurement.chest,
+      measurement.waist,
+      measurement.hip,
+      measurement.rightThigh,
+      measurement.leftThigh,
+      measurement.rightCalf,
+      measurement.leftCalf
+    )
+  }
+
+  override def schemas = List(measurements)
+
+  val measurements = TableQuery[Measurements]
 
   class Measurements(tag: Tag) extends Table[MeasurementDTO](tag, "measurement") {
 
     def id           = column[MeasurementId]("id", O.PrimaryKey)
-    def timestamp    = column[Long]("timestamp")
+    def clientId     = column[ClientId]("clientId")
+    def timestamp    = column[ZonedDateTime]("timestamp")
     def weight       = column[Double]("weight")
     def neck         = column[Double]("neck")
     def leftBicep    = column[Double]("leftBicep")
@@ -50,6 +100,7 @@ object MeasurementsSchema extends SlickSchemas {
     override def * =
       (
         id,
+        clientId,
         timestamp,
         weight,
         neck,
