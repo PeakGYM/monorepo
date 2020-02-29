@@ -30,6 +30,10 @@ import org.http4s.server.staticcontent._
 import org.http4s.syntax.kleisli._
 
 import scala.concurrent.ExecutionContext
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.CoachSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.ClientSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.ClientCoachCooperationSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.MeasurementsSchema
 
 class Application(config: ConfigValues)(
     implicit ec: ExecutionContext,
@@ -47,7 +51,11 @@ class Application(config: ConfigValues)(
     ExampleSchema,
     GymSchema,
     ExerciseSchema,
-    TrainingSchema
+    TrainingSchema,
+    CoachSchema,
+    ClientSchema,
+    ClientCoachCooperationSchema,
+    MeasurementsSchema
   )
 
   schemas.foreach(schema => repo.SchemaUtils.createSchemasIfNotExists(db, schema.schemas))
