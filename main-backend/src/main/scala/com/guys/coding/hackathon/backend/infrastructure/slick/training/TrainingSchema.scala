@@ -2,7 +2,7 @@ package com.guys.coding.hackathon.backend.infrastructure.slick.training
 
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.SlickSchemas
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._
-import com.guys.coding.hackathon.backend.domain.training.Series
+import com.guys.coding.hackathon.backend.domain.training._
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.DtoMappings
 import slick.lifted.{TableQuery, Tag}
 import java.time.ZonedDateTime
@@ -12,37 +12,32 @@ import com.guys.coding.hackathon.backend.domain.UserId.ClientId
 import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes._
 
 object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscoders {
-  case class TrainingDTO(
+  case class Training(
       id: String,
       name: String,
       coach: Option[CoachId],
       client: ClientId,
       dateFrom: ZonedDateTime,
-      dateTo: ZonedDateTime, // TODO:bcm add inpreson
+      dateTo: ZonedDateTime,
+      inperson: Boolean,
       archived: Boolean
   )
-
-  case class ExerciseDTO(
-      id: String,
-      imgurl: String,
-      name: String
-  )
-
-  case class PlannedExerciseDTO(exerciseId: String, plannedSeries: List[Series], doneSeries: List[Series], restAfter: Int)
 
   override def schemas = List(trainings)
 
   val trainings = TableQuery[Trainings]
 
-  class Trainings(tag: Tag) extends Table[TrainingDTO](tag, "training") {
+  class Trainings(tag: Tag) extends Table[Training](tag, "training") {
 
-    def id       = column[String]("id", O.PrimaryKey)
-    def name     = column[String]("name")
-    def coach    = column[Option[CoachId]]("coach_id")
-    def client   = column[ClientId]("client_id")
-    def dateFrom = column[ZonedDateTime]("time_from")
-    def dateTo   = column[ZonedDateTime]("time_to")
-    def archived = column[Boolean]("archived")
+    def id               = column[String]("id", O.PrimaryKey)
+    def name             = column[String]("name")
+    def coach            = column[Option[CoachId]]("coach_id")
+    def client           = column[ClientId]("client_id")
+    def dateFrom         = column[ZonedDateTime]("time_from")
+    def dateTo           = column[ZonedDateTime]("time_to")
+    def plannedExercises = column[List[PlannedExercise]]("planned_exercises")
+    def inperson         = column[Boolean]("inperson")
+    def archived         = column[Boolean]("archived")
 
     override def * =
       (
@@ -52,24 +47,9 @@ object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscod
         client,
         dateFrom,
         dateTo,
+        inperson,
         archived
-      ) <> (TrainingDTO.tupled, TrainingDTO.unapply)
-  }
-
-  class PlannedExercises(tag: Tag) extends Table[ExerciseDTO](tag, "planned_exercise") {
-
-    def id            = column[String]("id", O.PrimaryKey)
-    def plannedSeries = column[List[Series]]("planned_series")
-    def doneSeries    = column[List[Series]]("planned_series")
-    def restAfter     = column[Int]("rest_after")
-
-    override def * = ???
-    (
-      id,
-      plannedSeries,
-      doneSeries,
-      restAfter
-    ) <> (PlannedExerciseDTO.tupled, PlannedExerciseDTO.unapply)
+      ) <> (Training.tupled, Training.unapply)
   }
 
 }
