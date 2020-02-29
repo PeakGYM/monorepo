@@ -14,12 +14,15 @@ mv "hackathon-backend-$version" target
 tag="$owner/whitewolf-hackathon-backend:$version"
 
 if command -v podman >/dev/null; then
-	podman build -t "$tag" .
+	  podman build -t "$tag" .
+    podman push "$tag"
 else
-	docker build -t "$tag" .
+	  docker build -t "$tag" .
+    docker push "$tag"
 fi
 
 if [ ! -f build.sbt ]; then
 	echo "Removing target"
 	rm -rf target
 fi
+
