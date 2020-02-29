@@ -2,7 +2,7 @@ package com.guys.coding.hackathon.backend
 
 import cats.effect.{Blocker, ContextShift, ExitCode, IO, Resource, Timer}
 import cats.implicits._
-import com.guys.coding.hackathon.backend.api.graphql.core.{GraphQLContext, GraphqlRoute}
+import com.guys.coding.hackathon.backend.api.graphql.core.GraphqlRoute
 import com.guys.coding.hackathon.backend.infrastructure.jwt.JwtTokenService
 import com.guys.coding.hackathon.backend.infrastructure.slick.example.ExampleSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.gym.{GymSchema, SlickGymRepository}
@@ -75,7 +75,6 @@ class Application(config: ConfigValues)(
   )
 
   val graphqlRoute   = new GraphqlRoute(services)
-  val graphqlContext = new GraphQLContext(services)
 
   def start()(implicit t: Timer[IO]): IO[ExitCode] = {
 
