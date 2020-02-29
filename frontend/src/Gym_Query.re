@@ -14,6 +14,7 @@ module Gym = [%graphql
        lat
        lng
      }
+     coachIds
     }
   }
 |}

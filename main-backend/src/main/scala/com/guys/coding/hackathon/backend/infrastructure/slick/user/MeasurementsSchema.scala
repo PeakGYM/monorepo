@@ -17,19 +17,19 @@ object MeasurementsSchema extends SlickSchemas with DtoMappings {
       id: MeasurementId,
       clientId: ClientId,
       timestamp: ZonedDateTime,
-      weight: Double,
-      neck: Double,
-      leftBicep: Double,
-      rightBicep: Double,
-      leftForearm: Double,
-      rightForearm: Double,
-      chest: Double,
-      waist: Double,
-      hip: Double,
-      rightThigh: Double,
-      leftThigh: Double,
-      rightCalf: Double,
-      leftCalf: Double
+      weight: Option[Double],
+      neck: Option[Double],
+      leftBicep: Option[Double],
+      rightBicep: Option[Double],
+      leftForearm: Option[Double],
+      rightForearm: Option[Double],
+      chest: Option[Double],
+      waist: Option[Double],
+      hip: Option[Double],
+      rightThigh: Option[Double],
+      leftThigh: Option[Double],
+      rightCalf: Option[Double],
+      leftCalf: Option[Double]
   )
 
   def toDomain(measurement: MeasurementDTO): Measurement = {
@@ -83,19 +83,19 @@ object MeasurementsSchema extends SlickSchemas with DtoMappings {
     def id           = column[MeasurementId]("id", O.PrimaryKey)
     def clientId     = column[ClientId]("clientId")
     def timestamp    = column[ZonedDateTime]("timestamp")
-    def weight       = column[Double]("weight")
-    def neck         = column[Double]("neck")
-    def leftBicep    = column[Double]("leftBicep")
-    def rightBicep   = column[Double]("rightBicep")
-    def leftForearm  = column[Double]("leftForearm")
-    def rightForearm = column[Double]("rightForearm")
-    def chest        = column[Double]("chest")
-    def waist        = column[Double]("waist")
-    def hip          = column[Double]("hip")
-    def rightThigh   = column[Double]("rightThigh")
-    def leftThigh    = column[Double]("leftThigh")
-    def rightCalf    = column[Double]("rightCalf")
-    def leftCalf     = column[Double]("leftCalf")
+    def weight       = column[Option[Double]]("weight")
+    def neck         = column[Option[Double]]("neck")
+    def leftBicep    = column[Option[Double]]("leftBicep")
+    def rightBicep   = column[Option[Double]]("rightBicep")
+    def leftForearm  = column[Option[Double]]("leftForearm")
+    def rightForearm = column[Option[Double]]("rightForearm")
+    def chest        = column[Option[Double]]("chest")
+    def waist        = column[Option[Double]]("waist")
+    def hip          = column[Option[Double]]("hip")
+    def rightThigh   = column[Option[Double]]("rightThigh")
+    def leftThigh    = column[Option[Double]]("leftThigh")
+    def rightCalf    = column[Option[Double]]("rightCalf")
+    def leftCalf     = column[Option[Double]]("leftCalf")
     override def * =
       (
         id,

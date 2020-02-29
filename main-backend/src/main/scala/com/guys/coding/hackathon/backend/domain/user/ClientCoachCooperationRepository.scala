@@ -5,6 +5,6 @@ import simulacrum.typeclass
 @typeclass
 trait ClientCoachCooperationRepository[F[_]] {
   def insert(cooperation: ClientCoachCooperation): F[ClientCoachCooperation]
-  def getClientsForCoach(coach: Coach): F[List[ClientId]]
-  def getCoachesForClient(client: Client): F[List[CoachId]]
+  def getClientsForCoach(coachId: CoachId): F[List[ClientId]]
+  def getCoachesForClient(clientId: ClientId): F[List[CoachId]]
 }
