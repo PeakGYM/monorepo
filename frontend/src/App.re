@@ -19,6 +19,7 @@ let make = () => {
         <Navbar />
         {switch (route) {
          | Main => <Main_View />
+         | Map => <Map_View />
          | Schedule(id) => <Schedule_View id />
          }}
       </div>
