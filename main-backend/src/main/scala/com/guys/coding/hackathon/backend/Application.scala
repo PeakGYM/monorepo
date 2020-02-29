@@ -19,6 +19,10 @@ import scala.concurrent.ExecutionContext
 import hero.common.util.LoggingExt
 import com.guys.coding.hackathon.backend.infrastructure.slick.gym.GymSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.gym.SlickGymRepository
+import com.guys.coding.hackathon.backend.infrastructure.slick.training.SlickTrainingRepository
+import com.guys.coding.hackathon.backend.infrastructure.slick.training.SlickExerciseRepository
+import com.guys.coding.hackathon.backend.infrastructure.slick.training.ExerciseSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.training.TrainingSchema
 
 class Application(config: ConfigValues)(
     implicit ec: ExecutionContext,
@@ -34,7 +38,9 @@ class Application(config: ConfigValues)(
 
   private val schemas = List(
     ExampleSchema,
-    GymSchema
+    GymSchema,
+    ExerciseSchema,
+    TrainingSchema
   )
 
   schemas.foreach(schema => repo.SchemaUtils.createSchemasIfNotExists(db, schema.schemas))
@@ -43,9 +49,13 @@ class Application(config: ConfigValues)(
   private val publicKey       = PublicKeyReader.get(config.authKeys.publicPath)
   private val jwtTokenService = new JwtTokenService(publicKey, privateKey)
   private val gymRepository   = new SlickGymRepository()
+  val trainingRepository      = new SlickTrainingRepository()
+  val exerciseRepository      = new SlickExerciseRepository()
 
   private val services = Services(
     gymRepository,
+    trainingRepository,
+    exerciseRepository,
     jwtTokenService
   )
 

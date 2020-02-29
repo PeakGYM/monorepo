@@ -8,6 +8,9 @@ import scala.concurrent.ExecutionContext.global
 import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.language.postfixOps
+import com.guys.coding.hackathon.backend.infrastructure.slick.gym.GymSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.training.ExerciseSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.training.TrainingSchema
 
 trait PostgresSpec extends FlatSpec with BeforeAndAfterEach with BeforeAndAfterAll with repo.profile.API {
 
@@ -25,7 +28,10 @@ trait PostgresSpec extends FlatSpec with BeforeAndAfterEach with BeforeAndAfterA
 
   val schemas =
     List(
-      ExampleSchema
+      ExampleSchema,
+      GymSchema,
+      ExerciseSchema,
+      TrainingSchema
     )
 
   protected def openDbStartingPostgres(config: Config): Unit = {
