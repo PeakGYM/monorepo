@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "tms-flow-frontend": {
+      "schemaPath": "schema.graphql",
+      "extensions": {
+        "endpoints": {
+          "dev": {
+            "url": "https://api-wwh.codevillains.me/graphql"
+          }
+        }
+      }
+    }
+  }
+}

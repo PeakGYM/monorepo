@@ -8,9 +8,10 @@ let make = (~id as _id) => {
     );
 
   switch (simple) {
-  | Data(data) =>
+  | Data(_data) => "Error"->React.string
+  | Error(_) =>
     <div className=TW.([Padding(P8)] |> make)>
-      {data##trainings->Array.map(t => t##id->React.string)->React.array}
+      {Schedule_Query.mock->Array.map(t => t##id->React.string)->React.array}
       "Schedule"->React.string
     </div>
   | _ => React.null

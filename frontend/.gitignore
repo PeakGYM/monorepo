@@ -7,4 +7,4 @@ yarn-error.log
 .merlin
 .bsb.lock
 *.bs.js
-.graphql_ppx-cache/
+.graphql_ppx_cache/

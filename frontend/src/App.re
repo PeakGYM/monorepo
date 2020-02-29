@@ -1,4 +1,5 @@
-let uri = "https://api-wwh.codevillains.me";
+let uri = "https://api-wwh.codevillains.me/graphql";
+
 /* Create an InMemoryCache */
 let inMemoryCache = ApolloInMemoryCache.createInMemoryCache();
 
