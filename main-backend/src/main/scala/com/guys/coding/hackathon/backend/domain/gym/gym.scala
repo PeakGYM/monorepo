@@ -8,11 +8,6 @@ case class GymId(value: String) extends AnyVal
 case class Gym(
     id: GymId,
     name: String,
-    coaches: List[GymCoach]
+    location: Location,
+    coachIds: List[CoachId]
 )
-
-case class GymCoach(
-    id: CoachId,
-    location: Location
-)
-

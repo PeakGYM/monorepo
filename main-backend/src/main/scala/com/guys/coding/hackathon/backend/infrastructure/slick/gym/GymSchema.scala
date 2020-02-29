@@ -1,29 +1,20 @@
 package com.guys.coding.hackathon.backend.infrastructure.slick.gym
 
-import com.guys.coding.hackathon.backend.domain.UserId.CoachId
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.SlickSchemas
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._
 import slick.lifted.{TableQuery, Tag}
 import com.guys.coding.hackathon.backend.domain.gym._
-import hero.common.postgres.newtype.NewtypeTranscoders
-import io.circe.{Json, _}
 import com.guys.coding.hackathon.backend.domain.Location
-import io.circe.generic.semiauto._
-import io.circe.syntax._
-import slick.ast.BaseTypedType
-import slick.jdbc.JdbcType
+import com.guys.coding.hackathon.backend.domain.UserId.CoachId
 
-object GymSchema extends SlickSchemas with NewtypeTranscoders {
+object GymSchema extends SlickSchemas {
 
   case class GymDTO(
       id: String,
       name: String,
-      coaches: List[GymCoachDTO]
-  )
-
-  case class GymCoachDTO(
-      id: String,
-      location: LocationDTO
+      lat: String,
+      lng: String,
+      coachIds: List[String]
   )
 
   case class LocationDTO(
@@ -32,75 +23,42 @@ object GymSchema extends SlickSchemas with NewtypeTranscoders {
   )
 
   def toDomain(gym: GymDTO): Gym = {
-    def locationToDomain(location: LocationDTO): Location =
-      Location(
-        location.lat,
-        location.lng
-      )
-
-    def coachToDomain(coach: GymCoachDTO): GymCoach =
-      GymCoach(
-        CoachId(coach.id),
-        locationToDomain(coach.location)
-      )
-
     Gym(
       GymId(gym.id),
       gym.name,
-      gym.coaches.map(coachToDomain)
+      Location(gym.lat, gym.lng),
+      gym.coachIds.map(CoachId)
     )
   }
 
   def toDTO(gym: Gym): GymDTO = {
-    def locationToDTO(location: Location): LocationDTO =
-      LocationDTO(
-        location.lat,
-        location.lng
-      )
-
-    def coachToDTO(coach: GymCoach): GymCoachDTO =
-      GymCoachDTO(
-        coach.id.value,
-        locationToDTO(coach.location)
-      )
-
     GymDTO(
       gym.id.value,
       gym.name,
-      gym.coaches.map(coachToDTO)
+      gym.location.lat,
+      gym.location.lng,
+      gym.coachIds.map(_.value)
     )
   }
-
-  implicit val GymCoachDTOEncoder: Encoder[GymCoachDTO] = deriveEncoder[GymCoachDTO]
-  implicit val GymCoachDTODecoder: Decoder[GymCoachDTO] = deriveDecoder[GymCoachDTO]
-  implicit val LocationDTOEncoder: Encoder[LocationDTO] = deriveEncoder[LocationDTO]
-  implicit val LocationDTODecoder: Decoder[LocationDTO] = deriveDecoder[LocationDTO]
-
-  def gymCoachToJson: GymCoachDTO => Json   = _.asJson
-  def gymCoachFromJson: Json => GymCoachDTO = _.as[GymCoachDTO].toOption.get
-  def locationToJson: LocationDTO => Json   = _.asJson
-  def locationFromJson: Json => LocationDTO = _.as[LocationDTO].toOption.get
-
-  implicit val GymCoachDTOMapper: JdbcType[GymCoachDTO] with BaseTypedType[GymCoachDTO] =
-    MappedColumnType.base[GymCoachDTO, Json](gymCoachToJson, gymCoachFromJson)
-
-  implicit val LocationDTOMapper: JdbcType[LocationDTO] with BaseTypedType[LocationDTO] =
-    MappedColumnType.base[LocationDTO, Json](locationToJson, locationFromJson)
 
   override def schemas = List(gyms)
 
   val gyms = TableQuery[Gyms]
 
   class Gyms(tag: Tag) extends Table[GymDTO](tag, "gym") {
-    def id      = column[String]("id", O.PrimaryKey)
-    def name    = column[String]("name")
-    def coaches = column[List[GymCoachDTO]]("coaches")
+    def id       = column[String]("id", O.PrimaryKey)
+    def name     = column[String]("name")
+    def lat      = column[String]("lat")
+    def lng      = column[String]("lng")
+    def coachIds = column[List[String]]("coachIds")
 
     override def * =
       (
         id,
         name,
-        coaches
+        lat,
+        lng,
+        coachIds
       ) <> (GymDTO.tupled, GymDTO.unapply)
   }
 
