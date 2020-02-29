@@ -12,10 +12,12 @@
     "@glennsl/bs-json": "5.0.1",
     "gql-tools": "^0.0.15",
     "graphql-cli": "^3.0.14",
+    "leaflet": "^1.6.0",
     "parcel-bundler": "^1.12.4",
     "re-tailwind": "^0.0.6",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-leaflet": "^2.6.1",
     "reason-apollo": "0.18.0",
     "reason-apollo-hooks": "^6.0.0",
     "reason-react": "^0.7.0"
