@@ -1,14 +1,12 @@
 package com.guys.coding.hackathon.backend.infrastructure.slick.user
 
 import com.guys.coding.hackathon.backend.domain.MeasurementId.MeasurementId
+import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes.MeasurementIdMap
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.SlickSchemas
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._
-import slick.jdbc.JdbcType
 import slick.lifted.{TableQuery, Tag}
 
 object MeasurementsSchema extends SlickSchemas {
-  implicit val MeasurementIdMap: JdbcType[MeasurementId] = MappedColumnType.base[MeasurementId, String](_.value, MeasurementId)
-
   case class MeasurementDTO(
       //weight in kg, measurements in cm
       id: MeasurementId,
