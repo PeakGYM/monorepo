@@ -8,7 +8,7 @@ let lng = 19.9489974;
 let make = () => {
   let (simple, _full) = Gym_Query.use(~lat, ~lng);
 
-  let coaches =
+  let gyms =
     switch (simple) {
     | Data(data) => data##gyms
     | _ => [||]
@@ -16,11 +16,10 @@ let make = () => {
 
   React.useEffect1(
     () => {
-      Js.log(coaches);
-      loadMap(coaches) |> ignore;
+      loadMap(gyms) |> ignore;
       None;
     },
-    [|coaches|],
+    [|gyms|],
   );
 
   <div

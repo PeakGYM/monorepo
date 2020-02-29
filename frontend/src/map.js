@@ -4,7 +4,7 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 
 const position = [50.0265321, 19.9489974]
 
-export function loadMap(coaches) {
+export function loadMap(gyms) {
 
   let clientIcon = new L.Icon({
     iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
@@ -16,13 +16,13 @@ export function loadMap(coaches) {
   });
 
 
-  let coachMarkers =
-      coaches.map(coach => {
-        let pos = [coach.location.lat, coach.location.lng];
+  let gymMarkers =
+      gyms.map(gym => {
+        let pos = [gym.location.lat, gym.location.lng];
 
         return (
           <Marker riseOnHover={true} position={pos}>
-            <Popup>{coach.name}</Popup>
+            <Popup>{gym.name}</Popup>
           </Marker>
         );
       });
@@ -37,7 +37,7 @@ export function loadMap(coaches) {
       <Marker icon={clientIcon} position={position}>
         <Popup>Your location</Popup>
       </Marker>
-      {coachMarkers}
+      {gymMarkers}
     </Map>;
 
   render(map, document.getElementById('map-container'));
