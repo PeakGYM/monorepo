@@ -16,6 +16,7 @@ object GymSchema extends SlickSchemas {
       id: String,
       name: String,
       location: Point,
+      imgurl: Option[String],
       coachIds: List[String]
   )
 
@@ -24,6 +25,7 @@ object GymSchema extends SlickSchemas {
       GymId(gym.id),
       gym.name,
       Location(lng = gym.location.getX, lat = gym.location.getY),
+      gym.imgurl,
       gym.coachIds.map(CoachId)
     )
   }
@@ -33,6 +35,7 @@ object GymSchema extends SlickSchemas {
       gym.id.value,
       gym.name,
       PointFactory.createPoint(gym.location.lat, gym.location.lng),
+      gym.imgurl,
       gym.coachIds.map(_.value)
     )
   }
@@ -45,6 +48,7 @@ object GymSchema extends SlickSchemas {
     def id       = column[String]("id", O.PrimaryKey)
     def name     = column[String]("name")
     def location = column[Point]("location")
+    def imgurl   = column[Option[String]]("imgurl")
     def coachIds = column[List[String]]("coachIds")
 
     override def * =
@@ -52,6 +56,7 @@ object GymSchema extends SlickSchemas {
         id,
         name,
         location,
+        imgurl,
         coachIds
       ) <> (GymDTO.tupled, GymDTO.unapply)
   }

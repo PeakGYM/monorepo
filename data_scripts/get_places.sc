@@ -1,15 +1,14 @@
+import scala.util.Random
 //Http4s
 val http4sVersion = "0.21.1"
 val CirceVersion = "0.13.0"
 interp.load.ivy(
   "com.lihaoyi" % s"ammonite-shell_${scala.util.Properties.versionNumberString}" %  ammonite.Constants.version,
-  // "org.typelevel" % "mouse_2.12" % "0.21",
   "org.http4s" %% "http4s-dsl" % http4sVersion,
   "org.http4s" %% "http4s-blaze-client" % http4sVersion,
   "org.http4s"   %% "http4s-circe"        % http4sVersion,
     "io.circe"     %% "circe-generic"       % CirceVersion,
   "io.circe"     %% "circe-optics"        % CirceVersion,
-  "com.lihaoyi" %% "requests" % "0.2.0","it.justwrote" %% "scala-faker" % "0.3"
 )
 
 @
@@ -50,6 +49,8 @@ val httpClient: Client[IO] = JavaNetClientBuilder[IO](blocker).create
 val key = (read! Path( "/home/owner/.private/google-api-key" )).trim
 
 
+case class Gym(name:String,lat:Double,lng:Double,imageUrl:Option[String])
+
 def getGyms(page:Int,pageToken :Option[String]) :Unit = {
 
 
@@ -67,58 +68,71 @@ def getGyms(page:Int,pageToken :Option[String]) :Unit = {
     // "inputtype" -> "textquery",
     // "locationbias" -> s"circle:$radiusMeters@$lat,$lng",
     // "fields" -> "photos,formatted_address,name,rating,opening_hours,geometry"
-  )
+    )
 
-  val params:String = args.map{case (key,value) => s"$key=$value"}.reduce(_ + "&"+ _)
+  val tokenParam = pageToken.map(t => s"&pagetoken=$t").getOrElse("")
+
+  val params:String = args.map{case (key,value) => s"$key=$value"}.reduce(_ + "&"+ _) + tokenParam
 
 
   // val url ="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?" + params
-  // val url ="https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + params
-  val url = "https://api-wwh.codevillains.me/assets/ala"
+  val url ="https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + params
+  // val url = "https://api-wwh.codevillains.me/assets/ala"
 
 
   case class Location(lat:Double,lng:Double)
   case class Geometry(location:Location)
   case class Photo(photo_reference:String)
-  case class Entry(name:String,photos:List[Photo], geometry:Geometry,rating:Double)
+  case class Entry(name:String,photos:Option[List[Photo]], geometry:Geometry,rating:Double)
   case class NearbyResponse(next_page_token:Option[String], results:List[Entry])
   // implicit val dec: Decoder[NearbyResponse] = deriveDecoder
   implicit val daec: EntityDecoder[IO,Json] = jsonOf[IO,Json]
 
-  val result=   httpClient.expect[Json](url).unsafeRunSync().as[NearbyResponse].toOption.get
+  val jSON =   httpClient.expect[Json](url).unsafeRunSync()
 
-  // use `client` here and return an `IO`.
-  // the client will be acquired and shut down
-  // automatically each time the `IO` is run.
-  val id= result.results.head.photos.head.photo_reference
-  println(getPhoto(id))
-  println(result.next_page_token)//.next_page_token)
-  // os.write.over(pwd / "mapsquery.json",data)
+  val result = jSON.as[NearbyResponse].toOption match {
+    case  Some(j) => j
+    case None =>
+      println(jSON.as[NearbyResponse])
+      os.write.over(pwd / s"fail.json",jSON.toString)
+      ???
+  }
 
+
+  val gyms = result.results.map( r =>
+    Gym(name= r.name,lat = r.geometry.location.lat,  lng=  r.geometry.location.lng,imageUrl= r.photos.toList.flatten.headOption.map(_.photo_reference).map(getPhoto))
+  ).zipWithIndex.map{case (gym,i) => gymLine(i,gym)}
+
+  val data = gyms.reduce(_ + "\n" + _)
+  os.write.over(pwd / s"insert_$page.sql",data)
+
+
+
+  result.next_page_token match {
+    case Some(token ) =>
+      println(s"Starting page ${page +1}")
+      getGyms(page+1,Some(token))
+    case None => println("ending")
+  }
 
 }
 
 def getPhoto(id:String) = {
   val w=300
   val url =s"https://maps.googleapis.com/maps/api/place/photo?key=$key&photoreference=$id&maxwidth=$w"
-
-  import cats.Id
-
-
   val r = requests.get(url,maxRedirects=0,check=false)
   r.headers("location").head
-
-//       httpClient.fetch(Request[IO](uri= Uri.unsafeFromString(url))) {
-//     case Status.Successful(r) =>
-//           println("ala")
-//       val location = r.headers.find(_.name.toString.toLowerCase() == "location").get.value
-//       location
-//   case r =>
-//           println("ola")
-//     throw new IllegalArgumentException("fuuck")
-// }.unsafeRunSync()
+}
 
 
+def coachIds() = scala.util.Random.shuffle((1 to 30).toList.map(_.toString)).take(1+Random.nextInt(6)) // TODO:bcm:
+
+
+
+def gymLine(i:Int,g:Gym) ={
+  val coaches = "[" + coachIds().map(c => s""""$c",""" ).mkString + "]"
+  val img = g.imageUrl.map(i => s"'$i'").getOrElse("NULL")
+  s"""insert into gym(id, name, location,imgurl, "coachIds") values ('$i', '${g.name}', ST_SetSRID(ST_Point(${g.lat}, ${g.lng}), 4326),$img , '$coaches');"""
 }
 
 
