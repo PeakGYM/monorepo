@@ -23,6 +23,8 @@ import cats.effect.{ContextShift, IO}
 
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
+import com.guys.coding.hackathon.backend.api.graphql.schema.gym.TrainingOutputTypes
+import sangria.execution.deferred.DeferredResolver
 
 class GraphqlRoute(services: Services)(implicit ec: ExecutionContext, cs: ContextShift[IO]) extends StrictLogging {
 
@@ -46,7 +48,7 @@ class GraphqlRoute(services: Services)(implicit ec: ExecutionContext, cs: Contex
         val operation = root.operationName.string.getOption(body)
         val vars      = root.variables.json.getOption(body) getOrElse Json.obj()
         val context =
-          GraphqlSecureContext(bearerToken.map(Token), services.jwtTokenService)
+          GraphqlSecureContext(bearerToken.map(Token), services)
 
         query.map(QueryParser.parse(_)) match {
           case Some(Success(value)) =>
@@ -59,7 +61,8 @@ class GraphqlRoute(services: Services)(implicit ec: ExecutionContext, cs: Contex
                       context,
                       variables = vars,
                       operationName = operation,
-                      exceptionHandler = handler
+                      exceptionHandler = handler,
+                      deferredResolver = DeferredResolver.fetchers(TrainingOutputTypes.exerciseFetcher)
                     )
                 )
               )
