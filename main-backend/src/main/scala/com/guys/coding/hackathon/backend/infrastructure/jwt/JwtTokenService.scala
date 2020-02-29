@@ -1,6 +1,5 @@
 package com.guys.coding.hackathon.backend.infrastructure.jwt
 
-import hero.common.util.time.TimeUtils.Implicits._millisToZonedDateTime
 import com.guys.coding.hackathon.backend.domain.AuthenticatedUser
 
 import scala.language.postfixOps
@@ -8,7 +7,7 @@ import java.security.{PrivateKey, PublicKey}
 import java.time.ZonedDateTime
 import java.util.UUID
 
-import com.guys.coding.hackathon.backend.{AdminId, Token}
+import com.guys.coding.hackathon.backend.Token
 
 import scala.concurrent.duration._
 import com.guys.coding.hackathon.backend.domain.TokenService
@@ -19,7 +18,10 @@ import pdi.jwt.JwtCirce
 import pdi.jwt.JwtClaim
 import com.guys.coding.hackathon.backend.domain.UserId
 import com.guys.coding.hackathon.backend.domain.UserId.ClientId
+import io.circe.syntax._
+import io.circe._
 import com.guys.coding.hackathon.backend.domain.UserId.TrainerId
+import hero.common.util.time.TimeUtils
 
 class JwtTokenService(publicKey: PublicKey, privateKey: PrivateKey) extends TokenService {
 
@@ -29,11 +31,14 @@ class JwtTokenService(publicKey: PublicKey, privateKey: PrivateKey) extends Toke
   private val AUDIENCE       = "hackathon-backend"
   private val ROLE           = "ROLE"
 
+  private val CLIENT  = "CLIENT"
+  private val TRAINER = "TRAINER"
+
   def generateToken(userId: UserId): Token = {
 
     val (role, subject) = userId match {
-      case ClientId(value)  => ("CLIENT", value)
-      case TrainerId(value) => ("TRAINER", value)
+      case ClientId(value)  => (CLIENT, value)
+      case TrainerId(value) => (TRAINER, value)
     }
 
     val additionalClaims = Map(
@@ -50,7 +55,7 @@ class JwtTokenService(publicKey: PublicKey, privateKey: PrivateKey) extends Toke
       expiration = Some(expiration),
       issuedAt = Some(issuedTime),
       jwtId = Some(UUID.randomUUID().toString.filter(_ != '-'))
-    ) //+ Serialization.write(additionalClaims)
+    ) + additionalClaims.asJson.toString
 
     Token(JwtCirce.encode(claims, privateKey, algorithm))
   }
@@ -67,11 +72,19 @@ class JwtTokenService(publicKey: PublicKey, privateKey: PrivateKey) extends Toke
       if (claim.issuedAt.isEmpty)
         throw new IllegalStateException(s"IssuedAt must be defined")
 
-      val adminId = claim.subject.getOrElse(
+      val id = claim.subject.getOrElse(
         throw new IllegalStateException(s"Invalid subject [${claim.subject}]")
       )
 
-      AuthenticatedUser(???, ???) // TODO:bcm
+      val additional: Map[String, String] =
+        parser.decode[Map[String, String]](claim.content).getOrElse(throw new IllegalStateException("Invalid additional claims "))
+
+      val userId = additional(ROLE) match {
+        case `TRAINER` => TrainerId(id)
+        case `CLIENT`  => ClientId(id)
+      }
+
+      AuthenticatedUser(userId, claim.issuedAt.map(TimeUtils.millisToZonedDateTime).get)
     }
   }
 }

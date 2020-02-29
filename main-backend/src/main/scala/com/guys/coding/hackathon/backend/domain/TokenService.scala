@@ -1,6 +1,6 @@
 package com.guys.coding.hackathon.backend.domain
 
-import com.guys.coding.hackathon.backend.{AdminId, Token}
+import com.guys.coding.hackathon.backend.Token
 
 import scala.util.Try
 
