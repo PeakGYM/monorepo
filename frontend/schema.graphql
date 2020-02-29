@@ -1,0 +1,64 @@
+# source: https://api-wwh.codevillains.me/graphql
+# timestamp: Sat Feb 29 2020 15:21:27 GMT+0100 (czas środkowoeuropejski standardowy)
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type CreateExampleResult {
+  result: String
+  errors: [String!]
+}
+
+input ExampleInput {
+  id: String!
+  value: String!
+}
+
+type Gym {
+  id: String!
+  name: String!
+  location: Location!
+  coachIds: [String!]!
+}
+
+type Location {
+  lat: Float!
+  lng: Float!
+}
+
+type Serie {
+  id: String!
+  reps: Int!
+  rest: Int! #seconds
+  weight: Int
+}
+
+type Exercise {
+  id: String!
+  imageUrl: String!
+  name: String!
+  plannedSeries: [Serie]!
+  doneSeries: [Serie]!
+  restAfter: Int!
+}
+
+type Workout {
+  id: String!
+  name: String!
+  trainer: String!
+  client: String
+  dateFrom: Long!
+  dateTo: Long!
+  exercises: [Exercise!]!
+}
+
+type Mutation {
+  addExample(example: ExampleInput!): CreateExampleResult!
+}
+
+type Query {
+  gyms(lat: Float!, lng: Float!): [Gym!]!
+  trainings(from: Long!, to: Long!, clientId: String): [Workout!]!
+}

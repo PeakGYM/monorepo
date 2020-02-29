@@ -11,7 +11,7 @@ class Mutation(services: Services) {
 
   private val mutationHolders =
     List[MutationHolder](
-      new ExampleMutation(new ExampleService[IO]{})
+      new ExampleMutation(new ExampleService[IO] {})
     )
 
   val MutationType = ObjectType(

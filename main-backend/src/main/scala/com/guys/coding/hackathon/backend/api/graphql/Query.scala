@@ -2,7 +2,6 @@ package com.guys.coding.hackathon.backend.api.graphql
 
 import com.guys.coding.hackathon.backend.Services
 import com.guys.coding.hackathon.backend.api.graphql.schema.QueryHolder
-import com.guys.coding.hackathon.backend.api.graphql.schema.example.ExampleQuery
 import sangria.schema.ObjectType
 import com.guys.coding.hackathon.backend.api.graphql.schema.gym.GymQuery
 

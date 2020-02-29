@@ -15,6 +15,12 @@ services:
         target: /keys
         read_only: true
 
+  frontend:
+    image: porcupine96/peak-gym-frontend:0.1
+    ports:
+      - "3000:80"
+    restart: always
+
   postgres:
     image: mdillon/postgis:9.6
     ports:

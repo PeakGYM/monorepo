@@ -31,14 +31,14 @@ class JwtTokenService(publicKey: PublicKey, privateKey: PrivateKey) extends Toke
   private val AUDIENCE       = "hackathon-backend"
   private val ROLE           = "ROLE"
 
-  private val CLIENT  = "CLIENT"
-  private val COACH = "COACH"
+  private val CLIENT = "CLIENT"
+  private val COACH  = "COACH"
 
   def generateToken(userId: UserId): Token = {
 
     val (role, subject) = userId match {
-      case ClientId(value)  => (CLIENT, value)
-      case CoachId(value) => (COACH, value)
+      case ClientId(value) => (CLIENT, value)
+      case CoachId(value)  => (COACH, value)
     }
 
     val additionalClaims = Map(
@@ -80,8 +80,8 @@ class JwtTokenService(publicKey: PublicKey, privateKey: PrivateKey) extends Toke
         parser.decode[Map[String, String]](claim.content).getOrElse(throw new IllegalStateException("Invalid additional claims "))
 
       val userId = additional(ROLE) match {
-        case `COACH` => CoachId(id)
-        case `CLIENT`  => ClientId(id)
+        case `COACH`  => CoachId(id)
+        case `CLIENT` => ClientId(id)
       }
 
       AuthenticatedUser(userId, claim.issuedAt.map(TimeUtils.millisToZonedDateTime).get)
