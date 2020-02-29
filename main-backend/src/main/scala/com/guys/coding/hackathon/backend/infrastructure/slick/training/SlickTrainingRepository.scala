@@ -36,4 +36,6 @@ class SlickTrainingRepository()(implicit db: Database, ec: ExecutionContext, cs:
   def addTraining(training: Training) =
     runIO(upsertAction(TrainingSchema.trainingFromDomain(training).copy(id = IdProvider.id.newId()))).map(_.map(_.toDomain))
 
+  def getTraining(id: String) = runIO(getFirstEntityByMatcherAction(_.id === id)).map(_.map(_.toDomain))
+
 }

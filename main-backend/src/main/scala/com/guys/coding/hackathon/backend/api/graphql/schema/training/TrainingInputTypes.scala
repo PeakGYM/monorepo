@@ -26,6 +26,7 @@ object TrainingInputTypes extends CommonOutputTypes {
       clientId: String,
       dateFrom: Long,
       dateTo: Long,
+      exercises: List[PlannedExercise],
       inperson: Boolean
   ) {
     def toDomain =
@@ -37,6 +38,7 @@ object TrainingInputTypes extends CommonOutputTypes {
         clientId = ClientId(clientId),
         dateFrom = TimeUtils.millisToZonedDateTime(dateFrom),
         dateTo = TimeUtils.millisToZonedDateTime(dateTo),
+        exercises = exercises,
         inperson = inperson
       )
   }
