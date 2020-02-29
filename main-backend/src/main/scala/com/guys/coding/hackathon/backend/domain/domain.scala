@@ -10,3 +10,9 @@ object UserId {
 }
 
 case class AuthenticatedUser(id: UserId, isuedAt: ZonedDateTime)
+
+
+case class Location(
+    lat: String,
+    lng: String
+)

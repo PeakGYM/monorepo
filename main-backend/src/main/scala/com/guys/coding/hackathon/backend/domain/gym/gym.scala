@@ -1,6 +1,7 @@
 package com.guys.coding.hackathon.backend.domain.gym
 
 import com.guys.coding.hackathon.backend.domain.coach.CoachId
+import com.guys.coding.hackathon.backend.domain.Location
 
 case class GymId(value: String) extends AnyVal
 
@@ -15,7 +16,3 @@ case class GymCoach(
     location: Location
 )
 
-case class Location(
-    lat: String,
-    lng: String
-)

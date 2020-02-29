@@ -7,6 +7,7 @@ import com.guys.coding.hackathon.backend.domain.gym._
 import com.guys.coding.hackathon.backend.domain.coach._
 import hero.common.postgres.newtype.NewtypeTranscoders
 import io.circe.{Json, _}
+import com.guys.coding.hackathon.backend.domain.Location
 import io.circe.generic.semiauto._
 import io.circe.syntax._
 import slick.ast.BaseTypedType

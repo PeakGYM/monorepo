@@ -18,6 +18,8 @@ import org.http4s.syntax.kleisli._
 
 import scala.concurrent.ExecutionContext
 import hero.common.util.LoggingExt
+import com.guys.coding.hackathon.backend.infrastructure.slick.gym.GymSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.gym.SlickGymRepository
 
 class Application(config: ConfigValues)(
     implicit ec: ExecutionContext,
@@ -32,7 +34,8 @@ class Application(config: ConfigValues)(
     repo.profile.api.Database.forConfig("slick.db", config.raw)
 
   private val schemas = List(
-    ExampleSchema
+    ExampleSchema,
+    GymSchema
   )
 
   schemas.foreach(schema => repo.SchemaUtils.createSchemasIfNotExists(db, schema.schemas))
@@ -40,8 +43,14 @@ class Application(config: ConfigValues)(
   private val privateKey      = PrivateKeyReader.get(config.authKeys.privatePath)
   private val publicKey       = PublicKeyReader.get(config.authKeys.publicPath)
   private val jwtTokenService = new JwtTokenService(publicKey, privateKey)
-  private val services        = Services(new ExampleService[IO] {}, jwtTokenService)
-  val graphqlRoute            = new GraphqlRoute(services)
+  private val gymRepository   = new SlickGymRepository()
+
+  private val services = Services(
+    gymRepository,
+    jwtTokenService
+  )
+
+  val graphqlRoute = new GraphqlRoute(services)
 
   private val routes = Router(
     "/graphql" -> graphqlRoute.route
