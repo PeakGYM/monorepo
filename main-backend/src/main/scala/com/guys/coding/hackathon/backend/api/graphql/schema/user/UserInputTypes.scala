@@ -40,19 +40,19 @@ object UserInputTypes extends CommonOutputTypes {
   case class MeasurementGraphql(
       clientId: String,
       timestamp: Long,
-      weight: Double,
-      neck: Double,
-      leftBicep: Double,
-      rightBicep: Double,
-      leftForearm: Double,
-      rightForearm: Double,
-      chest: Double,
-      waist: Double,
-      hip: Double,
-      rightThigh: Double,
-      leftThigh: Double,
-      rightCalf: Double,
-      leftCalf: Double
+      weight: Option[Double],
+      neck: Option[Double],
+      leftBicep: Option[Double],
+      rightBicep: Option[Double],
+      leftForearm: Option[Double],
+      rightForearm: Option[Double],
+      chest: Option[Double],
+      waist: Option[Double],
+      hip: Option[Double],
+      rightThigh: Option[Double],
+      leftThigh: Option[Double],
+      rightCalf: Option[Double],
+      leftCalf: Option[Double]
   ) {
     def toDomain: Measurement =
       Measurement(

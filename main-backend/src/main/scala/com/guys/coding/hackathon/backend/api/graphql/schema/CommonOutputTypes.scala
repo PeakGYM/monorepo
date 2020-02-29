@@ -9,6 +9,7 @@ import com.guys.coding.hackathon.backend.domain.UserId.ClientId
 import java.time.ZonedDateTime
 
 import com.guys.coding.hackathon.backend.domain.MeasurementId.MeasurementId
+import com.guys.coding.hackathon.backend.domain.user.Coach
 import hero.common.util.time.TimeUtils
 
 trait CommonOutputTypes {
@@ -24,6 +25,8 @@ trait CommonOutputTypes {
 
   implicit val MeasurementIdType: ScalarAlias[MeasurementId, String] =
     ScalarAlias[MeasurementId, String](StringType, _.value, value => Right(MeasurementId(value)))
+
+  implicit val CoachType: ObjectType[Unit, Coach] = deriveObjectType[Unit, Coach]()
 
   implicit val GymIdType: ScalarAlias[GymId, String] =
     ScalarAlias[GymId, String](StringType, _.value, value => Right(GymId(value)))

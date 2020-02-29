@@ -9,7 +9,6 @@ object UserOutputTypes extends CommonOutputTypes{
 
   implicit val ClientCoachCooperationType: ObjectType[Unit, ClientCoachCooperation]   = deriveObjectType[Unit, ClientCoachCooperation]()
   implicit val ClientType: ObjectType[Unit, Client]   = deriveObjectType[Unit, Client]()
-  implicit val CoachType: ObjectType[Unit, Coach]   = deriveObjectType[Unit, Coach]()
   implicit val MeasurementType: ObjectType[Unit, Measurement]   = deriveObjectType[Unit, Measurement]()
 
 
