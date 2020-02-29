@@ -15,7 +15,7 @@ services:
         target: /keys # TODO:bcm  read only
 
   postgres:
-    image: postgres:12-alpine # mdillon/postgis:9.6
+    image: mdillon/postgis:9.6
     ports:
       - "5432:5432"
     restart: always

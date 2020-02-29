@@ -12,8 +12,8 @@ class GymQuery(gymRepository: GymRepository[IO]) extends QueryHolder {
 
   import GymOutputTypes._
 
-  val LatArg = Argument("lat", StringType)
-  val LngArg = Argument("lng", StringType)
+  val LatArg = Argument("lat", FloatType)
+  val LngArg = Argument("lng", FloatType)
 
   override def queryFields(): List[Field[GraphqlSecureContext, Unit]] =
     fields[GraphqlSecureContext, Unit](
@@ -31,4 +31,5 @@ class GymQuery(gymRepository: GymRepository[IO]) extends QueryHolder {
           }
       )
     )
+
 }
