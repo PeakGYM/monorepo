@@ -40,9 +40,9 @@ object ClientSchema extends SlickSchemas {
 
   class Clients(tag: Tag) extends Table[ClientDTO](tag, "client") {
 
-    def id        = column[ClientId]("id", O.PrimaryKey)
-    def name      = column[String]("name")
-    def height    = column[Int]("height")
+    def id         = column[ClientId]("id", O.PrimaryKey)
+    def name       = column[String]("name")
+    def height     = column[Int]("height")
     def pictureUrl = column[String]("picture_url")
 
     override def * =

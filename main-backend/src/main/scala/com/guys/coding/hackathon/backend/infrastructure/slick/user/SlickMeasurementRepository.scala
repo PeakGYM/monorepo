@@ -22,7 +22,6 @@ class SlickMeasurementRepository(implicit db: Database, ec: ExecutionContext, cs
 
   implicit val localDateOrdering: Ordering[ZonedDateTime] = Ordering.by(TimeUtils.zonedDateTimeToMillis)
 
-
   override protected def id            = _.id
   override protected def DTOtoDomain   = identity
   override protected def toInsertedDTO = identity
@@ -33,9 +32,8 @@ class SlickMeasurementRepository(implicit db: Database, ec: ExecutionContext, cs
       result <- getFirstEntityByMatcherAction(_.id === measurement.id)
     } yield toDomain(result.get))
 
-  override def getAllFor(client: Client): IO[List[Measurement]] = {
-    runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, _.clientId ===client.id,None)).map(_.map(toDomain).toList)
-  }
+  override def getAllFor(client: Client): IO[List[Measurement]] =
+    runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, _.clientId === client.id, None)).map(_.map(toDomain).toList)
 
   override def getMostRecentFor(client: Client): IO[Measurement] =
     runIO {

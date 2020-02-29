@@ -26,7 +26,7 @@ class SlickClientRepository(implicit db: Database, ec: ExecutionContext, cs: Con
       result <- getFirstEntityByMatcherAction(_.id === client.id)
     } yield toDomain(result.get))
 
-  def getCoachesById(ids: List[ClientId]): IO[List[Client]] = runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, _.id inSet ids, None)).map(_.map(toDomain).toList)
-
+  def getCoachesById(ids: List[ClientId]): IO[List[Client]] =
+    runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, _.id inSet ids, None)).map(_.map(toDomain).toList)
 
 }

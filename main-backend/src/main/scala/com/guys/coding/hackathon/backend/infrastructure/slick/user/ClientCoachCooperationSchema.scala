@@ -18,13 +18,11 @@ object ClientCoachCooperationSchema extends SlickSchemas {
 
   val cooperations = TableQuery[ClientCoachCooperations]
 
-  def toDomain(cooperation: ClientCoachCooperationDTO): ClientCoachCooperation = {
+  def toDomain(cooperation: ClientCoachCooperationDTO): ClientCoachCooperation =
     ClientCoachCooperation(cooperation.id, cooperation.clientId, cooperation.coachId)
-  }
 
-  def toDTO(cooperation: ClientCoachCooperation): ClientCoachCooperationDTO = {
+  def toDTO(cooperation: ClientCoachCooperation): ClientCoachCooperationDTO =
     ClientCoachCooperationDTO(cooperation.id, cooperation.clientId, cooperation.coachId)
-  }
 
   class ClientCoachCooperations(tag: Tag) extends Table[ClientCoachCooperationDTO](tag, "client") {
 

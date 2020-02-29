@@ -11,8 +11,7 @@ import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.DtoMappings
 import slick.lifted.{TableQuery, Tag}
 
-
-object MeasurementsSchema extends SlickSchemas with DtoMappings  {
+object MeasurementsSchema extends SlickSchemas with DtoMappings {
   case class MeasurementDTO(
       //weight in kg, measurements in cm
       id: MeasurementId,

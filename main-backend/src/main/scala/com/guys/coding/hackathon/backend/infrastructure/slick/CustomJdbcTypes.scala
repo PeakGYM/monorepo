@@ -18,8 +18,8 @@ import slick.ast.BaseTypedType
 import com.guys.coding.hackathon.backend.infrastructure.slick.training.TrainingSchema.MuscleGroup
 
 object CustomJdbcTypes {
-  implicit val ClientIdMap: JdbcType[ClientId] = MappedColumnType.base[ClientId, String](_.value, ClientId)
-  implicit val CoachIdMap: JdbcType[CoachId]   = MappedColumnType.base[CoachId, String](_.value, CoachId)
+  implicit val ClientIdMap: JdbcType[ClientId]           = MappedColumnType.base[ClientId, String](_.value, ClientId)
+  implicit val CoachIdMap: JdbcType[CoachId]             = MappedColumnType.base[CoachId, String](_.value, CoachId)
   implicit val MeasurementIdMap: JdbcType[MeasurementId] = MappedColumnType.base[MeasurementId, String](_.value, MeasurementId)
 
   implicit val seriesDecoder = deriveDecoder[Series]

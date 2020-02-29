@@ -1,8 +1,6 @@
 package com.guys.coding.hackathon.backend.domain.user
 
 import simulacrum.typeclass
-
-
 @typeclass
 trait MeasurementRepository[F[_]] {
   def insert(measurement: Measurement): F[Measurement]

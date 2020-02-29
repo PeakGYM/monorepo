@@ -6,6 +6,6 @@ import simulacrum.typeclass
 @typeclass
 trait ClientRepository[F[_]] {
   def insert(client: Client): F[Client]
-    def getCoachesById(ids: List[ClientId]): F[List[Client]]
+  def getCoachesById(ids: List[ClientId]): F[List[Client]]
 
 }
