@@ -1,5 +1,5 @@
 package com.guys.coding.hackathon.backend.infrastructure.slick
-import com.guys.coding.hackathon.backend.infrastructure.slick.repo.SlickSchemas
+
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.DtoMappings
 import slick.lifted.{TableQuery, Tag}

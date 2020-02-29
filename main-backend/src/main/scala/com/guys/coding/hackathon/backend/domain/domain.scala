@@ -9,19 +9,18 @@ object UserId {
   case class CoachId(value: String)  extends UserId
 }
 
-
 sealed trait MeasurementId
-object MeasurementId{
+object MeasurementId {
   case class MeasurementId(value: String)
 }
 
 sealed trait PictureId
-object PictureId{
+object PictureId {
   case class PictureId(value: String)
 }
 case class AuthenticatedUser(id: UserId, isuedAt: ZonedDateTime)
 
 case class Location(
-    lat: String,
-    lng: String
+    lat: Double,
+    lng: Double
 )

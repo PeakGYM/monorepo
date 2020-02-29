@@ -9,6 +9,7 @@ import repo.profile.api._
 import scala.concurrent.ExecutionContext
 import cats.effect.{ContextShift, IO}
 import com.guys.coding.hackathon.backend.domain.Location
+import com.guys.coding.hackathon.backend.infrastructure.slick.PointFactory
 
 class SlickGymRepository()(implicit db: Database, ec: ExecutionContext, cs: ContextShift[IO])
     extends repo.plain.CrudRepo[String, GymDTO, Gyms](db, gyms)
@@ -27,7 +28,12 @@ class SlickGymRepository()(implicit db: Database, ec: ExecutionContext, cs: Cont
       result <- getFirstEntityByMatcherAction(_.id === gym.id.value)
     } yield toDomain(result.get))
 
-  // TODO: impletment
-  override def getInVicinity(location: Location): IO[List[Gym]] = ???
+  override def getInVicinity(location: Location): IO[List[Gym]] = {
+    runIO {
+      gyms.sortBy {
+        case gym => gym.location <-> PointFactory.createPoint(location.lat, location.lng) asc
+      }.result
+    }.map(_.map(toDomain).toList)
+  }
 
 }

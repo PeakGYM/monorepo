@@ -8,7 +8,6 @@ import com.guys.coding.hackathon.backend.infrastructure.slick.example.ExampleSch
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo
 
 import com.guys.coding.hackathon.backend.api.graphql.core.GraphqlRoute
-import com.guys.coding.hackathon.backend.domain.ExampleService
 import com.guys.coding.hackathon.backend.infrastructure.jwt.JwtTokenService
 import hero.common.crypto.KeyReaders.{PrivateKeyReader, PublicKeyReader}
 import org.http4s.server.Router
