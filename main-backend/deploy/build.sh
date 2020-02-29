@@ -2,7 +2,7 @@
 
 set -e
 
-owner=TODO
+owner=supernovaunwired
 
 ebt "universal:packageBin"
 version=$(sed -E 's/version:=\ \"([0-9]\.[0-9])\"/\1/' <../version.sbt)
