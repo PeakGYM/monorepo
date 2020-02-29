@@ -1,0 +1,51 @@
+//Http4s
+val http4sVersion = "0.21.0"
+interp.load.ivy(
+  "com.lihaoyi" % s"ammonite-shell_${scala.util.Properties.versionNumberString}" %  ammonite.Constants.version,
+  "org.typelevel" % "mouse_2.12" % "0.21",
+  "org.http4s" %% "http4s-dsl" % http4sVersion,
+  "org.http4s" %% "http4s-blaze-server" % http4sVersion,
+  "org.http4s" %% "http4s-blaze-client" % http4sVersion
+)
+
+@
+val shellSession = ammonite.shell.ShellSession()
+import shellSession._
+// Loggging
+import scala.concurrent.duration._
+import scala.util.{Failure,Success}
+import ammonite.ops._
+import ammonite.shell._
+import mouse.boolean._
+import scala.concurrent._
+import scala.language.postfixOps
+import scala.concurrent.ExecutionContext.global
+import cats.effect._
+
+import org.http4s.client.blaze._
+import org.http4s.client._
+
+import cats.effect.Blocker
+import java.util.concurrent._
+
+implicit val cs= IO.contextShift(global)
+val blockingPool = Executors.newFixedThreadPool(5)
+val blocker = Blocker.liftExecutorService(blockingPool)
+val httpClient: Client[IO] = JavaNetClientBuilder[IO](blocker).create
+
+
+
+
+
+def getGyms() = {
+
+    val url ="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
+
+  println(httpClient.expect[String]("http://example.com").unsafeRunSync())
+
+
+}
+// def main() = ???
+// main()
+getGyms()
+println("exited")

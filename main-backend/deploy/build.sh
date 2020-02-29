@@ -5,7 +5,7 @@ set -e
 owner=supernovaunwired
 
 ebt "universal:packageBin"
-version=$(sed -E 's/version\ *:=\ *\"([0-9].[0-9])\"/\1/' <../version.sbt)
+version=$(sed -E 's/version\ *:=\ *\"([0-9].[0-9]*)\"/\1/' <../version.sbt)
 zipfile="../target/universal/hackathon-backend-$version.zip"
 
 unzip "$zipfile"

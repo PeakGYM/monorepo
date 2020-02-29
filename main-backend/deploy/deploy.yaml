@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   backend:
-    image: supernovaunwired/whitewolf-hackathon-backend:0.1
+    image: supernovaunwired/whitewolf-hackathon-backend:0.6
     ports:
       - "8080:8080"
     restart: always

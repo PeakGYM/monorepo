@@ -15,5 +15,6 @@ class SlickExerciseRepository()(implicit db: Database, ec: ExecutionContext, cs:
   override protected def id = _.id
 
   def exercisesById(ids: List[String]): IO[List[Exercise]] = runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, _.id inSet ids, None))
+  def allExercises(): IO[List[Exercise]]                   = runIO(getEntriesAction(limit = Int.MaxValue, offset = 0))
 
 }

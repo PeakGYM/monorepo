@@ -8,6 +8,6 @@ import com.guys.coding.hackathon.backend.domain.gym._
 
 object GymOutputTypes extends CommonOutputTypes {
 
-  implicit val GymType: ObjectType[Unit, Gym] = deriveObjectType[Unit, Gym]()
+  implicit val GymType: ObjectType[Unit, Gym] = deriveObjectType[Unit, Gym]() // TODO:bcm  rresolve coach
 
 }
