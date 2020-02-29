@@ -10,10 +10,10 @@ import hero.common.util.time.TimeUtils
 
 class TrainingQuery(services: Services) extends QueryHolder {
 
-  val FromArg     = Argument("from", LongType)
-  val ToArg       = Argument("to", LongType)
-  val CoachIdArg  = Argument("coachId", OptionInputType(StringType))
-  val ClientIdArg = Argument("clientId", OptionInputType(StringType))
+  val FromArg      = Argument("from", LongType)
+  val ToArg        = Argument("to", LongType)
+  val CoachIdArg   = Argument("coachId", OptionInputType(StringType))
+  val ClientIdArg  = Argument("clientId", OptionInputType(StringType))
   val WorkoutIdArg = Argument("workoutId", StringType)
 
   override def queryFields(): List[Field[GraphqlSecureContext, Unit]] =
@@ -36,7 +36,8 @@ class TrainingQuery(services: Services) extends QueryHolder {
               .unsafeToFuture()
 
           }
-      ),Field(
+      ),
+      Field(
         "workout",
         OptionType(TrainingOutputTypes.TrainingType),
         arguments = List(WorkoutIdArg),
@@ -45,8 +46,21 @@ class TrainingQuery(services: Services) extends QueryHolder {
             // Should be taken from token
 
             services.trainingRepository
-              .getTraining(c.arg(WorkoutIdArg)
-              )
+              .getTraining(c.arg(WorkoutIdArg))
+              .unsafeToFuture()
+
+          }
+      ),
+      Field(
+        "exercises",
+        ListType(TrainingOutputTypes.ExerciseType),
+        arguments = Nil,
+        resolve = c =>
+          c.ctx.authorizedF { _ =>
+            // Should be taken from token
+
+            services.exerciseRepository
+              .allExercises()
               .unsafeToFuture()
 
           }

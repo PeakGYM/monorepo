@@ -32,8 +32,8 @@ object TrainingOutputTypes extends CommonOutputTypes {
   implicit val ExerciseType: ObjectType[Unit, Exercise] = deriveObjectType[Unit, Exercise]()
 
   implicit val PlannedExercieType: ObjectType[GraphqlSecureContext, PlannedExercise] = deriveObjectType(
-    ReplaceField(
-      "exerciseId",
+    ReplaceField("exerciseId", Field("id", StringType, resolve = _.value.exerciseId)),
+    AddFields(
       Field(
         "exercise",
         OptionType(ExerciseType),
