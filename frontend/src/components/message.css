@@ -1,0 +1,13 @@
+.ant-message-notice-content {
+  font-size: 300%;
+}
+
+.ant-message-custom-content {
+  display: flex;
+  padding: 2rem;
+  align-items: center;
+}
+
+.ant-message-custom-content span {
+  margin-left: 2rem;
+}

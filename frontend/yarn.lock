@@ -7362,6 +7362,11 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+re-debouncer@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/re-debouncer/-/re-debouncer-2.1.0.tgz#2eaf7994ba41590f4f80d4a363ae8905156b7dc1"
+  integrity sha512-Iy9BecWF9X4V6zXfL3ROZpKGkCnpzYdjG/j6NIBxQn7gEwO2DzED5BsbfRUiPeqr7C0tAD0HPHF6tYIcQFEnyA==
+
 re-tailwind@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/re-tailwind/-/re-tailwind-0.0.6.tgz#eb3ff30d05aa4c6658023152a92a4678b928d893"

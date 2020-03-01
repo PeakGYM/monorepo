@@ -21,7 +21,8 @@
     "reason-apollo",
     "reason-react",
     "bs-moment",
-    "bs-fetch"
+    "bs-fetch",
+    "re-debouncer"
   ],
   "warnings": {
     "error": "+101"

@@ -6,5 +6,7 @@
 [%bs.raw {|require("./index.css")|}];
 [%bs.raw {|require("./components/calendar.css")|}];
 [%bs.raw {|require("./components/collapse.css")|}];
+[%bs.raw {|require("./components/input.css")|}];
+[%bs.raw {|require("./components/message.css")|}];
 
 ReactDOMRe.renderToElementWithId(<App />, "app");

@@ -1,3 +1,36 @@
+type serie = {
+  id: string,
+  reps: int,
+  rest: int,
+  weight: option(int),
+};
+
+type exercise = {
+  id: string,
+  imgurl: string,
+  name: string,
+};
+
+type e = {
+  id: string,
+  doneSeries: array(serie),
+  plannedSeries: array(serie),
+  restAfter: int,
+  exercise: option(exercise),
+};
+type muscleGroup = [ | `Arms | `Back | `Chest | `Legs | `Shoulders];
+
+type workout = {
+  id: string,
+  name: string,
+  coachId: option(string),
+  clientId: string,
+  dateFrom: float,
+  dateTo: float,
+  muscleGroup: array(muscleGroup),
+  exercises: array(e),
+};
+
 module Training = [%graphql
   {|
   query Trainings(
@@ -5,7 +38,7 @@ module Training = [%graphql
     ) {
     workout(
       workoutId: $workoutId,
-    ) {
+    ) @bsRecord  {
         id
         name
         coachId
@@ -13,26 +46,27 @@ module Training = [%graphql
         dateFrom @bsDecoder(fn: "Time.fromJSON")
         dateTo  @bsDecoder(fn: "Time.fromJSON")
         muscleGroup
-        exercises {
+        exercises @bsRecord {
                 id
-                plannedSeries {
+                plannedSeries @bsRecord {
                      id
                     reps
                     rest
                     weight
                 }
-                doneSeries {
+                doneSeries @bsRecord {
                     id
                     reps
                     rest
                     weight
                 }
                 restAfter
-                exercise {
-                    id
-                    imgurl
-                    name
+                exercise @bsRecord {
+                  id
+                  imgurl
+                  name
                 }
+
         }
     }
   }
