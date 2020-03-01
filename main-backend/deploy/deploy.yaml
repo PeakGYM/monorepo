@@ -2,21 +2,28 @@ version: "3.2"
 
 services:
   backend:
-    image: supernovaunwired/whitewolf-hackathon-backend:0.6
+    image: supernovaunwired/whitewolf-hackathon-backend:0.31
     ports:
       - "8080:8080"
+      - "8090:8090"
     restart: always
     environment:
       PRIVATE_KEY_PATH: /keys/private.der
       PUBLIC_KEY_PATH: /keys/public.der
+      APP_SECRET: "😄"
     volumes:
       - type: bind
         source: /root/keys
         target: /keys
         read_only: true
 
+      - type: bind
+        source: /root/assets
+        target: /assets
+        read_only: false
+
   frontend:
-    image: porcupine96/peak-gym-frontend:0.1
+    image: porcupine96/peak-gym-frontend:0.7
     ports:
       - "3000:80"
     restart: always

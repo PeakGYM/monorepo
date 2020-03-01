@@ -58,7 +58,7 @@ class TrainingMutation(services: Services) extends MutationHolder {
 
             val id = IdProvider.id.newId()
 
-            Training(
+            val training = Training(
               id =  id,
               name = "BestTraining",
               muscleGroup = MuscleGroup.Back :: Nil,
@@ -71,7 +71,7 @@ class TrainingMutation(services: Services) extends MutationHolder {
             )
             // Should be taken from token
             services.trainingRepository
-              .updateTraiing(c.arg(TrainingArg).toDomain)
+              .updateTraiing(training)
               .unsafeToFuture()
 
           }

@@ -51,6 +51,7 @@ class ChatActor(
       sender ! (r match {
         case "GET_MAP"      => Responses.getMapResponse()
         case "NOT_EXERCISE" => Responses.looserResponse()
+        case "OK_I_WILL" => Responses.helloMessage
         case "GET_NEXT_TRAINING" =>
           nextWorkoutFor("1").value.unsafeRunSync.map(Responses.getTrainingInfoResponse _ tupled).getOrElse(Responses.getTrainingNotFoundResponse())
       })

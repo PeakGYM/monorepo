@@ -14,10 +14,10 @@ import java.time.ZonedDateTime
 object Responses {
 
   val helloMessage = QuickReplies(
-    "Hello do you want to exercise?\n Or maybe  you want to find personal trainier in vicinity?",
-    QR.Text("Trainer 📍", "GET_MAP"),
-    QR.Text("No 😥", "NOT_EXERCISE"),
-    QR.Text("Next training", "GET_NEXT_TRAINING")
+    "Hey, do you want to trian with your personal trainier?\n Or maybe  you want to find one somwhere newarby?",
+    QR.Text("Find 📍", "GET_MAP"),
+    QR.Text("I'm tired 😥", "NOT_EXERCISE"),
+    QR.Text("Train? When? 😍", "GET_NEXT_TRAINING")
 
     // Get next training
 
@@ -57,17 +57,24 @@ object Responses {
     Simple("No workout found for you. You can schedule another via our app!")
 
   def looserResponse() =
-    Simple(
+    QuickReplies(
       Random
         .shuffle(
           List(
-            "Bro I feel you 🙁",
-            "Did you drink last night? 😈",
+            "Did you drink last night or what? 😈\nPush ❗",
             "Come on! ✊",
-            "What can I do? 🤷"
+            "Really?\nI won't exercise for you 🤷"
           )
         )
-        .head
+        .head,
+      QR.Text(
+        "Ok 😢",
+        "OK_I_WILL"
+      ),
+      QR.Text(
+        "Kidding 😘",
+        "OK_I_WILL"
+      )
     )
 
   def ok: Simple =
