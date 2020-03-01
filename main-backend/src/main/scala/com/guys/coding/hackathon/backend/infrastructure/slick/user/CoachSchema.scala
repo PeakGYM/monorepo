@@ -36,6 +36,7 @@ object CoachSchema extends SlickSchemas {
 
   class Coaches(tag: Tag) extends Table[CoachDTO](tag, "coach") {
 
+    //
     def id         = column[CoachId]("id", O.PrimaryKey)
     def name       = column[String]("name")
     def pictureUrl = column[String]("pictureUrl")

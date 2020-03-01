@@ -101,7 +101,7 @@ def getGyms(page:Int,pageToken :Option[String]) :Unit = {
 
   val gyms = result.results.map( r =>
     Gym(name= r.name,lat = r.geometry.location.lat,  lng=  r.geometry.location.lng,imageUrl= r.photos.toList.flatten.headOption.map(_.photo_reference).map(getPhoto))
-  ).zipWithIndex.map{case (gym,i) => gymLine(i,gym)}
+  ).zipWithIndex.map{case (gym,i) => gymLine(page * 200 + i,gym)}
 
   val data = gyms.reduce(_ + "\n" + _)
   os.write.over(pwd / s"insert_$page.sql",data)
@@ -132,7 +132,7 @@ def coachIds() = scala.util.Random.shuffle((1 to 30).toList.map(_.toString)).tak
 def gymLine(i:Int,g:Gym) ={
   val coaches = "[" + coachIds().map(c => s""""$c",""" ).mkString.stripSuffix(",") + "]"
   val img = g.imageUrl.map(i => s"'$i'").getOrElse("NULL")
-  s"""insert into gym(id, name, location,imgurl, "coachIds") values ('$i', '${g.name}', ST_SetSRID(ST_Point(${g.lat}, ${g.lng}), 4326),$img , '$coaches');"""
+  s"""insert into gym(id, name, location,imgurl, "coachIds") values ('$i', '${g.name}', ST_SetSRID(ST_Point(${g.lng}, ${g.lat}), 4326),$img , '$coaches');"""
 }
 
 

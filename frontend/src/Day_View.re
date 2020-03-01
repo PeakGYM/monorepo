@@ -1,6 +1,33 @@
+open Day_Query;
+
+let defaultImg = "https://image.flaticon.com/icons/svg/1869/1869616.svg";
+
+type u = [ | `kg | `s | `none];
+
+let uTostring =
+  fun
+  | `kg => "kg"
+  | `s => "s"
+  | `none => "x";
+
 module Block = {
   [@react.component]
-  let make = (~title, ~text, ~className) =>
+  let make =
+      (
+        ~title,
+        ~value,
+        ~className,
+        ~editable=false,
+        ~onChange=(_, _) => (),
+        ~type_=`none,
+        ~serieId,
+      ) => {
+    let value =
+      switch (value) {
+      | Some(value) => value
+      | None => 0
+      };
+
     <div
       className=TW.(
         [
@@ -20,188 +47,331 @@ module Block = {
         className=TW.([Margin(Mb8), TextAlign(TextCenter)] |> make)
         style={ReactDOMRe.Style.make(~fontSize="36px", ())}
       />
-      <Text
-        className=TW.([TextAlign(TextCenter)] |> make)
-        content=text
-        style={ReactDOMRe.Style.make(~fontSize="24px", ())}
-      />
+      {editable
+         ? <Input
+             value={value->string_of_int}
+             htmlType="number"
+             onChange={event => {
+               let value = event->ReactEvent.Form.target##value;
+               Js.log(value);
+               onChange(serieId, value);
+             }}
+             placeholder="0"
+           />
+         : <Text
+             className=TW.([TextAlign(TextCenter)] |> make)
+             content={value->string_of_int ++ " " ++ uTostring(type_)}
+             style={ReactDOMRe.Style.make(~fontSize="24px", ())}
+           />}
     </div>;
+  };
 };
 
 module Exercise = {
   [@react.component]
-  let make = (~exercise, ~onChange) => {
+  let make = (~exercise, ~onRepeatChange, ~onRestChange, ~onWeightChange) => {
     let (visible, setVisible) = React.useState(_ => true);
+    let e = exercise.exercise;
 
-    exercise
-    ->Option.map(e => {
-        let done_ = e##plannedSeries;
-        let allDone = e##plannedSeries->Array.length === 0;
+    let done_ = exercise.plannedSeries;
+    let allDone = exercise.plannedSeries->Array.length === 0;
+
+    <div
+      className=TW.(
+        [BoxShadow(ShadowLg), BorderRadius(RoundedLg), Padding(P8)] |> make
+      )>
+      <div className=TW.([Display(Flex), FlexDirection(FlexRow)] |> make)>
+        <div>
+          <img
+            className=TW.(
+              [
+                Display(Flex),
+                FlexDirection(FlexCol),
+                Width(W64),
+                Height(H64),
+                Padding(Pr12),
+              ]
+              |> make
+            )
+            src={
+              e->Option.map(e => e.imgurl)->Option.getWithDefault(defaultImg)
+            }
+          />
+        </div>
         <div
           className=TW.(
-            [BoxShadow(ShadowLg), BorderRadius(RoundedLg), Padding(P8)]
+            [
+              Display(Flex),
+              AlignItems(ItemsCenter),
+              JustifyContent(JustifyBetween),
+              Flex(Flex1),
+            ]
             |> make
           )>
-          <div
-            className=TW.([Display(Flex), FlexDirection(FlexRow)] |> make)>
-            <div>
-              <img
-                className=TW.(
-                  [
-                    Display(Flex),
-                    FlexDirection(FlexCol),
-                    Width(W64),
-                    Height(H64),
-                    Padding(Pr12),
-                  ]
-                  |> make
-                )
-                src={e##imgurl}
-              />
-            </div>
-            <div
+          <Text
+            content={e->Option.map(e => e.name)->Option.getWithDefault("")}
+            style={ReactDOMRe.Style.make(
+              ~fontSize="36px",
+              ~fontWeight="600",
+              (),
+            )}
+          />
+          {allDone ? <Ok /> : React.null}
+        </div>
+      </div>
+      <Collapse bordered=false activeKey={visible ? [|"1"|] : [||]}>
+        <Collapse.Panel
+          key="1"
+          extra={
+            <button
+              onClick={_ => setVisible(v => !v)}
               className=TW.(
                 [
-                  Display(Flex),
-                  AlignItems(ItemsCenter),
-                  JustifyContent(JustifyBetween),
-                  Flex(Flex1),
+                  TextTransform(Uppercase),
+                  TextColor(TextBlue500),
+                  Padding(P4),
                 ]
                 |> make
               )>
               <Text
-                content=e##name
-                style={ReactDOMRe.Style.make(
-                  ~fontSize="36px",
-                  ~fontWeight="600",
-                  (),
-                )}
+                content={visible ? {j|Zobacz mniej|j} : {j|Zobacz więcej|j}}
+                style={ReactDOMRe.Style.make(~fontSize="48px", ())}
               />
-              {allDone ? <Ok /> : React.null}
-            </div>
-          </div>
-          <Collapse bordered=false activeKey={visible ? [|"1"|] : [||]}>
-            <Collapse.Panel
-              key="1"
-              extra={
-                <button
-                  onClick={_ => setVisible(v => !v)}
-                  className=TW.(
-                    [
-                      TextTransform(Uppercase),
-                      TextColor(TextBlue500),
-                      Padding(P4),
-                    ]
-                    |> make
-                  )>
-                  <Text
-                    content={
-                      visible ? {j|Zobacz mniej|j} : {j|Zobacz więcej|j}
-                    }
-                    style={ReactDOMRe.Style.make(~fontSize="48px", ())}
-                  />
-                </button>
-              }>
-              {e##doneSeries
-               ->Array.mapWithIndex((index, p) => {
-                   let index = (index + 1)->string_of_int;
-                   <>
-                     <Text
-                       content={j|Seria $index|j}
-                       style={ReactDOMRe.Style.make(~fontSize="48px", ())}
-                     />
-                     <div
-                       className=TW.(
-                         [
-                           Display(Flex),
-                           Padding(P8),
-                           JustifyContent(JustifyBetween),
-                         ]
-                         |> make
-                       )>
-                       <Block
-                         title={j|Powtórzenia|j}
-                         text={p##reps->string_of_int}
-                         className={TW.Margin(Mx0)}
-                       />
-                       <Block
-                         title={j|Ciężar|j}
-                         text={p##weight->string_of_int ++ " kg"}
-                         className={TW.Margin(Mx8)}
-                       />
-                       <Block
-                         title={j|Odpoczynek|j}
-                         text={p##rest->string_of_int ++ " s"}
-                         className={TW.Margin(Mx0)}
-                       />
-                     </div>
-                   </>;
-                 })
-               //  <div> <Text content={p##weight->string_of_int} /> </div>
-               //  <div> <Text content={p##rest->string_of_int} /> </div>
-               ->React.array}
-              {e##plannedSeries
-               ->Array.mapWithIndex((index, p) => {
-                   let index =
-                     (e##doneSeries->Array.length + (index + 1))
-                     ->string_of_int;
-                   <>
-                     <Text
-                       content={j|Seria $index|j}
-                       style={ReactDOMRe.Style.make(~fontSize="48px", ())}
-                     />
-                     <div
-                       className=TW.(
-                         [
-                           Display(Flex),
-                           Padding(P8),
-                           JustifyContent(JustifyBetween),
-                         ]
-                         |> make
-                       )>
-                       <Block
-                         title={j|Powtórzenia|j}
-                         text={p##reps->string_of_int}
-                         className={TW.Margin(Mx0)}
-                       />
-                       <Block
-                         title={j|Ciężar|j}
-                         text={p##weight->string_of_int ++ " kg"}
-                         className={TW.Margin(Mx8)}
-                       />
-                       <Block
-                         title={j|Odpoczynek|j}
-                         text={p##rest->string_of_int ++ " s"}
-                         className={TW.Margin(Mx0)}
-                       />
-                     </div>
-                   </>;
-                 })
-               //  <div> <Text content={p##weight->string_of_int} /> </div>
-               //  <div> <Text content={p##rest->string_of_int} /> </div>
-               ->React.array}
-            </Collapse.Panel>
-          </Collapse>
-        </div>;
-      })
-    ->Option.getWithDefault(React.null);
+            </button>
+          }>
+          {exercise.doneSeries
+           ->Array.mapWithIndex((index, p) => {
+               let index = (index + 1)->string_of_int;
+               <>
+                 <Text
+                   content={j|Seria $index|j}
+                   style={ReactDOMRe.Style.make(~fontSize="48px", ())}
+                 />
+                 <div
+                   className=TW.(
+                     [
+                       Display(Flex),
+                       Padding(P8),
+                       JustifyContent(JustifyBetween),
+                     ]
+                     |> make
+                   )>
+                   <Block
+                     title={j|Powtórzenia|j}
+                     value={Some(p.reps)}
+                     className={TW.Margin(Mx0)}
+                     type_=`none
+                     serieId={p.id}
+                   />
+                   <Block
+                     title={j|Ciężar|j}
+                     value={p.weight}
+                     className={TW.Margin(Mx8)}
+                     type_=`kg
+                     serieId={p.id}
+                   />
+                   <Block
+                     title={j|Odpoczynek|j}
+                     value={Some(p.rest)}
+                     className={TW.Margin(Mx0)}
+                     type_=`s
+                     serieId={p.id}
+                   />
+                 </div>
+               </>;
+             })
+           ->React.array}
+          {exercise.plannedSeries
+           ->Array.mapWithIndex((index, p) => {
+               let index =
+                 (exercise.doneSeries->Array.length + (index + 1))
+                 ->string_of_int;
+               <>
+                 <Text
+                   content={j|Seria $index|j}
+                   style={ReactDOMRe.Style.make(~fontSize="48px", ())}
+                 />
+                 <div
+                   className=TW.(
+                     [
+                       Display(Flex),
+                       Padding(P8),
+                       JustifyContent(JustifyBetween),
+                     ]
+                     |> make
+                   )>
+                   <Block
+                     title={j|Powtórzenia|j}
+                     value={Some(p.reps)}
+                     className={TW.Margin(Mx0)}
+                     editable=true
+                     type_=`none
+                     serieId={p.id}
+                     onChange=onRepeatChange
+                   />
+                   <Block
+                     title={j|Ciężar|j}
+                     value={p.weight}
+                     className={TW.Margin(Mx8)}
+                     editable=true
+                     type_=`kg
+                     serieId={p.id}
+                     onChange=onWeightChange
+                   />
+                   <Block
+                     title={j|Odpoczynek|j}
+                     value={Some(p.rest)}
+                     className={TW.Margin(Mx0)}
+                     editable=true
+                     type_=`s
+                     serieId={p.id}
+                     onChange=onRestChange
+                   />
+                 </div>
+               </>;
+             })
+           ->React.array}
+        </Collapse.Panel>
+      </Collapse>
+    </div>;
   };
 };
 
+type exerciseId = string;
+type serieId = string;
+type action =
+  | UpdateReps(exerciseId, serieId, int)
+  | UpdateRest(exerciseId, serieId, int)
+  | UpdateWeight(exerciseId, serieId, option(int));
+
 let reducer = (state, action) =>
   switch (action) {
-  | _ => state
+  | UpdateRest(exerciseId, serieId, rest) => {
+      ...state,
+      exercises:
+        state.exercises
+        ->Array.map(e =>
+            e.id === exerciseId
+              ? {
+                ...e,
+                plannedSeries:
+                  e.plannedSeries
+                  ->Array.map(s => s.id === serieId ? {...s, rest} : s),
+              }
+              : e
+          ),
+    }
+
+  | UpdateWeight(exerciseId, serieId, weight) => {
+      ...state,
+      exercises:
+        state.exercises
+        ->Array.map(e =>
+            e.id === exerciseId
+              ? {
+                ...e,
+                plannedSeries:
+                  e.plannedSeries
+                  ->Array.map(s => s.id === serieId ? {...s, weight} : s),
+              }
+              : e
+          ),
+    }
+
+  | UpdateReps(exerciseId, serieId, reps) => {
+      ...state,
+      exercises:
+        state.exercises
+        ->Array.map(e =>
+            e.id === exerciseId
+              ? {
+                ...e,
+                plannedSeries:
+                  e.plannedSeries
+                  ->Array.map(s => s.id === serieId ? {...s, reps} : s),
+              }
+              : e
+          ),
+    }
   };
+
+let toSerie = (s: Day_Query.serie) => {
+  "id": s.id,
+  "reps": s.reps,
+  "rest": s.rest,
+  "weight": s.weight,
+};
+
+let toMuscle =
+  fun
+  | `Arms => "Arms"
+  | `Back => "Back"
+  | `Chest => "Chest"
+  | `Legs => "legs"
+  | `Shoulders => "Shoulders";
+
+let toPayload = state => {
+  "id": state.id,
+  "name": state.name,
+  "clientId": state.clientId,
+  "coachId": state.coachId,
+  "dateFrom": state.dateFrom->Time.toJSON,
+  "dateTo": state.dateFrom->Time.toJSON,
+  "inperson": false,
+  "muscleGroup": state.muscleGroup->Array.map(toMuscle),
+  "exercises":
+    state.exercises
+    ->Array.map(e =>
+        {
+          "trainingId": state.id,
+          "exerciseId": e.id,
+          "doneSeries": e.doneSeries->Array.map(toSerie),
+          "plannedSeries": e.plannedSeries->Array.map(toSerie),
+          "restAfter": e.restAfter,
+        }
+      ),
+};
+
 module View = {
   [@react.component]
-  let make = (~workout, ~defaultState) => {
-    let mutation = Day_Mutation.use();
-
+  let make = (~workout as _w, ~defaultState) => {
     let (state, dispatch) = React.useReducer(reducer, defaultState);
+    let mutation = Day_Mutation.use(~training=toPayload(state), ());
+
+    // Js.log(defaultState);
+    let fn = Debouncer.make(~wait=400, _ => mutation |> ignore);
+
+    React.useEffect1(
+      () => {
+        Message.success({
+          "content": "Working",
+          "duration": 1000,
+          "icon": <Ok />,
+          "top": 64,
+        });
+
+        fn();
+        None;
+      },
+      [|state|],
+    );
+
     <div>
-      {workout##exercises
+      {state.exercises
        ->Array.map(e =>
-           <Exercise key={e##id} exercise={e##exercise} onChange=Js.log />
+           <Exercise
+             key={e.id}
+             exercise=e
+             onRepeatChange={(serieId, value) =>
+               dispatch(UpdateReps(e.id, serieId, value))
+             }
+             onRestChange={(serieId, value) =>
+               dispatch(UpdateRest(e.id, serieId, value))
+             }
+             onWeightChange={(serieId, value) =>
+               dispatch(UpdateWeight(e.id, serieId, value))
+             }
+           />
          )
        ->React.array}
     </div>;
@@ -218,30 +388,36 @@ let make = (~id) => {
        let workout = data##workout;
        let workout =
          Some({
-           "id": "1",
-           "exercises": [|
+           id: "1",
+           name: "asd",
+           clientId: "2",
+           coachId: Some("2"),
+           dateFrom: Js.Date.now(),
+           dateTo: Js.Date.now(),
+           muscleGroup: [|`Arms|],
+           exercises: [|
              {
-               "id": "1",
-               "exercise":
+               id: "1",
+               exercise:
                  Some({
-                   "id": "1",
-                   "name": {j|Biceps - na ławeczce|j},
-                   "imgurl": "https://image.flaticon.com/icons/svg/1869/1869616.svg",
-                   "plannedSeries": [|
-                     {"id": "1", "reps": 12, "rest": 30, "weight": 70},
-                   |],
-
-                   "doneSeries": [|
-                     {"id": "1", "reps": 12, "rest": 30, "weight": 70},
-                   |],
+                   id: "1",
+                   name: {j|Biceps - na ławeczce|j},
+                   imgurl: defaultImg,
                  }),
+
+               plannedSeries: [|
+                 {id: "1", reps: 12, rest: 30, weight: Some(70)},
+               |],
+               doneSeries: [|
+                 {id: "1", reps: 12, rest: 30, weight: Some(70)},
+               |],
+               restAfter: 30,
              },
            |],
          });
        workout
-       ->Option.map(workout => <View workout defaultState=data##workout />)
+       ->Option.map(workout => <View workout defaultState=workout />)
        ->Option.getWithDefault(React.null);
-
      | Loading => <Loader />
      | _ => React.null
      }}

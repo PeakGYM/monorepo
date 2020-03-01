@@ -19,7 +19,7 @@ export function loadMap(gyms) {
   let formatCoachCount = coachIds => {
     let count = coachIds.length;
 
-    return count === 1 ? "1 coach" : `{count} coaches`;
+    return count === 1 ? "1 coach" : `${count} coaches`;
   };
 
   let gymMarkers = gyms.map(gym => {
@@ -35,7 +35,7 @@ export function loadMap(gyms) {
   });
 
   let map = (
-    <Map center={position} zoom={16} minZoom={10} maxZoom={17}>
+    <Map center={position} zoom={16} minZoom={0} maxZoom={17}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
