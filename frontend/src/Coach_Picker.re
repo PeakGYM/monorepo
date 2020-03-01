@@ -20,6 +20,9 @@ let make = (~gym) => {
       ->Array.map(coach => {
           <div
             key={coach##id}
+            className=TW.(
+              [BoxShadow(ShadowMd), BorderRadius(RoundedLg)] |> make
+            )
             style={ReactDOMRe.Style.make(
               ~display="flex",
               ~justifyContent="left",
@@ -42,6 +45,7 @@ let make = (~gym) => {
                     Width(W32),
                     Height(H32),
                     BorderRadius(RoundedFull),
+                    Margin(Ml1),
                   ]
                   |> make
                 )
@@ -67,7 +71,6 @@ let make = (~gym) => {
       ~zIndex="1000",
       ~padding="2rem",
       ~background="white",
-      ~borderRadius="5rem",
       ~transition="all 0.25s",
       ~overflowY="scroll",
       ~bottom=position,
