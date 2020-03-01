@@ -18,11 +18,11 @@ seriesCounter = 0
 PlannedExerciseCounter = 0
 trainingCounter = 0
 
-hour = 3600 * 1000
+hour = 3600
 day = hour * 24
 week = day * 7
 
-names = ["super", "hardcore", "intensive", "fulfilling", "hard", "regular", "exhaustive", ]
+names = ["Super", "Hardcore", "Intensive", "Fulfilling", "Hard", "Regular", "Exhaustive", ]
 muscleGroup = ["Chest",
                "Back",
                "Shoulders",
@@ -34,11 +34,11 @@ duration = [1, 1.5, 2, 2.5]
 numOfSeries = [2, 3, 4, 5]
 restAfter = [30, 60, 90]
 reps = [6, 8, 10, 12, 15]
-base_date = 1582725600000  # 26.02.2020 15:00
+base_date = 1582817400  # 26.02.2020 15:00
 
 
 def getWorkoutName(muscleGroup: str) -> str:
-    return f'{choice(names)} {muscleGroup} {choice(adjective)}'
+    return f'{choice(names)} {muscleGroup.lower()} {choice(adjective)}'
 
 
 def getMuscleGroup() -> list:
@@ -125,6 +125,11 @@ from collections import defaultdict
 clientTocoach = defaultdict(set)
 coopid=0
 
+
+def formatDate(timestamp):
+    dt = datetime.datetime.fromtimestamp(timestamp)
+    return dt.strftime("%Y-%m-%dT%H:%M:%S.000000Z[Etc/UTC]")
+
 def regularClient(i_max, j_max):
     global trainingCounter
     resultStrings = []
@@ -151,7 +156,7 @@ def regularClient(i_max, j_max):
             muscles_dumped = json.dumps(muscleGroup)
             exercises_dumped = json.dumps(planned_Exercises)
             resultStrings.append(
-                f"{starting_string}'{id}', '{name}', '{muscles_dumped}', {ciapki(coachId)}, '{clientId}', '{tmp_datefrom}', '{date_to}', '{exercises_dumped}', '{inperson}');"
+                f"{starting_string}'{id}', '{name}', '{muscles_dumped}', {ciapki(coachId)}, '{clientId}', '{formatDate(tmp_datefrom)}', '{formatDate(date_to)}', '{exercises_dumped}', '{inperson}');"
             )
     return resultStrings
 
@@ -161,9 +166,9 @@ for i in range(5):
     glob_res+= regularClient(3,7)
 
 for i in range(5):
-    glob_res+= regularClient(2,4)
+    glob_res+= regularClient(2,2)
 
-for i in range(5):
+for i in range(37):
     glob_res+= regularClient(1,1)
 
 coop_list= []
