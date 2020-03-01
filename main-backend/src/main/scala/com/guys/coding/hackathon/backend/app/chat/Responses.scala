@@ -1,4 +1,4 @@
-package com.guys.coding.bitehack.chat
+package com.guys.coding.wwh.chat
 
 import com.guys.coding.hackathon.backend.domain.training.Training
 import io.codeheroes.herochat.environment.facebook.Buttons.{MessengerExtension, UrlButton}

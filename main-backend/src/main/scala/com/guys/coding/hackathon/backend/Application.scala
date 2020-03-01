@@ -40,15 +40,15 @@ import com.guys.coding.hackathon.backend.infrastructure.slick.user.MeasurementsS
 import com.guys.coding.hackathon.backend.api.Fakerendpoint
 import io.codeheroes.herochat.environment.facebook.`package`.FacebookSenderId
 import akka.actor.Props
-import com.guys.coding.bitehack.chat.ChatActor
+import com.guys.coding.wwh.chat.ChatActor
 import io.codeheroes.herochat.Chat
 import io.codeheroes.herochat.environment.facebook.FacebookRequest
 import io.codeheroes.herochat.environment.facebook.FacebookResponse
 import akka.actor.ActorSystem
 import io.codeheroes.herochat.`package`.PassivationConfig
 import io.codeheroes.herochat.infrastructure.inmem.InMemChatRepository
-import com.guys.coding.bitehack.api.core.EndpointsWrapper
-import com.guys.coding.bitehack.api.core.HttpServer
+import com.guys.coding.wwh.api.core.EndpointsWrapper
+import com.guys.coding.wwh.api.core.HttpServer
 import akka.stream.ActorMaterializer
 
 class Application(config: ConfigValues)(

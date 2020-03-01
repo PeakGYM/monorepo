@@ -1,4 +1,4 @@
-package com.guys.coding.bitehack.api.core
+package com.guys.coding.wwh.api.core
 
 import org.json4s.CustomSerializer
 

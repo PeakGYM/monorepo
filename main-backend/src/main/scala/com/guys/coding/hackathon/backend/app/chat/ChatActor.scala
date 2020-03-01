@@ -1,4 +1,4 @@
-package com.guys.coding.bitehack.chat
+package com.guys.coding.wwh.chat
 
 import akka.persistence.{PersistentActor, RecoveryCompleted}
 import com.typesafe.scalalogging.StrictLogging
