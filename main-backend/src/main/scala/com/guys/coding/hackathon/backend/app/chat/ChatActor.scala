@@ -3,11 +3,13 @@ package com.guys.coding.wwh.chat
 import akka.persistence.{PersistentActor, RecoveryCompleted}
 import com.typesafe.scalalogging.StrictLogging
 import io.codeheroes.herochat.environment.facebook.{FacebookRequest, FacebookSenderId}
+import scala.language.postfixOps
 
 import scala.concurrent.ExecutionContext
 
 import com.guys.coding.hackathon.backend.Services
-import com.guys.coding.hackathon.backend.domain.training.Training
+import cats.data.OptionT
+import cats.effect.IO
 
 class ChatActor(
     id: FacebookSenderId,
@@ -28,10 +30,15 @@ class ChatActor(
 
   override def receiveCommand: Receive = initial
 
-  private def nextWorkoutFor(clientId: String): Option[Training] =
-    services.trainingRepository
-      .getNextTraining(clientId)
-      .unsafeRunSync()
+  private def nextWorkoutFor(clientId: String) =
+    for {
+      traiining <- OptionT(
+                    services.trainingRepository
+                      .getNextTraining(clientId)
+                  )
+      coachId <- OptionT.fromOption[IO](traiining.coachId)
+      coach   <- OptionT(services.coachRepository.getCoachesById(List(coachId)).map(_.headOption))
+    } yield (traiining, coach)
 
   def initial: Receive = {
     case FacebookRequest.Message(v) =>
@@ -42,9 +49,10 @@ class ChatActor(
 
     case FacebookRequest.QuickReply(r) =>
       sender ! (r match {
-        case "GET_MAP"           => Responses.getMapResponse()
-        case "NOT_EXERCISE"      => Responses.inProgress()
-        case "GET_NEXT_TRAINING" => nextWorkoutFor("1").map(Responses.getTrainingInfoResponse).getOrElse(Responses.getTrainingNotFoundResponse())
+        case "GET_MAP"      => Responses.getMapResponse()
+        case "NOT_EXERCISE" => Responses.looserResponse()
+        case "GET_NEXT_TRAINING" =>
+          nextWorkoutFor("1").value.unsafeRunSync.map(Responses.getTrainingInfoResponse _ tupled).getOrElse(Responses.getTrainingNotFoundResponse())
       })
 
   }
