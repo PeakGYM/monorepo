@@ -17,19 +17,8 @@ import scala.concurrent._
 import scala.language.postfixOps
 import scala.concurrent.ExecutionContext.global
 
-def fakeName() =  ujson.read(requests.get.stream("https://api.namefake.com/polish-poland/random/"))("name").str
+def create(i:Int) =  requests.post(s"https://api-wwh.codevillains.me/faker/measurements/$i/$i")
 
-def generateMeasurements() = {
-  case class Coach(id:Int,name:String)  {
-    def toLine =  s"""insert into coach(id,name,"pictureUrl") values('$id','$name','https://thispersondoesnotexist.com/image');"""
-  }
-
-  val coachIds = 1 to 30 toList
-  val data = coachIds.map(id => Coach(id,fakeName()).toLine).reduce(_ + "\n" + _)
-
-
-  os.write.over(pwd / "coaches.sql", data)
-}
 
 
 
@@ -38,7 +27,10 @@ def generateMeasurements() = {
 def main() = {
   println("Started")
   // generateCoaches()
-  generateClients()
+
+
+  1 to 30 foreach(create)
+
   println("Exit")
 }
 
