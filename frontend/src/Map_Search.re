@@ -86,11 +86,11 @@ let make = (~setLocation) => {
       ~justifyContent="center",
       ~alignItems="center",
       ~width="100%",
-      ~height="5rem",
+      ~height="8rem",
       (),
     )}>
     <Antd.Select
-      placeholder="Enter location"
+      placeholder="Wpisz lokację"
       value
       showSearch=true
       onChange=handleChange

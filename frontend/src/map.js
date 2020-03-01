@@ -4,17 +4,24 @@ import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
 let myPosition = [50.0265321, 19.9489974];
 
-let textStyle = {
-  textSize: "24px"
-};
-
 export function loadMap(position, gyms, onMapClick, onMarkerClick) {
+  let gymIcon = new L.Icon({
+    iconUrl:
+      "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [75, 123],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
   let clientIcon = new L.Icon({
     iconUrl:
       "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png",
     shadowUrl:
       "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
-    iconSize: [25, 41],
+    iconSize: [75, 123],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
@@ -28,19 +35,19 @@ export function loadMap(position, gyms, onMapClick, onMarkerClick) {
 
   let gymMarkers = gyms.map(gym => {
     let pos = [gym.location.lat, gym.location.lng];
-    let text = `${gym.name} - ${formatCoachCount(gym.coachIds)}`
+    // let text = `${gym.name} - ${formatCoachCount(gym.coachIds)}`;
+    let text = gym.name;
 
     return (
       <Marker
         key={gym.id}
         riseOnHover={true}
+        icon={gymIcon}
         position={pos}
         onClick={_ => onMarkerClick(gym)}
       >
         <Popup>
-          <div style={textStyle}>
-            {text}
-          </div>
+          <div style={{fontSize: "28px"}}>{text}</div>
         </Popup>
       </Marker>
     );
@@ -50,8 +57,8 @@ export function loadMap(position, gyms, onMapClick, onMarkerClick) {
     <Map
       center={position}
       zoom={16}
-      minZoom={0}
-      maxZoom={17}
+      minZoom={10}
+      maxZoom={18}
       onClick={onMapClick}
       doubleClickZoom={false}
     >

@@ -12,7 +12,7 @@ let make = (~id) => {
                                           |> make
                                         )>
                                         <Text
-                                          content={j|Zaloguj trening|j}
+                                          content={j|Start workout|j}
                                           style={ReactDOMRe.Style.make(
                                             ~fontSize="36px",
                                             (),
@@ -30,12 +30,12 @@ let make = (~id) => {
                                           |> make
                                         )>
                                         <Text
-                                          content={j|Edytuj trening|j}
+                                          content={j|Edit workout|j}
                                           style={ReactDOMRe.Style.make(
                                             ~fontSize="36px",
                                             (),
                                           )}
                                         />
                                       </button>
-                                    </div> /*Edytuje workout - to nie dodaje do zrobione, edytuje planned, done - nie rusza*/ /*Loguje workout - wysyalem planned jakie bylo a done, dodajesz*/;
+                                    </div> /*Loguje workout - wysyalem planned jakie bylo a done, dodajesz*/ /*Edytuje workout - to nie dodaje do zrobione, edytuje planned, done - nie rusza*/;
 };

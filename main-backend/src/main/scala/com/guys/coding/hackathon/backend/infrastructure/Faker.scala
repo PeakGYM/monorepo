@@ -7,6 +7,8 @@ import scala.util.Random
 import hero.common.util.IdProvider
 import com.guys.coding.hackathon.backend.domain.MeasurementId
 import java.time.ZonedDateTime
+import com.guys.coding.hackathon.backend.domain.training.Series
+import com.guys.coding.hackathon.backend.domain.training.PlannedExercise
 
 object Faker {
 
@@ -101,5 +103,11 @@ object Faker {
       .toList
 
   }
+
+  def plannedEx(trainingId: String) =
+    PlannedExercise(exerciseId = Random.nextInt(4).toString, trainingId = trainingId, plannedSeries = (1 to 3).map(randomSeries).toList, doneSeries = Nil,restAfter = 180)
+
+  def randomSeries(id: Int): Series =
+    Series(id = id.toString(), reps = 5 + Random.nextInt(3), rest = 60 + Random.nextInt(60), weight = Some(40 + Random.nextInt(30)))
 
 }

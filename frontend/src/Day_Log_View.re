@@ -97,7 +97,7 @@ module Serie = {
           [Display(Flex), JustifyContent(JustifyBetween)] |> make
         )>
         <Text
-          content={j|Seria|j}
+          content={j|Series|j}
           style={ReactDOMRe.Style.make(~fontSize="36px", ())}
         />
         <Checkbox
@@ -108,7 +108,7 @@ module Serie = {
             onDone(p.id, true);
             update();
           }}>
-          <Text content="Zrobione" />
+    <Text content="Done" />
         </Checkbox>
       </div>
       <div
@@ -117,7 +117,7 @@ module Serie = {
           |> make
         )>
         <Block
-          title={j|Powtórzenia|j}
+          title={j|Reps|j}
           value={Some(p.reps)}
           className={TW.Margin(Mx0)}
           editable={!checked}
@@ -126,7 +126,7 @@ module Serie = {
           onChange=onRepeatChange
         />
         <Block
-          title={j|Ciężar|j}
+          title={j|Weight|j}
           value={p.weight}
           className={TW.Margin(Mx8)}
           editable={!checked}
@@ -135,7 +135,7 @@ module Serie = {
           onChange=onWeightChange
         />
         <Block
-          title={j|Odpoczynek|j}
+          title={j|Rest|j}
           value={Some(p.rest)}
           className={TW.Margin(Mx0)}
           editable={!checked}
@@ -222,7 +222,7 @@ module Exercise = {
                 |> make
               )>
               <Text
-                content={visible ? {j|Zobacz mniej|j} : {j|Zobacz więcej|j}}
+                content={visible ? {j|See less|j} : {j|See more|j}}
                 style={ReactDOMRe.Style.make(~fontSize="36px", ())}
               />
             </button>
@@ -255,7 +255,7 @@ module Exercise = {
            ->Array.mapWithIndex((index, p) => {
                <>
                  <Text
-                   content={j|Seria |j}
+                   content={j|Series |j}
                    style={ReactDOMRe.Style.make(~fontSize="36px", ())}
                  />
                  <div
@@ -268,21 +268,21 @@ module Exercise = {
                      |> make
                    )>
                    <Block
-                     title={j|Powtórzenia|j}
+                     title={j|Reps|j}
                      value={Some(p.reps)}
                      className={TW.Margin(Mx0)}
                      type_=`none
                      serieId={p.id}
                    />
                    <Block
-                     title={j|Ciężar|j}
+                     title={j|Weight|j}
                      value={p.weight}
                      className={TW.Margin(Mx8)}
                      type_=`kg
                      serieId={p.id}
                    />
                    <Block
-                     title={j|Odpoczynek|j}
+                     title={j|Rest|j}
                      value={Some(p.rest)}
                      className={TW.Margin(Mx0)}
                      type_=`s
@@ -306,7 +306,7 @@ module Exercise = {
                   |> make
                 )>
                 <Text
-                  content={j|Zapisz|j}
+                  content={j|Save|j}
                   style={ReactDOMRe.Style.make(~fontSize="36px", ())}
                 />
               </button>
@@ -467,7 +467,7 @@ module View = {
                mutation()
                |> Js.Promise.then_(_ => {
                     Message.success({
-                      "content": {j|Pomyślnie zaktualizowano dane|j},
+                      "content": {j|Succesfully updated|j},
                       "icon": <Ok />,
                       "top": 64,
                     });
