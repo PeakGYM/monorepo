@@ -28,10 +28,12 @@ object Responses {
     )
 
   def getTrainingInfoResponse(training: Training)={
-    Simple(s"Your next training will take place from ${training.dateFrom} to ${training.dateTo}.")
+    Simple(s"You're going to have the '${training.name}' workout on ${training.dateFrom}. Have fun! ")
   }
   def getTrainingNotFoundResponse()={
-    Simple("No workout found for you. You can schedule another via our app!")
+    Buttons( "You don't have any upcoming workouts.",
+      UrlButton("Schedule one from our app!", s"https://wwh.codevillains.me/map")
+    )
   }
 
   def inProgress() =
