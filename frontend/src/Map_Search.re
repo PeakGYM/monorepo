@@ -32,17 +32,10 @@ let getPlaces = (~value) => {
   let acceptLanguage = "pl-PL";
 
   Api.get(
-    {j|https://nominatim.openstreetmap.org/search?format=json&q=$value&limit=10&accept-language=$acceptLanguage|j},
+    {j|https://nominatim.openstreetmap.org/search?format=json&q=$value&limit=10&accept-language=$acceptLanguage&countrycodes=pl|j},
   )
   |> Repromise.Rejectable.map(Result.map(_, decode));
 };
-
-/* let initialPlace = { */
-/*   id: "pega", */
-/*   displayName: "Pega", */
-/*   lat: "50.0265321", */
-/*   lon: "19.9489974", */
-/* }; */
 
 [@react.component]
 let make = (~setLocation) => {

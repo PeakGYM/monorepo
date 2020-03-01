@@ -15,6 +15,11 @@ module Gym = [%graphql
        lng
      }
      coachIds
+     coaches {
+       id
+       name
+       pictureUrl
+     }
     }
   }
 |}

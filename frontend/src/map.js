@@ -2,9 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-const position = [50.0265321, 19.9489974];
-
-export function loadMap(gyms) {
+export function loadMap(position, gyms) {
   let clientIcon = new L.Icon({
     iconUrl:
       "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png",
@@ -24,7 +22,6 @@ export function loadMap(gyms) {
 
   let gymMarkers = gyms.map(gym => {
     let pos = [gym.location.lat, gym.location.lng];
-
     return (
       <Marker riseOnHover={true} position={pos}>
         <Popup>
