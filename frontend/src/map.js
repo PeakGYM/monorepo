@@ -4,6 +4,10 @@ import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
 let myPosition = [50.0265321, 19.9489974];
 
+let textStyle = {
+  textSize: "24px"
+};
+
 export function loadMap(position, gyms, onMapClick, onMarkerClick) {
   let clientIcon = new L.Icon({
     iconUrl:
@@ -24,6 +28,8 @@ export function loadMap(position, gyms, onMapClick, onMarkerClick) {
 
   let gymMarkers = gyms.map(gym => {
     let pos = [gym.location.lat, gym.location.lng];
+    let text = `${gym.name} - ${formatCoachCount(gym.coachIds)}`
+
     return (
       <Marker
         key={gym.id}
@@ -32,7 +38,9 @@ export function loadMap(position, gyms, onMapClick, onMarkerClick) {
         onClick={_ => onMarkerClick(gym)}
       >
         <Popup>
-          {gym.name} - {formatCoachCount(gym.coachIds)}
+          <div style={textStyle}>
+            {text}
+          </div>
         </Popup>
       </Marker>
     );
