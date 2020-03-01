@@ -1,0 +1,13 @@
+insert into client_to_coach(id, client_id, coach_id) values('0','19','10');
+insert into client_to_coach(id, client_id, coach_id) values('1','1','10');
+insert into client_to_coach(id, client_id, coach_id) values('2','16','14');
+insert into client_to_coach(id, client_id, coach_id) values('3','23','9');
+insert into client_to_coach(id, client_id, coach_id) values('4','25','30');
+insert into client_to_coach(id, client_id, coach_id) values('5','20','20');
+insert into client_to_coach(id, client_id, coach_id) values('6','13','31');
+insert into client_to_coach(id, client_id, coach_id) values('7','13','18');
+insert into client_to_coach(id, client_id, coach_id) values('8','7','27');
+insert into client_to_coach(id, client_id, coach_id) values('9','28','34');
+insert into client_to_coach(id, client_id, coach_id) values('10','27','10');
+insert into client_to_coach(id, client_id, coach_id) values('11','15','32');
+insert into client_to_coach(id, client_id, coach_id) values('12','14','9');
