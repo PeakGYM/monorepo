@@ -9,12 +9,23 @@ let textStyle = {
 };
 
 export function loadMap(position, gyms, onMapClick, onMarkerClick) {
+  let gymIcon = new L.Icon({
+    iconUrl:
+      "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [75, 123],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
   let clientIcon = new L.Icon({
     iconUrl:
       "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png",
     shadowUrl:
       "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
-    iconSize: [25, 41],
+    iconSize: [75, 123],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
@@ -34,6 +45,7 @@ export function loadMap(position, gyms, onMapClick, onMarkerClick) {
       <Marker
         key={gym.id}
         riseOnHover={true}
+        icon={gymIcon}
         position={pos}
         onClick={_ => onMarkerClick(gym)}
       >
@@ -50,8 +62,8 @@ export function loadMap(position, gyms, onMapClick, onMarkerClick) {
     <Map
       center={position}
       zoom={16}
-      minZoom={0}
-      maxZoom={17}
+      minZoom={10}
+      maxZoom={18}
       onClick={onMapClick}
       doubleClickZoom={false}
     >
