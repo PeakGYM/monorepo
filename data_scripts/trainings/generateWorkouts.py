@@ -46,8 +46,8 @@ def getMuscleGroup() -> list:
 
 
 def getCoach() -> str:
-    num = randrange(40) + 1
-    return str(num if num <= 35 else -1)
+    num = randrange(8) + 1
+    return str(num if num <= 6 else -1)
 
 
 def getExercisesNums() -> list:
@@ -58,8 +58,12 @@ def getFinishDate(timestamp):
     return timestamp + int(choice(duration) * hour)
 
 
-def getClient() -> str:
-    return str(randrange(30) + 1)
+def clientGen() -> str:
+    for i in range(1, 31):
+        yield str(i)
+
+
+client = clientGen()
 
 
 def getInperson() -> bool:
@@ -104,6 +108,7 @@ def reduceSeries(seriesToDo):
 def ciapki(val):
     return f"'{val}'" if str(val) != '-1' else 'null'
 
+
 def getPlannedExercises(id: str, exercises: list, datefrom: int):
     res = []
     for exerciseNum in exercises:
@@ -122,20 +127,22 @@ def getPlannedExercises(id: str, exercises: list, datefrom: int):
 starting_string = 'insert into training(id, name, "muscle_group", coach_id, client_id, time_from, time_to, "planned_exercises", inperson) values ('
 
 from collections import defaultdict
+
 clientTocoach = defaultdict(set)
-coopid=0
+coopid = 0
 
 
 def formatDate(timestamp):
     dt = datetime.datetime.fromtimestamp(timestamp)
     return dt.strftime("%Y-%m-%dT%H:%M:%S.000000Z[Etc/UTC]")
 
+
 def regularClient(i_max, j_max):
     global trainingCounter
     resultStrings = []
 
     coachId = getCoach()
-    clientId = getClient()
+    clientId = next(client)
 
     clientTocoach[clientId].add(coachId)
     inperson = getInperson()
@@ -163,33 +170,29 @@ def regularClient(i_max, j_max):
 
 glob_res = []
 for i in range(5):
-    glob_res+= regularClient(3,7)
+    glob_res += regularClient(3, 7)
 
-for i in range(5):
-    glob_res+= regularClient(2,2)
 
-for i in range(37):
-    glob_res+= regularClient(1,1)
+for i in range(25):
+    glob_res += regularClient(1, 1)
 
-coop_list= []
+coop_list = []
 for key in clientTocoach:
     for val in clientTocoach[key]:
-        if str(val) !='-1':
-            coop_list.append(f"insert into client_to_coach(id, client_id, coach_id) values('{coopid}','{key}',{ciapki(val)});")
-            coopid+=1
+        if str(val) != '-1':
+            coop_list.append(
+                f"insert into client_to_coach(id, client_id, coach_id) values('{coopid}','{key}',{ciapki(val)});")
+            coopid += 1
 
 traings_to_save = "\n".join(glob_res)
 coops_to_save = "\n".join(coop_list)
 
-with open("insert_trainings.sql","w+") as f:
+with open("insert_trainings.sql", "w+") as f:
     f.write(traings_to_save)
 
-with open("insert_client_to_coach.sql","w+") as f:
+with open("insert_client_to_coach.sql", "w+") as f:
     f.write(coops_to_save)
 
 print(traings_to_save)
 print("\n\n\n\n\n")
 print(coops_to_save)
-
-
-
