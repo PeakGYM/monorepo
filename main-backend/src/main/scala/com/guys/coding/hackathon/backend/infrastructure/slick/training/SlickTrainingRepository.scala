@@ -4,7 +4,6 @@ import cats.effect.IO
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo
 import repo.CatsIntegration
 import repo.profile.api._
-import com.guys.coding.hackathon.backend.infrastructure.slick.training._
 import scala.concurrent.ExecutionContext
 import cats.effect.{ContextShift, IO}
 import java.time.ZonedDateTime
