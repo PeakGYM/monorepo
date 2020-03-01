@@ -7,14 +7,14 @@ val protoSettings = Seq(
     scalapb.gen(flatPackage = true) -> (sourceManaged in Compile).value
   )
 )
-
+addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full) // simulacrum in 2.12
 addCompilerPlugin(scalafixSemanticdb)
 
 lazy val `hackathon-backend` = (project in file("."))
   .settings(
     organization := "com.guys.coding",
     name := "hackathon-backend",
-    scalaVersion := "2.13.1",
+    scalaVersion := "2.12.10",
     resolvers ++= Dependencies.additionalResolvers,
     libraryDependencies ++= Dependencies.all,
     scalacOptions ++= CompilerOps.all,

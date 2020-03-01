@@ -19,11 +19,6 @@ import scala.concurrent.ExecutionContext.global
 
 def create(i:Int) =  requests.post(s"https://api-wwh.codevillains.me/faker/measurements/$i/$i")
 
-
-
-
-
-
 def main() = {
   println("Started")
   // generateCoaches()

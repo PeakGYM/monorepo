@@ -2,8 +2,17 @@
 let make = (~gym) => {
   let position =
     switch (gym) {
-    | Some(_gym) => "0px"
+    | Some(_) => "0px"
     | None => "-2000px"
+    };
+
+  let coaches =
+    switch (gym) {
+    | Some(_gym) =>
+      _gym##coaches
+      ->Array.map(coach => {<div> {ReasonReact.string(coach##name)} </div>})
+
+    | None => [||]
     };
 
   <div
@@ -17,8 +26,9 @@ let make = (~gym) => {
       ~bottom=position,
       ~background="white",
       ~borderRadius="5rem",
+      ~transition="all 0.2s",
       (),
     )}>
-    {ReasonReact.string("Hello")}
+    {ReasonReact.array(coaches)}
   </div>;
 };

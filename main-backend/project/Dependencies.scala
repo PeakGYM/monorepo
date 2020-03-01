@@ -1,7 +1,7 @@
 object Dependencies {
   import sbt._
   import scalapb.compiler.Version
-  val CodeheroesCommonsVersion = "0.127_2.13"
+  val CodeheroesCommonsVersion = "0.119"
   val ScalaTestVersion         = "3.0.8"
   val ScalaMockVersion         = "4.4.0"
   val SimulacrumVersion        = "0.19.0"
@@ -38,6 +38,23 @@ object Dependencies {
     "com.beachape" %% "enumeratum-circe"    % EnumeratumCirceVersion
   )
 
+
+  val heroChatVersion            = "0.81"
+  val akkaVersion                = "2.5.23"
+  val inMemJournalVersion        = "2.5.15.2"
+  val chatbotDependencies = Seq(
+    "com.typesafe.akka" %% "akka-actor"             % akkaVersion,
+    "com.typesafe.akka" %% "akka-slf4j"             % akkaVersion,
+    "com.typesafe.akka" %% "akka-persistence"       % akkaVersion,
+    "com.typesafe.akka" %% "akka-persistence-query" % akkaVersion,
+    "com.typesafe.akka" %% "akka-stream"            % akkaVersion,
+    "com.typesafe.akka" %% "akka-remote"            % akkaVersion,
+    "com.typesafe.akka" %% "akka-cluster"           % akkaVersion,
+    "com.typesafe.akka" %% "akka-cluster-tools"     % akkaVersion,
+    "com.github.dnvriend" %% "akka-persistence-inmemory"  % inMemJournalVersion,
+    "io.codeheroes" %% "herochat" % heroChatVersion,
+  )
+
   private val jwtDependencies = Seq(
     "com.pauldijou" %% "jwt-circe" % JwtVersion
   )
@@ -72,7 +89,8 @@ object Dependencies {
     postgresDependencies,
     grpcDependencies,
     testDependencies,
-    miscDependencies
+    miscDependencies,
+    chatbotDependencies
   ).flatten
 
   val additionalResolvers: Seq[Resolver] = Seq(
