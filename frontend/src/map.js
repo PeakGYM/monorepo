@@ -2,6 +2,8 @@ import React from "react";
 import { render } from "react-dom";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
+let myPosition = [50.0265321, 19.9489974];
+
 export function loadMap(position, gyms, onMapClick, onMarkerClick) {
   let clientIcon = new L.Icon({
     iconUrl:
@@ -49,7 +51,7 @@ export function loadMap(position, gyms, onMapClick, onMarkerClick) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker icon={clientIcon} position={position}>
+      <Marker icon={clientIcon} position={myPosition}>
         <Popup>Your location</Popup>
       </Marker>
       {gymMarkers}
