@@ -28,9 +28,13 @@ let use = (~from, ~to_, ~clientId) => {
     Training.makeVariables(
       ~from=from->Time.toJSON,
       ~to_=to_->Time.toJSON,
-      ~clientId?,
+      ~clientId="3",
       (),
     );
 
-  ApolloHooks.useQuery(~variables, Training.definition);
+  ApolloHooks.useQuery(
+    ~fetchPolicy=NetworkOnly,
+    ~variables,
+    Training.definition,
+  );
 } /* module Query = ApolloHooks.Query.Make(Training)*/;

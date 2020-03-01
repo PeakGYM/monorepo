@@ -1,7 +1,6 @@
 type config = {
   .
   "content": string,
-  "duration": int,
   "icon": React.element,
   "top": int,
 };

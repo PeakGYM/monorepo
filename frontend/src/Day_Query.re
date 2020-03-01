@@ -58,7 +58,7 @@ module Training = [%graphql
                     id
                     reps
                     rest
-                    weight
+                    weight @bsDecoder(fn: "Weight.toNumber")
                 }
                 restAfter
                 exercise @bsRecord {
@@ -76,5 +76,9 @@ module Training = [%graphql
 let use = (~id) => {
   let variables = Training.makeVariables(~workoutId=id, ());
 
-  ApolloHooks.useQuery(~variables, Training.definition);
+  ApolloHooks.useQuery(
+    ~fetchPolicy=NetworkOnly,
+    ~variables,
+    Training.definition,
+  );
 } /* module Query = ApolloHooks.Query.Make(Training)*/;

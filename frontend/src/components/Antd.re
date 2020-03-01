@@ -41,3 +41,9 @@ module Select = {
       "Option";
   };
 };
+
+module Spin = {
+  [@react.component] [@bs.module "antd"]
+  external make: (~spinning: bool=?, ~size: string=?) => React.element =
+    "Spin";
+};

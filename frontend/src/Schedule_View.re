@@ -60,15 +60,14 @@ let make = () => {
         switch (data) {
         | Error(_data) => <Text content="Error" />
         | Data(data) =>
-          let ms = date |> Moment.valueOf |> Js.Float.toString;
-          // data##workouts
-          mock()
+          data##workouts
+          // mock()
           ->Array.map(w => {
               let hasTrainig = renderTraining(~date, ~workout=w);
 
               hasTrainig
                 ? <div
-                    onClick={_ => Router.go(Router.Day(ms))}
+                    onClick={_ => Router.go(Pick(w##id))}
                     style={ReactDOMRe.Style.make(
                       ~background=toColor(w##muscleGroup->Array.get(0)),
                       ~width="24px",
@@ -79,7 +78,7 @@ let make = () => {
                   />
                 : React.null;
             })
-          ->React.array;
+          ->React.array
 
         | _ => React.null
         }

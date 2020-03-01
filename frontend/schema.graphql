@@ -1,5 +1,24 @@
 # source: https://api-wwh.codevillains.me/graphql
-# timestamp: Sat Feb 29 2020 21:08:54 GMT+0100 (Central European Standard Time)
+# timestamp: Sun Mar 01 2020 02:18:10 GMT+0100 (czas środkowoeuropejski standardowy)
+
+type Client {
+  id: String!
+  name: String!
+  height: Int!
+  pictureUrl: String!
+}
+
+type ClientCoachCooperation {
+  id: String!
+  clientId: String!
+  coachId: String!
+}
+
+type Coach {
+  id: String!
+  name: String!
+  pictureUrl: String!
+}
 
 type CreateExampleResult {
   result: String
@@ -21,7 +40,9 @@ type Gym {
   id: String!
   name: String!
   location: Location!
+  imgurl: String
   coachIds: [String!]!
+  coaches: [Coach!]!
 }
 
 type Location {
@@ -35,18 +56,41 @@ Long can represent values between -(2^63) and 2^63 - 1.
 """
 scalar Long
 
+type Measurement {
+  id: String!
+  clientId: String!
+  timestamp: Long!
+  weight: Float
+  neck: Float
+  leftBicep: Float
+  rightBicep: Float
+  leftForearm: Float
+  rightForearm: Float
+  chest: Float
+  waist: Float
+  hip: Float
+  rightThigh: Float
+  leftThigh: Float
+  rightCalf: Float
+  leftCalf: Float
+}
+
 enum MuscleGroup {
-  Arms
-  Legs
   Shoulders
   Back
   Chest
+  Arms
+  Legs
 }
 
 type Mutation {
   addExample(example: ExampleInput!): CreateExampleResult!
   addWorkout(training: WorkoutInput!): Workout
   updateWorkout(training: WorkoutInput!): Workout
+  addCoach(coachName: String!, coachPictureUrl: String!): Coach!
+  addClient(clientName: String!, clientHeight: Int!, clientPictureUrl: String!): Client!
+  addCooperation(coachId: String!, clientId: String!): ClientCoachCooperation!
+  addMeasurement(clientId: String!, timestamp: Long!, weight: Float, neck: Float, leftBicep: Float, rightBicep: Float, leftForearm: Float, rightForearm: Float, chest: Float, waist: Float, hip: Float, rightThigh: Float, leftThigh: Float, rightCalf: Float, leftCalf: Float): Measurement!
 }
 
 type PlannedExercise {
@@ -68,15 +112,15 @@ input PlannedExerciseInput {
 
 type Query {
   gyms(lat: Float!, lng: Float!): [Gym!]!
-  workouts(
-    from: Long!
-    to: Long!
-    coachId: String
-    clientId: String
-  ): [Workout!]!
-
+  workouts(from: Long!, to: Long!, coachId: String, clientId: String): [Workout!]!
   workout(workoutId: String!): Workout
   exercises: [Exercise!]!
+  getCoachesByIds(ids: [String!]!): [Coach!]!
+  getClientsByIds(ids: [String!]!): [Client!]!
+  clientsForCoach(coachId: String!): [String!]!
+  coachesForClient(clientId: String!): [String!]!
+  getMostRecentFor(clientId: String!): Measurement!
+  getAllFor(clientId: String!): [Measurement!]!
 }
 
 type Series {

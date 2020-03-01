@@ -3,7 +3,7 @@ body {
 }
 
 nav {
-  background: #1890ff;
+  background: white;
 }
 
 .leaflet-container {
@@ -14,4 +14,34 @@ nav {
 
 button {
   outline: none !important;
+}
+
+.pick-edit-or-log {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.ant-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.ant-checkbox-inner::after {
+  top: 40%;
+  left: 24%;
+  display: table;
+  width: 10.71428571px;
+  height: 19.14285714px;
+}
+
+.ant-checkbox-inner {
+  width: 32px;
+  height: 32px;
+}
+
+.ant-checkbox-wrapper span {
+  font-size: 36px;
 }

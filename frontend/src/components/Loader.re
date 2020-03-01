@@ -1,4 +1,4 @@
 [@react.component]
 let make = () => {
-  <Text content="Loading" />;
+  <Antd.Spin spinning=true size="big" />;
 };

@@ -24,10 +24,9 @@ module Block = {
       ) => {
     let value =
       switch (value) {
-      | Some(value) => value
-      | None => 0
+      | Some(value) => value->string_of_int
+      | None => "0"
       };
-
     <div
       className=TW.(
         [
@@ -49,31 +48,120 @@ module Block = {
       />
       {editable
          ? <Input
-             value={value->string_of_int}
+             value
              htmlType="number"
              onChange={event => {
                let value = event->ReactEvent.Form.target##value;
-               Js.log(value);
-               onChange(serieId, value);
+               let v =
+                 switch (value) {
+                 | "" => 0
+                 | value => value->int_of_string
+                 };
+               onChange(serieId, Some(v));
              }}
-             placeholder="0"
+             placeholder=value
            />
          : <Text
              className=TW.([TextAlign(TextCenter)] |> make)
-             content={value->string_of_int ++ " " ++ uTostring(type_)}
+             content={value ++ " " ++ uTostring(type_)}
              style={ReactDOMRe.Style.make(~fontSize="24px", ())}
            />}
     </div>;
   };
 };
 
+module Serie = {
+  [@react.component]
+  let make =
+      (
+        ~index,
+        ~exercise,
+        ~serie: Day_Query.serie,
+        ~onRepeatChange,
+        ~onRestChange,
+        ~onWeightChange,
+        ~onDone,
+        ~update,
+      ) => {
+    let p = serie;
+    let (checked, setChecked) =
+      React.useState(_ =>
+        exercise.doneSeries
+        ->Array.keep(s => s.id === p.id)
+        ->Array.get(0)
+        ->Option.isSome
+      );
+    <>
+      <div
+        className=TW.(
+          [Display(Flex), JustifyContent(JustifyBetween)] |> make
+        )>
+        <Text
+          content={j|Seria|j}
+          style={ReactDOMRe.Style.make(~fontSize="36px", ())}
+        />
+        <Checkbox
+          checked
+          disabled=checked
+          onChange={_ => {
+            setChecked(change => !change);
+            onDone(p.id, true);
+            update();
+          }}>
+          <Text content="Zrobione" />
+        </Checkbox>
+      </div>
+      <div
+        className=TW.(
+          [Display(Flex), Padding(P8), JustifyContent(JustifyBetween)]
+          |> make
+        )>
+        <Block
+          title={j|Powtórzenia|j}
+          value={Some(p.reps)}
+          className={TW.Margin(Mx0)}
+          editable={!checked}
+          type_=`none
+          serieId={p.id}
+          onChange=onRepeatChange
+        />
+        <Block
+          title={j|Ciężar|j}
+          value={p.weight}
+          className={TW.Margin(Mx8)}
+          editable={!checked}
+          type_=`kg
+          serieId={p.id}
+          onChange=onWeightChange
+        />
+        <Block
+          title={j|Odpoczynek|j}
+          value={Some(p.rest)}
+          className={TW.Margin(Mx0)}
+          editable={!checked}
+          type_=`s
+          serieId={p.id}
+          onChange=onRestChange
+        />
+      </div>
+    </>;
+  };
+};
+
 module Exercise = {
   [@react.component]
-  let make = (~exercise, ~onRepeatChange, ~onRestChange, ~onWeightChange) => {
-    let (visible, setVisible) = React.useState(_ => true);
+  let make =
+      (
+        ~exercise,
+        ~update,
+        ~onRepeatChange,
+        ~onRestChange,
+        ~onWeightChange,
+        ~onDone,
+      ) => {
+    let (visible, setVisible) = React.useState(_ => false);
     let e = exercise.exercise;
 
-    let done_ = exercise.plannedSeries;
     let allDone = exercise.plannedSeries->Array.length === 0;
 
     <div
@@ -135,61 +223,40 @@ module Exercise = {
               )>
               <Text
                 content={visible ? {j|Zobacz mniej|j} : {j|Zobacz więcej|j}}
-                style={ReactDOMRe.Style.make(~fontSize="48px", ())}
+                style={ReactDOMRe.Style.make(~fontSize="36px", ())}
               />
             </button>
           }>
-          {exercise.doneSeries
-           ->Array.mapWithIndex((index, p) => {
-               let index = (index + 1)->string_of_int;
-               <>
-                 <Text
-                   content={j|Seria $index|j}
-                   style={ReactDOMRe.Style.make(~fontSize="48px", ())}
-                 />
-                 <div
-                   className=TW.(
-                     [
-                       Display(Flex),
-                       Padding(P8),
-                       JustifyContent(JustifyBetween),
-                     ]
-                     |> make
-                   )>
-                   <Block
-                     title={j|Powtórzenia|j}
-                     value={Some(p.reps)}
-                     className={TW.Margin(Mx0)}
-                     type_=`none
-                     serieId={p.id}
-                   />
-                   <Block
-                     title={j|Ciężar|j}
-                     value={p.weight}
-                     className={TW.Margin(Mx8)}
-                     type_=`kg
-                     serieId={p.id}
-                   />
-                   <Block
-                     title={j|Odpoczynek|j}
-                     value={Some(p.rest)}
-                     className={TW.Margin(Mx0)}
-                     type_=`s
-                     serieId={p.id}
-                   />
-                 </div>
-               </>;
-             })
-           ->React.array}
           {exercise.plannedSeries
            ->Array.mapWithIndex((index, p) => {
                let index =
                  (exercise.doneSeries->Array.length + (index + 1))
                  ->string_of_int;
+               exercise.doneSeries
+               ->Array.keep(s => s.id === p.id)
+               ->Array.get(0)
+               ->Option.isSome
+                 ? React.null
+                 : <React.Fragment key={p.id}>
+                     <Serie
+                       index
+                       exercise
+                       serie=p
+                       onRestChange
+                       onRepeatChange
+                       onWeightChange
+                       onDone
+                       update
+                     />
+                   </React.Fragment>;
+             })
+           ->React.array}
+          {exercise.doneSeries
+           ->Array.mapWithIndex((index, p) => {
                <>
                  <Text
-                   content={j|Seria $index|j}
-                   style={ReactDOMRe.Style.make(~fontSize="48px", ())}
+                   content={j|Seria |j}
+                   style={ReactDOMRe.Style.make(~fontSize="36px", ())}
                  />
                  <div
                    className=TW.(
@@ -204,33 +271,47 @@ module Exercise = {
                      title={j|Powtórzenia|j}
                      value={Some(p.reps)}
                      className={TW.Margin(Mx0)}
-                     editable=true
                      type_=`none
                      serieId={p.id}
-                     onChange=onRepeatChange
                    />
                    <Block
                      title={j|Ciężar|j}
                      value={p.weight}
                      className={TW.Margin(Mx8)}
-                     editable=true
                      type_=`kg
                      serieId={p.id}
-                     onChange=onWeightChange
                    />
                    <Block
                      title={j|Odpoczynek|j}
                      value={Some(p.rest)}
                      className={TW.Margin(Mx0)}
-                     editable=true
                      type_=`s
                      serieId={p.id}
-                     onChange=onRestChange
                    />
                  </div>
-               </>;
+               </>
              })
            ->React.array}
+          <div className=TW.([TextAlign(TextCenter)] |> make)>
+            <div className=TW.([TextAlign(TextCenter)] |> make)>
+              <button
+                onClick={_ => update()}
+                className=TW.(
+                  [
+                    TextTransform(Uppercase),
+                    TextColor(TextBlue500),
+                    Padding(P4),
+                    TextAlign(TextCenter),
+                  ]
+                  |> make
+                )>
+                <Text
+                  content={j|Zapisz|j}
+                  style={ReactDOMRe.Style.make(~fontSize="36px", ())}
+                />
+              </button>
+            </div>
+          </div>
         </Collapse.Panel>
       </Collapse>
     </div>;
@@ -240,12 +321,31 @@ module Exercise = {
 type exerciseId = string;
 type serieId = string;
 type action =
-  | UpdateReps(exerciseId, serieId, int)
-  | UpdateRest(exerciseId, serieId, int)
-  | UpdateWeight(exerciseId, serieId, option(int));
+  | UpdateReps(exerciseId, serieId, option(int))
+  | UpdateRest(exerciseId, serieId, option(int))
+  | UpdateWeight(exerciseId, serieId, option(int))
+  | SetDone(exerciseId, serieId, bool);
 
 let reducer = (state, action) =>
   switch (action) {
+  | SetDone(exerciseId, serieId, value) => {
+      ...state,
+      exercises:
+        state.exercises
+        ->Array.map(e =>
+            e.id === exerciseId && value === true
+              ? {
+                ...e,
+
+                doneSeries:
+                  e.doneSeries
+                  ->Array.concat(
+                      e.plannedSeries->Array.keep(s => s.id === serieId),
+                    ),
+              }
+              : e
+          ),
+    }
   | UpdateRest(exerciseId, serieId, rest) => {
       ...state,
       exercises:
@@ -256,7 +356,10 @@ let reducer = (state, action) =>
                 ...e,
                 plannedSeries:
                   e.plannedSeries
-                  ->Array.map(s => s.id === serieId ? {...s, rest} : s),
+                  ->Array.map(s =>
+                      s.id === serieId
+                        ? {...s, rest: rest->Option.getWithDefault(0)} : s
+                    ),
               }
               : e
           ),
@@ -288,7 +391,10 @@ let reducer = (state, action) =>
                 ...e,
                 plannedSeries:
                   e.plannedSeries
-                  ->Array.map(s => s.id === serieId ? {...s, reps} : s),
+                  ->Array.map(s =>
+                      s.id === serieId
+                        ? {...s, reps: reps->Option.getWithDefault(0)} : s
+                    ),
               }
               : e
           ),
@@ -307,7 +413,7 @@ let toMuscle =
   | `Arms => "Arms"
   | `Back => "Back"
   | `Chest => "Chest"
-  | `Legs => "legs"
+  | `Legs => "Legs"
   | `Shoulders => "Shoulders";
 
 let toPayload = state => {
@@ -336,31 +442,40 @@ module View = {
   [@react.component]
   let make = (~workout as _w, ~defaultState) => {
     let (state, dispatch) = React.useReducer(reducer, defaultState);
-    let mutation = Day_Mutation.use(~training=toPayload(state), ());
 
-    // Js.log(defaultState);
-    let fn = Debouncer.make(~wait=400, _ => mutation |> ignore);
+    // let mutation = Day_Mutation.use(~training=toPayload(state));
+    Js.log(state);
 
-    React.useEffect1(
-      () => {
-        Message.success({
-          "content": "Working",
-          "duration": 1000,
-          "icon": <Ok />,
-          "top": 64,
-        });
-
-        fn();
-        None;
-      },
-      [|state|],
-    );
+    let (mutation, _simple, _full) =
+      ApolloHooks.useMutation(
+        ~variables=
+          Day_Mutation.UpdateWorkout.makeVariables(
+            ~training=toPayload(state),
+            (),
+          ),
+        Day_Mutation.UpdateWorkout.definition,
+      );
 
     <div>
       {state.exercises
        ->Array.map(e =>
            <Exercise
              key={e.id}
+             onDone={(serieId, value) => {
+               dispatch(SetDone(e.id, serieId, value))
+             }}
+             update={() => {
+               mutation()
+               |> Js.Promise.then_(_ => {
+                    Message.success({
+                      "content": {j|Pomyślnie zaktualizowano dane|j},
+                      "icon": <Ok />,
+                      "top": 64,
+                    });
+                    Js.Promise.resolve();
+                  })
+               |> ignore
+             }}
              exercise=e
              onRepeatChange={(serieId, value) =>
                dispatch(UpdateReps(e.id, serieId, value))
@@ -386,35 +501,36 @@ let make = (~id) => {
     {switch (data) {
      | Data(data) =>
        let workout = data##workout;
-       let workout =
-         Some({
-           id: "1",
-           name: "asd",
-           clientId: "2",
-           coachId: Some("2"),
-           dateFrom: Js.Date.now(),
-           dateTo: Js.Date.now(),
-           muscleGroup: [|`Arms|],
-           exercises: [|
-             {
-               id: "1",
-               exercise:
-                 Some({
-                   id: "1",
-                   name: {j|Biceps - na ławeczce|j},
-                   imgurl: defaultImg,
-                 }),
+       Js.log(workout);
+       //  let workout =
+       //    Some({
+       //      id: "1",
+       //      name: "asd",
+       //      clientId: "2",
+       //      coachId: Some("2"),
+       //      dateFrom: Js.Date.now(),
+       //      dateTo: Js.Date.now(),
+       //      muscleGroup: [|`Arms|],
+       //      exercises: [|
+       //        {
+       //          id: "1",
+       //          exercise:
+       //            Some({
+       //              id: "1",
+       //              name: {j|Biceps - na ławeczce|j},
+       //              imgurl: defaultImg,
+       //            }),
 
-               plannedSeries: [|
-                 {id: "1", reps: 12, rest: 30, weight: Some(70)},
-               |],
-               doneSeries: [|
-                 {id: "1", reps: 12, rest: 30, weight: Some(70)},
-               |],
-               restAfter: 30,
-             },
-           |],
-         });
+       //          plannedSeries: [|
+       //            {id: "1", reps: 12, rest: 30, weight: Some(70)},
+       //          |],
+       //          doneSeries: [|
+       //            {id: "1", reps: 12, rest: 30, weight: Some(70)},
+       //          |],
+       //          restAfter: 30,
+       //        },
+       //      |],
+       //    });
        workout
        ->Option.map(workout => <View workout defaultState=workout />)
        ->Option.getWithDefault(React.null);
