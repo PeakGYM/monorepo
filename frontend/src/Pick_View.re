@@ -12,7 +12,7 @@ let make = (~id) => {
                                           |> make
                                         )>
                                         <Text
-                                          content={j|Zaloguj trening|j}
+                                          content={j|Rozpocznij trening|j}
                                           style={ReactDOMRe.Style.make(
                                             ~fontSize="36px",
                                             (),

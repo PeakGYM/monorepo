@@ -90,7 +90,7 @@ let make = (~setLocation) => {
       (),
     )}>
     <Antd.Select
-      placeholder="Enter location"
+      placeholder="Wpisz lokację"
       value
       showSearch=true
       onChange=handleChange
