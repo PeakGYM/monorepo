@@ -10,7 +10,51 @@ let make = (~gym) => {
     switch (gym) {
     | Some(_gym) =>
       _gym##coaches
-      ->Array.map(coach => {<div> {ReasonReact.string(coach##name)} </div>})
+      ->Array.map(coach => {
+          <div
+            key={coach##id}
+            style={ReactDOMRe.Style.make(
+              ~display="flex",
+              ~justifyContent="left",
+              ~position="fixed",
+              ~marginBottom="0",
+              ~marginTop="auto",
+              ~padding="2rem",
+              ~width="100%",
+              ~height="55%",
+              ~zIndex="1000",
+              ~bottom=position,
+              ~background="white",
+              ~transition="all 0.2s",
+              (),
+            )}>
+            <div
+              style={ReactDOMRe.Style.make(
+                ~display="flex",
+                ~justifyContent="left",
+                ~alignItems="center",
+                ~height="10rem",
+                (),
+              )}>
+              <img
+                className=TW.(
+                  [
+                    Display(Flex),
+                    FlexDirection(FlexCol),
+                    Width(W32),
+                    Height(H32),
+                    BorderRadius(RoundedFull),
+                  ]
+                  |> make
+                )
+                src={coach##pictureUrl}
+              />
+              <div style={ReactDOMRe.Style.make(~marginLeft="2rem", ())}>
+                {ReasonReact.string(coach##name)}
+              </div>
+            </div>
+          </div>
+        })
 
     | None => [||]
     };
@@ -23,7 +67,6 @@ let make = (~gym) => {
       ~width="100%",
       ~height="55%",
       ~zIndex="1000",
-      ~bottom=position,
       ~background="white",
       ~borderRadius="5rem",
       ~transition="all 0.2s",

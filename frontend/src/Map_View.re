@@ -1,6 +1,6 @@
 type map;
 
-[@bs.module "./map.js"] external loadMap: ('a, 'b, 'c) => map = "loadMap";
+[@bs.module "./map.js"] external loadMap: ('a, 'b, 'c, 'd) => map = "loadMap";
 
 let windowHeight: unit => int = () => [%bs.raw {| window.innerHeight |}];
 
@@ -14,7 +14,7 @@ let initialLocation = {lat: 50.0265321, lng: 19.9489974};
 [@react.component]
 let make = () => {
   let (location, setLocation) = React.useState(_ => initialLocation);
-  let (modalOpen, setModalOpen) = React.useState(_ => false);
+  let (chosenGym, setChosenGym) = React.useState(_ => None);
   let (simple, _full) = Gym_Query.use(~lat=location.lat, ~lng=location.lng);
 
   let gyms =
@@ -26,14 +26,16 @@ let make = () => {
   let position = [|location.lat, location.lng|];
 
   let onMapClick = () => {
-    Js.log(modalOpen);
+    setChosenGym(_ => None);
+  };
 
-    setModalOpen(modalOpen => !modalOpen);
+  let onMarkerClick = gym => {
+    setChosenGym(_ => Some(gym));
   };
 
   React.useEffect1(
     () => {
-      loadMap(position, gyms, onMapClick) |> ignore;
+      loadMap(position, gyms, onMapClick, onMarkerClick) |> ignore;
       None;
     },
     [|gyms|],
@@ -50,14 +52,7 @@ let make = () => {
   };
 
   let picker = () => {
-    let gym =
-      if (modalOpen) {
-        gyms->Array.get(0);
-      } else {
-        None;
-      };
-
-    <Coach_Picker gym />;
+    <Coach_Picker gym=chosenGym />;
   };
 
   <div style={ReactDOMRe.Style.make(~width="100%", ())}>

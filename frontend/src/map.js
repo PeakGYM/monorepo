@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-export function loadMap(position, gyms, onClick) {
+export function loadMap(position, gyms, onMapClick, onMarkerClick) {
   let clientIcon = new L.Icon({
     iconUrl:
       "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png",
@@ -23,7 +23,12 @@ export function loadMap(position, gyms, onClick) {
   let gymMarkers = gyms.map(gym => {
     let pos = [gym.location.lat, gym.location.lng];
     return (
-      <Marker riseOnHover={true} position={pos}>
+      <Marker
+        key={gym.id}
+        riseOnHover={true}
+        position={pos}
+        onClick={_ => onMarkerClick(gym)}
+      >
         <Popup>
           {gym.name} - {formatCoachCount(gym.coachIds)}
         </Popup>
@@ -31,10 +36,15 @@ export function loadMap(position, gyms, onClick) {
     );
   });
 
-  let handleClick = _e => onClick();
-
   let map = (
-    <Map center={position} zoom={16} minZoom={0} maxZoom={17} onClick={handleClick} >
+    <Map
+      center={position}
+      zoom={16}
+      minZoom={0}
+      maxZoom={17}
+      onClick={onMapClick}
+      doubleClickZoom={false}
+    >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
