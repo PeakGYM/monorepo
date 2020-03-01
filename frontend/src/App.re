@@ -19,7 +19,7 @@ let make = () => {
         className=TW.([Position(Relative), MinHeight(MinHScreen)] |> make)>
         <div style={ReactDOMRe.Style.make(~paddingBottom="120px", ())}>
           {switch (route) {
-           | Main => <Main_View />
+           | Main => <Map_View />
            | Schedule => <Schedule_View />
            | DayEdit(id) => <Day_Edit_View id />
            | DayLog(id) => <Day_Log_View id />
