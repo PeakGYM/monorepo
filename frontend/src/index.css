@@ -56,3 +56,9 @@ button {
   transform: scale(1.5);
   transform-origin: 50% 50%;
 }
+
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+  transform: scale(2.5);
+  transform-origin: 0 0;
+}
