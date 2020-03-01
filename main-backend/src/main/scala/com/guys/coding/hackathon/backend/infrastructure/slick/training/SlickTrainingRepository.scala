@@ -34,13 +34,13 @@ class SlickTrainingRepository()(implicit db: Database, ec: ExecutionContext, cs:
     runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, matchers, None)).map(_.filter(inmemmatcher).map(_.toDomain))
   }
 
-  def getNextTraining(clientid: String):IO[Option[Training]] = {
+  def getNextTraining(clientid: String): IO[Option[Training]] = {
     val matchers = foldMatcher(_.dateFrom >= ZonedDateTime.now())(true)(_ && _)
-    def inmemmatcher(t: TrainingSchema.TrainingDTO) = {
-       t.clientId.value == clientid
-    }
+    def inmemmatcher(t: TrainingSchema.TrainingDTO) =
+      t.clientId.value == clientid
 
-    runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, matchers,None)).map(_.filter(inmemmatcher).map(_.toDomain).sortBy(_.dateFrom).headOption)
+    runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, matchers, None))
+      .map(_.filter(inmemmatcher).map(_.toDomain).sortBy(_.dateFrom).headOption)
   }
 
   def updateTraiing(training: Training): IO[Option[Training]] =

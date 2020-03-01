@@ -17,7 +17,6 @@ import scala.util.control.NonFatal
 
 class EndpointsWrapper(endpoints: server.Route*)(implicit system: ActorSystem) extends Json4sSupport with StrictLogging {
 
-
   private val allowedCorsMethods = Seq(GET, POST, PUT, DELETE, OPTIONS)
   private val routingSettings    = RoutingSettings(system.settings.config)
   private val rejectionHandler   = RejectionHandler.default

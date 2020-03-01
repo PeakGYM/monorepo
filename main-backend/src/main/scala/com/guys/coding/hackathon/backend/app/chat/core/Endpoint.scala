@@ -12,9 +12,9 @@ import scala.language.postfixOps
 
 trait Endpoint extends Json4sSupport with Directives with StrictLogging {
 
-  protected implicit val formats: Formats             = DefaultFormats ++ DomainFormatters.all
-  protected implicit val serialization: Serialization = Serialization
-  protected implicit val timeout: Timeout             = Timeout(60 seconds)
+  implicit protected val formats: Formats             = DefaultFormats ++ DomainFormatters.all
+  implicit protected val serialization: Serialization = Serialization
+  implicit protected val timeout: Timeout             = Timeout(60 seconds)
 
   def routing: Route
 
