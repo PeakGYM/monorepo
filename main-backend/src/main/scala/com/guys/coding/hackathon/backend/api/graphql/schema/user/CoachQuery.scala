@@ -4,7 +4,7 @@ import com.guys.coding.hackathon.backend.api.graphql.schema.QueryHolder
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.UserOutputTypes._
 import com.guys.coding.hackathon.backend.api.graphql.service.GraphqlSecureContext
 import com.guys.coding.hackathon.backend.domain.UserId.CoachId
-import sangria.schema.{Argument, Field, ListInputType, ListType, StringType, fields}
+import sangria.schema.{fields, Argument, Field, ListInputType, ListType, StringType}
 
 class CoachQuery(services: Services) extends QueryHolder {
   val CoachIdsArg = Argument("ids", ListInputType(StringType))

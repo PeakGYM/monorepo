@@ -7,7 +7,7 @@ import com.guys.coding.hackathon.backend.domain.MeasurementId.MeasurementId
 import com.guys.coding.hackathon.backend.domain.UserId.ClientId
 import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes.MeasurementIdMap
 import com.guys.coding.hackathon.backend.infrastructure.slick.CustomJdbcTypes.ClientIdMap
-import com.guys.coding.hackathon.backend.domain.user.{Client, Measurement, MeasurementRepository}
+import com.guys.coding.hackathon.backend.domain.user.{Measurement, MeasurementRepository}
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.CatsIntegration
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._

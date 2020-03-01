@@ -5,7 +5,7 @@ import com.guys.coding.hackathon.backend.api.graphql.schema.MutationHolder
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.UserInputTypes.ClientCoachCooperationGraphql
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.UserOutputTypes._
 import com.guys.coding.hackathon.backend.api.graphql.service.GraphqlSecureContext
-import sangria.schema.{Argument, Field, StringType, fields}
+import sangria.schema.{fields, Argument, Field, StringType}
 
 class ClientCoachCooperationMutation(services: Services) extends MutationHolder {
   val CoachIdArg  = Argument("coachId", StringType)

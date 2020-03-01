@@ -2,13 +2,23 @@ package com.guys.coding.hackathon.backend
 
 import cats.effect.{Blocker, ContextShift, ExitCode, IO, Resource, Timer}
 import cats.implicits._
-import com.guys.coding.hackathon.backend.api.graphql.core.{GraphQLContext, GraphqlRoute}
+import com.guys.coding.hackathon.backend.api.graphql.core.GraphqlRoute
 import com.guys.coding.hackathon.backend.infrastructure.jwt.JwtTokenService
 import com.guys.coding.hackathon.backend.infrastructure.slick.example.ExampleSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.gym.{GymSchema, SlickGymRepository}
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo
-import com.guys.coding.hackathon.backend.infrastructure.slick.training.{ExerciseSchema, SlickExerciseRepository, SlickTrainingRepository, TrainingSchema}
-import com.guys.coding.hackathon.backend.infrastructure.slick.user.{SlickClientCoachCooperationRepository, SlickClientRepository, SlickCoachRepository, SlickMeasurementRepository}
+import com.guys.coding.hackathon.backend.infrastructure.slick.training.{
+  ExerciseSchema,
+  SlickExerciseRepository,
+  SlickTrainingRepository,
+  TrainingSchema
+}
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.{
+  SlickClientCoachCooperationRepository,
+  SlickClientRepository,
+  SlickCoachRepository,
+  SlickMeasurementRepository
+}
 import hero.common.crypto.KeyReaders.{PrivateKeyReader, PublicKeyReader}
 import hero.common.logging.Logger
 import hero.common.logging.slf4j.LoggingConfigurator
@@ -20,6 +30,10 @@ import org.http4s.server.staticcontent._
 import org.http4s.syntax.kleisli._
 
 import scala.concurrent.ExecutionContext
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.CoachSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.ClientSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.ClientCoachCooperationSchema
+import com.guys.coding.hackathon.backend.infrastructure.slick.user.MeasurementsSchema
 
 class Application(config: ConfigValues)(
     implicit ec: ExecutionContext,
@@ -37,7 +51,11 @@ class Application(config: ConfigValues)(
     ExampleSchema,
     GymSchema,
     ExerciseSchema,
-    TrainingSchema
+    TrainingSchema,
+    CoachSchema,
+    ClientSchema,
+    ClientCoachCooperationSchema,
+    MeasurementsSchema
   )
 
   schemas.foreach(schema => repo.SchemaUtils.createSchemasIfNotExists(db, schema.schemas))
@@ -64,8 +82,7 @@ class Application(config: ConfigValues)(
     jwtTokenService
   )
 
-  val graphqlRoute = new GraphqlRoute(services)
-  val graphqlContext = new GraphQLContext(services)
+  val graphqlRoute   = new GraphqlRoute(services)
 
   def start()(implicit t: Timer[IO]): IO[ExitCode] = {
 

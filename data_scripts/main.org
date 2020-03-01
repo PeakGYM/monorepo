@@ -1,6 +1,7 @@
 * GetData
 
-#+BEGIN_SRC bash
-query="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?parameters"
+#+BEGIN_SRC sql
 
+
+insert into gym(id, name, location, "coachIds") values ('2', 'Kolejna Siłownia', ST_SetSRID(ST_Point(49.5, 19.24), 4326), '["3"]');
 #+END_SRC

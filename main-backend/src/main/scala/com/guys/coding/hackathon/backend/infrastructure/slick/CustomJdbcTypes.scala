@@ -1,9 +1,6 @@
 package com.guys.coding.hackathon.backend.infrastructure.slick
 
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo.profile.api._
-import com.guys.coding.hackathon.backend.infrastructure.slick.repo.DtoMappings
-import slick.lifted.{TableQuery, Tag}
-import java.time.ZonedDateTime
 
 import com.guys.coding.hackathon.backend.domain.MeasurementId.MeasurementId
 import com.guys.coding.hackathon.backend.domain.UserId.CoachId
@@ -15,7 +12,6 @@ import io.circe.generic.semiauto._
 import com.guys.coding.hackathon.backend.domain.training._
 import io.circe.Json
 import slick.ast.BaseTypedType
-import com.guys.coding.hackathon.backend.infrastructure.slick.training.TrainingSchema.MuscleGroup
 
 object CustomJdbcTypes {
   implicit val ClientIdMap: JdbcType[ClientId]           = MappedColumnType.base[ClientId, String](_.value, ClientId)
