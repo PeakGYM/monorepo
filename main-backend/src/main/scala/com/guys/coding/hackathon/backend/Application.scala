@@ -7,6 +7,9 @@ import com.guys.coding.hackathon.backend.infrastructure.jwt.JwtTokenService
 import com.guys.coding.hackathon.backend.infrastructure.slick.example.ExampleSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.gym.{GymSchema, SlickGymRepository}
 import com.guys.coding.hackathon.backend.infrastructure.slick.repo
+import scala.concurrent.duration._
+import scala.language.postfixOps
+
 import com.guys.coding.hackathon.backend.infrastructure.slick.training.{
   ExerciseSchema,
   SlickExerciseRepository,
@@ -35,6 +38,21 @@ import com.guys.coding.hackathon.backend.infrastructure.slick.user.ClientSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.user.ClientCoachCooperationSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.user.MeasurementsSchema
 import com.guys.coding.hackathon.backend.api.Fakerendpoint
+import io.codeheroes.herochat.environment.facebook.`package`.FacebookSenderId
+import akka.actor.Props
+import com.guys.coding.bitehack.chat.ChatActor
+import io.codeheroes.herochat.Chat
+import io.codeheroes.herochat.environment.facebook.FacebookRequest
+import io.codeheroes.herochat.environment.facebook.FacebookResponse
+import akka.actor.ActorSystem
+import io.codeheroes.herochat.core.ChatActorRepository
+import io.codeheroes.herochat.`package`.PassivationConfig
+import io.codeheroes.herochat.infrastructure.inmem.InMemChatRepository
+import com.guys.coding.bitehack.api.core.EndpointsWrapper
+import com.guys.coding.bitehack.api.core.HttpServer
+import akka.stream.Materializer
+import akka.stream.ActorMaterializer
+import hero.common.akka.journal.postgres.JournalTablesInitializer
 
 class Application(config: ConfigValues)(
     implicit ec: ExecutionContext,
@@ -85,7 +103,30 @@ class Application(config: ConfigValues)(
 
   val graphqlRoute = new GraphqlRoute(services)
 
+  val serveChatbot: IO[Unit] = IO.shift.flatMap { _ =>
+    com.guys.coding.hackathon.backend.app.chat.JournalTablesInitializer.createJournalSchema(db)
+    def chatActorProvider(id: FacebookSenderId) = Props(new ChatActor(id, services))
+
+    def chatActorRepositoryProvider(propsProvider: PassivationConfig => Props)(implicit system: ActorSystem) =
+      new InMemChatRepository[FacebookSenderId, FacebookRequest, FacebookResponse](propsProvider, 10 seconds)
+
+    implicit val as  = ActorSystem()
+    implicit val mat = ActorMaterializer()
+
+    val chat = new Chat[FacebookSenderId, FacebookRequest, FacebookResponse](
+      chatActorRepositoryProvider,
+      chatActorProvider
+    )
+
+    import akka.http.scaladsl.server.Directives._
+    val routes = new EndpointsWrapper(pathPrefix("chat")(chat.routes)).routing
+    val server = new HttpServer("0.0.0.0", 8090, routes)
+
+    IO{server.start()}
+  }
+
   def start()(implicit t: Timer[IO]): IO[ExitCode] = {
+    serveChatbot.unsafeRunAsyncAndForget()
 
     val app: Resource[IO, Server[IO]] =
       for {
@@ -104,7 +145,11 @@ class Application(config: ConfigValues)(
                    )
                    .resource
       } yield server
-    app.use(_ => appLogger.info(s"Started server at ${config.app.bindHost}:${config.app.bindPort}").flatMap(_ => IO.never)).as(ExitCode.Success)
+    import cats.syntax.parallel._
+
+    app
+      .use(_ => appLogger.info(s"Started server at ${config.app.bindHost}:${config.app.bindPort}").flatMap(_ => IO.never))
+      .as(ExitCode.Success)
   }
 
 }

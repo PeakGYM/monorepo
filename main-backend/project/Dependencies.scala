@@ -38,21 +38,22 @@ object Dependencies {
     "com.beachape" %% "enumeratum-circe"    % EnumeratumCirceVersion
   )
 
-
-  val heroChatVersion            = "0.81"
-  val akkaVersion                = "2.5.23"
-  val inMemJournalVersion        = "2.5.15.2"
+  val heroChatVersion     = "0.81"
+  val akkaVersion         = "2.5.23"
+  val inMemJournalVersion = "2.5.15.2"
   val chatbotDependencies = Seq(
-    "com.typesafe.akka" %% "akka-actor"             % akkaVersion,
-    "com.typesafe.akka" %% "akka-slf4j"             % akkaVersion,
-    "com.typesafe.akka" %% "akka-persistence"       % akkaVersion,
-    "com.typesafe.akka" %% "akka-persistence-query" % akkaVersion,
-    "com.typesafe.akka" %% "akka-stream"            % akkaVersion,
-    "com.typesafe.akka" %% "akka-remote"            % akkaVersion,
-    "com.typesafe.akka" %% "akka-cluster"           % akkaVersion,
-    "com.typesafe.akka" %% "akka-cluster-tools"     % akkaVersion,
-    "com.github.dnvriend" %% "akka-persistence-inmemory"  % inMemJournalVersion,
-    "io.codeheroes" %% "herochat" % heroChatVersion,
+    "com.typesafe.akka"   %% "akka-actor"                % akkaVersion,
+    "com.typesafe.akka"   %% "akka-slf4j"                % akkaVersion,
+    "com.typesafe.akka"   %% "akka-persistence"          % akkaVersion,
+    "com.typesafe.akka"   %% "akka-persistence-query"    % akkaVersion,
+    "com.typesafe.akka"   %% "akka-stream"               % akkaVersion,
+    "com.typesafe.akka"   %% "akka-remote"               % akkaVersion,
+    "com.typesafe.akka"   %% "akka-cluster"              % akkaVersion,
+    "com.typesafe.akka"   %% "akka-cluster-tools"        % akkaVersion,
+    "com.github.dnvriend" %% "akka-persistence-inmemory" % inMemJournalVersion,
+    "io.codeheroes"       %% "herochat"                  % heroChatVersion,
+    "ch.megard"           %% "akka-http-cors"            % "0.2.2",
+    "com.github.dnvriend" %% "akka-persistence-jdbc"     % "3.4.0"
   )
 
   private val jwtDependencies = Seq(
