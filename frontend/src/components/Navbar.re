@@ -28,7 +28,7 @@ let make = () =>
       )>
       <Icons.Global />
       <Text
-        content={j|Mapa|j}
+        content={j|Map|j}
         style={ReactDOMRe.Style.make(~fontSize="24px", ())}
         className=TW.([TextAlign(TextCenter)] |> make)
       />
@@ -47,7 +47,7 @@ let make = () =>
       )>
       <Icons.Calendar />
       <Text
-        content={j|Kalendarz|j}
+        content={j|Calendar|j}
         style={ReactDOMRe.Style.make(~fontSize="24px", ())}
         className=TW.([TextAlign(TextCenter)] |> make)
       />
@@ -65,7 +65,7 @@ let make = () =>
       )>
       <Icons.Account />
       <Text
-        content={j|Profil|j}
+        content={j|Profile|j}
         style={ReactDOMRe.Style.make(~fontSize="24px", ())}
         className=TW.([TextAlign(TextCenter)] |> make)
       />
@@ -83,7 +83,7 @@ let make = () =>
       )>
       <Icons.Chart />
       <Text
-        content={j|Statystyki|j}
+        content={j|Statistics|j}
         style={ReactDOMRe.Style.make(~fontSize="24px", ())}
         className=TW.([TextAlign(TextCenter)] |> make)
       />
