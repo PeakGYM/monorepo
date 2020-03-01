@@ -1,5 +1,6 @@
 package com.guys.coding.bitehack.chat
 
+import com.guys.coding.hackathon.backend.domain.training.Training
 import io.codeheroes.herochat.environment.facebook.Buttons.{MessengerExtension, UrlButton}
 import io.codeheroes.herochat.environment.facebook.FacebookResponse.{Buttons, QuickReplies, Simple}
 import io.codeheroes.herochat.environment.facebook.{FacebookResponse, MessengerExtensionHeights, QuickReplies => QR}
@@ -25,6 +26,13 @@ object Responses {
       "Who can help you become the best? 💪",
       UrlButton("Nearby traininers", s"https://wwh.codevillains.me/map")
     )
+
+  def getTrainingInfoResponse(training: Training)={
+    Simple(s"Your next training will take place from ${training.dateFrom} to ${training.dateTo}.")
+  }
+  def getTrainingNotFoundResponse()={
+    Simple("No workout found for you. You can schedule another via our app!")
+  }
 
   def inProgress() =
     Simple(
@@ -68,6 +76,7 @@ object Responses {
   val completedAllData  = Simple("Nice, you did it 🙃 We've gathered all data I needed to know. Do you want to create a JIRA issue?")
 
   def issuePreview(uri: String) = Buttons("Here's the summary of your issue.", MessengerExtension("Issue", uri, MessengerExtensionHeights.Full))
+
 
   val askIsaDuplicateMessage = QuickReplies(
     "Is it a dupliacte issue?",

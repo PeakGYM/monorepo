@@ -19,8 +19,10 @@ import scala.concurrent.{Await, ExecutionContext}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import cats.data.OptionT
+
 import scala.concurrent.Future
 import com.guys.coding.hackathon.backend.Services
+import com.guys.coding.hackathon.backend.domain.training.Training
 
 class ChatActor(
     id: FacebookSenderId,
@@ -41,6 +43,11 @@ class ChatActor(
 
   override def receiveCommand: Receive = initial
 
+  private def nextWorkoutFor(clientId: String) : Option[Training]={
+    services.trainingRepository.getNextTraining(clientId)
+      .unsafeRunSync()
+  }
+
   def initial: Receive = {
     case FacebookRequest.Message(v) =>
       logger.info(s"received $v")
@@ -52,7 +59,7 @@ class ChatActor(
       sender ! (r match {
         case "GET_MAP"           => Responses.getMapResponse()
         case "NOT_EXERCISE"      => Responses.inProgress()
-        case "GET_NEXT_TRAINING" =>
+        case "GET_NEXT_TRAINING" => nextWorkoutFor("1").map(Responses.getTrainingInfoResponse).getOrElse(Responses.getTrainingNotFoundResponse())
       })
 
   }
