@@ -48,9 +48,12 @@ class ChatActor(
       logger.info(s"I AM [$self]")
       sender ! Responses.helloMessage
 
-    case FacebookRequest.Location(lat, lng) =>
-      logger.info(s"lat $lat, lng $lng")
-      sender ! Responses.ok
+    case FacebookRequest.QuickReply(r) =>
+      sender ! (r match {
+        case "GET_MAP"           => Responses.getMapResponse()
+        case "NOT_EXERCISE"      => Responses.inProgress()
+        case "GET_NEXT_TRAINING" =>
+      })
 
   }
 }

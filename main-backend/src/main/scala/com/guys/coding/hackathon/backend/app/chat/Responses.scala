@@ -10,15 +10,46 @@ import scala.util.Random
 object Responses {
 
   val helloMessage = QuickReplies(
-    "Where are you bro?",
-    QR.Text("Yes ✔️", "FOUND_NEW_BUG"),
-    QR.Text("Nope ❌", "NOTHING_NEW")
-    // find trainers neraby -> apke
+    "Hey, do you want to exercise?\n Or maybe  you want to find personal trainier in vicinity?",
+    QR.Text("Show me trainers nearby ", "GET_MAP"),
+    QR.Text("I don't want to exercise 😥", "NOT_EXERCISE"),
+    QR.Text("What is my next training 🤔 ?", "GET_NEXT_TRAINING")
 
     // Get next training
 
     // QR.Location // not working
   )
+
+  def getMapResponse() =
+    Buttons(
+      "Who can help you become the best? 💪",
+      UrlButton("Nearby traininers", s"https://wwh.codevillains.me/map")
+    )
+
+  def inProgress() =
+    Simple(
+      Random
+        .shuffle(
+          List(
+            "Robert is working",
+            "It will be done",
+            "Developing"
+          )
+        )
+        .head
+    )
+  def looserResponse() =
+    Simple(
+      Random
+        .shuffle(
+          List(
+            "Bro I feel you 🙁",
+            "Did you drink last night? 😈",
+            "Come on! ✊"
+          )
+        )
+        .head
+    )
 
   def ok: Simple =
     Simple(
