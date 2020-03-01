@@ -1,0 +1,909 @@
+{
+   "html_attributions" : [],
+   "next_page_token" : "CqQCHwEAAEZb0H02oWgkz_-SI3tH7n69__jVEiHBC1cK1C5a5PytZfGcghsfEf7rOt-H2Udm8fpp0cam6101t1e-PLVQGVSq115fYHRkN5bLOzi2lvGdrX7ynUIN_MZPFj83vBgctm4VadRn9bgwxIK6_4bvrXeu2ZV7Q4-ik6c6zYFkKrGig2zHiv0byDPE6RqVJOXRlK-vOtnL3jOwli2P5CP34PF5Mzr4QzGOXDEpuoXrOMVFrGh12j2iH1fHlmdB7DOznoQnc4UbwIiCcHBBYJDX8abulsO7wZzRq_ToBswKOkjuV8SSYgHKnLhZO9GQs01vvodiALjI45tkffojE-SnvjwYBu2afd4Dxv8JkWaidueyFG_UI-S7niSEa44MdUKR_RIQUMo5FCeIK3c3HbA1pHahUBoUAQYeO0fDOtEyuvSM_U-kALQCFPQ",
+   "results" : [
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0865359,
+               "lng" : 20.0143007
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.08777227989273,
+                  "lng" : 20.01560327989272
+               },
+               "southwest" : {
+                  "lat" : 50.08507262010728,
+                  "lng" : 20.01290362010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "aeee7b586ead6b0ed2dddb299961349f8d1d906d",
+         "name" : "Wild Power Gym - Siłownia Kraków, Fitness, Boks, K1, Suplementy i odżywki, Trener personalny",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 4032,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/114975523700011255878\"\u003eStudio Ruchu Prestige\u003c/a\u003e"
+               ]
+               "photo_reference" : "CmRaAAAAgx5nKyqra5I1l6by8zUF85-mILMVHIpmXg2opG5m7mnJ35KcTsUVks_0KCkpxCtMDVcldKlAq5sGKYDAMk_bbsEJQa8WE1VxtDwTN_cYs2Hl9rq6Acvw1F0NGl2lq14PEhAOePROSqHAicq3OC8VwWbDGhTAXWRXIAuieQDPMrgyDV0M-vqKdw",
+               "width" : 3024
+            }
+         ],
+         "place_id" : "ChIJweyq7UlFFkcRiOh_gxVgtKc",
+         "plus_code" : {
+            "compound_code" : "32P7+JP Kraków",
+            "global_code" : "9G2232P7+JP"
+         },
+         "rating" : 4.6,
+         "reference" : "ChIJweyq7UlFFkcRiOh_gxVgtKc",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 22,
+         "vicinity" : "osiedle Na Lotnisku 11, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.096273,
+               "lng" : 19.9483549
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.09755567989271,
+                  "lng" : 19.94967607989272
+               },
+               "southwest" : {
+                  "lat" : 50.09485602010727,
+                  "lng" : 19.94697642010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "85fd8b5f4df419d3c6c3815a9fa3f07383a89540",
+         "name" : "Just GYM Kraków",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2976,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/111537070536177395536\"\u003eMr\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAaAJ9isNHiAczf9gdjMghwCkQIq972S-bPi1_cbI9EnYmrcXlcfCI2RqUg0MzpPXP0TYKcUIOHfJTrvbJ-ATwaRE8NKRD3uxjrqseNpcGKMyZ8Ob06rLHimbWQ56kBQMxEhBXNbW3gh_4KE2a75W1XJUoGhSKNEkFUnHPTVMaVqQpDpItIOwL4Q",
+               "width" : 3968
+            }
+         ],
+         "place_id" : "ChIJcwVfWfVaFkcR9ezEW7FZ1fg",
+         "plus_code" : {
+            "compound_code" : "3WWX+G8 Kraków",
+            "global_code" : "9F2X3WWX+G8"
+         },
+         "rating" : 4.6,
+         "reference" : "ChIJcwVfWfVaFkcR9ezEW7FZ1fg",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 313,
+         "vicinity" : "Siewna 46, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0740914,
+               "lng" : 20.0197837
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.07544037989272,
+                  "lng" : 20.02114167989272
+               },
+               "southwest" : {
+                  "lat" : 50.07274072010728,
+                  "lng" : 20.01844202010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "18206b14e5458c22ba3149f75bf7163b9ee63750",
+         "name" : "Energym Fitness Club",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 450,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/107469958114084144868\"\u003eEnergym Fitness Club\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAsz2Qh-ePZ1suNkIDSyV9wYbjaBwxEiVabZ2rdoEm4CpsoDGaTd_n4Ppuy9aHcooZ5Q5N2h-9izOd8Machk8EacwAhLdlkpZkWnrvSNSxM8BlZB2UYdsTSiBhi1dgw1ZtEhDTO7Yei8mC73JhDV_-pIeIGhT-T6ipepla9D-mrxLE4RUGlvkKRg",
+               "width" : 881
+            }
+         ],
+         "place_id" : "ChIJeyxNVjtFFkcRl1kn3pKem3M",
+         "plus_code" : {
+            "compound_code" : "32F9+JW Kraków",
+            "global_code" : "9G2232F9+JW"
+         },
+         "rating" : 4.6,
+         "reference" : "ChIJeyxNVjtFFkcRl1kn3pKem3M",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 259,
+         "vicinity" : "Osiedle Kolorowe 33, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0730342,
+               "lng" : 19.8939642
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.07429947989272,
+                  "lng" : 19.89527907989272
+               },
+               "southwest" : {
+                  "lat" : 50.07159982010727,
+                  "lng" : 19.89257942010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "2bacc03590abc26631467f6539f59ed4400f226c",
+         "name" : "Fitness Platinium",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 853,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/103148774117081468839\"\u003ePlatinium Fitness\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAR-BGhG7xXNdFi-OLdHOhtnBqPNcTYSFLOlGvNdlBCYDOuDfjj_ecWeY-A96MYUYnsVVb4KHiZkCuei_kuUaFgz1bcVgIjDGKPhLXSzuXji--a721dI0uyRsv_jlvxxDhEhA1eVZVFZy8Ju5wmqkzeDJRGhQwqXjqruMTzqhLS7qTAUalwvKrBA",
+               "width" : 1280
+            }
+         ],
+         "place_id" : "ChIJ5e67TsZbFkcRwn50kxmvKFc",
+         "plus_code" : {
+            "compound_code" : "3VFV+6H Kraków",
+            "global_code" : "9F2X3VFV+6H"
+         },
+         "rating" : 4,
+         "reference" : "ChIJ5e67TsZbFkcRwn50kxmvKFc",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 490,
+         "vicinity" : "Juliusza Lea 213, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.04312789999999,
+               "lng" : 19.969518
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.04456437989272,
+                  "lng" : 19.97079307989272
+               },
+               "southwest" : {
+                  "lat" : 50.04186472010728,
+                  "lng" : 19.96809342010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "7a93d581be0f6b2edce8be2dc55a7c90580a188f",
+         "name" : "Fitness Club Academy Krakow King Square",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2268,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/113823214709515504160\"\u003eFilip Krasiński\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAGFa9aABgYI9kG2mPDJ6tuy9dRZ_b09_W3siw0F2R_VJatWVgq5h7Ja3nFwqPqWGbjLLcQiwrTBMolif2N57HgweOdoFQtokvliLM7aSNnGZIo4l8rlFSerGopZoqaLQ4EhAKeMXXkCuTLSXUDT6e-kcNGhTKzXtmTOXHxhNUZ9o2ogH1fiNEjg",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJeZ5W8ExbFkcRCdyppiCW67s",
+         "plus_code" : {
+            "compound_code" : "2XV9+7R Kraków",
+            "global_code" : "9F2X2XV9+7R"
+         },
+         "rating" : 4.2,
+         "reference" : "ChIJeZ5W8ExbFkcRCdyppiCW67s",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "spa", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 304,
+         "vicinity" : "Powstańców Wielkopolskich 18, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0760793,
+               "lng" : 19.9280325
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.07756917989272,
+                  "lng" : 19.92952522989272
+               },
+               "southwest" : {
+                  "lat" : 50.07486952010728,
+                  "lng" : 19.92682557010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "b18217055d9a05bbb4345527f2311025c01397f6",
+         "name" : "Energym Fitness Club",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 450,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/109421934783422356844\"\u003eEnergym Fitness Club\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAPPNfqZxMjUClSW8KlEaZPjVEc0goeCKH2loWo-RI-zDvxg1A-1hD9AI4bCmAosnfj6rRR-NJ5mlQUOWMbUPaUACz_NKvJKOkLIss5d1P8J7d1KrYhWhOTwaduUreB2V4EhCCCru1VRFqqMxObqY5tnMPGhRct2h0UYgG0xFHxQiB6GcmxdQmtA",
+               "width" : 881
+            }
+         ],
+         "place_id" : "ChIJi2AZrKtbFkcRUgDbLMZuz3M",
+         "plus_code" : {
+            "compound_code" : "3WGH+C6 Kraków",
+            "global_code" : "9F2X3WGH+C6"
+         },
+         "rating" : 4.1,
+         "reference" : "ChIJi2AZrKtbFkcRUgDbLMZuz3M",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 198,
+         "vicinity" : "Wrocławska 28, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0650029,
+               "lng" : 19.9851736
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.06580622989272,
+                  "lng" : 19.98669550000001
+               },
+               "southwest" : {
+                  "lat" : 50.06310657010728,
+                  "lng" : 19.9806079
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "0c93719800b21e5434c8152fd7d8793036717155",
+         "name" : "Fitness Platinium@ Galeria Plaza",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 1000,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/112009934561669022554\"\u003eFitness Platinium® Galeria Plaza\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAArj3Lm4QyY8FZhytsDa_AkFX75JA3YATipgZqgFhZXedVe84RuSXlnNpsTS_u3ev_mVmwAm-Q6QxF8nTBEYEYdBhuJmlg1RbDeFwSC8V-NyrvILkYxTyxwQ3tD5LZ-wIJEhBKd0xqaOdIA8pi_09yGc7wGhQ3XvlYPWk4lSvHX4viZ0rD-8FhAQ",
+               "width" : 1500
+            }
+         ],
+         "place_id" : "ChIJE0bkhytbFkcR8wdYIvXlc-8",
+         "plus_code" : {
+            "compound_code" : "3X8P+23 Kraków",
+            "global_code" : "9F2X3X8P+23"
+         },
+         "rating" : 4.4,
+         "reference" : "ChIJE0bkhytbFkcR8wdYIvXlc-8",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 419,
+         "vicinity" : "Galeria Plaza, Aleja Pokoju 44, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0720709,
+               "lng" : 19.9029595
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.07349162989272,
+                  "lng" : 19.90431287989272
+               },
+               "southwest" : {
+                  "lat" : 50.07079197010727,
+                  "lng" : 19.90161322010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "2aaa4fc59bc4fab6015e85076508793b2e5f8f83",
+         "name" : "Fitness Siłownia Odchudzenie Kraków",
+         "photos" : [
+            {
+               "height" : 413,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/113473091761924809057\"\u003eFitness Siłownia Odchudzenie Kraków .\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAtLvbFWZcPQ0XN5KarpsPDqSA-rVZO-s-sQ4cKgd7vCX1c-GW1f5MLZsdJUxACAqzTmGt69L3Ji-03qrBJ9R2EYSBam2LiwIIBBWovYq86AtMSQI7mCUtLQnFL4dBQ0DHEhDFoDielHS-kpHIgWCK6V6ZGhS0yKbTQjS3w5sS6VnLvkqtn532mw",
+               "width" : 400
+            }
+         ],
+         "place_id" : "ChIJY08txrlbFkcRfCGxOGLLPLk",
+         "plus_code" : {
+            "compound_code" : "3WC3+R5 Kraków",
+            "global_code" : "9F2X3WC3+R5"
+         },
+         "rating" : 0,
+         "reference" : "ChIJY08txrlbFkcRfCGxOGLLPLk",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "Juliusza Lea 114, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.06592329999999,
+               "lng" : 19.91
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.06738257989272,
+                  "lng" : 19.91139357989272
+               },
+               "southwest" : {
+                  "lat" : 50.06468292010727,
+                  "lng" : 19.90869392010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "f604147540cdf9b55ea4696dcb25c0583d0f047b",
+         "name" : "Infinity Fitness",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 5504,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/111024676985631138988\"\u003eA Google User\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAJwy5dZVR8MEEPM1oNYMuQ3JTBcz6_GJRgxaP1TU9gbQ-2kY1Ry-Q1E9XcXpnsexpVD7B7HDuzDVB2RORAB-7fp_lzgJDsnHLfklTqrLjhKNx9pv-OX4nIef29-oXtuBHEhAtEfPN6MezNiPq3Hv7xx2VGhRoLlH22hln9tBuBgncV1AnNnJm_Q",
+               "width" : 8256
+            }
+         ],
+         "place_id" : "ChIJlfvWq7xbFkcRDJZOHfQSxD0",
+         "plus_code" : {
+            "compound_code" : "3W85+9X Kraków",
+            "global_code" : "9F2X3W85+9X"
+         },
+         "rating" : 4.6,
+         "reference" : "ChIJlfvWq7xbFkcRDJZOHfQSxD0",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "spa", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 95,
+         "vicinity" : "Reymonta 22, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0140835,
+               "lng" : 19.9282324
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.01543947989272,
+                  "lng" : 19.92955432989272
+               },
+               "southwest" : {
+                  "lat" : 50.01273982010728,
+                  "lng" : 19.92685467010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "b6b2ad372ef91032d256172a2e3fa4ceecb692ce",
+         "name" : "Fitness Platinium Solvay Park",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 1000,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/112107064602961506656\"\u003eFitness Platinium®\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAM1VlOFSm1zLUn-CYbPc1ELjIM2uYBEL3msXZgDcvv_59mV0qwXK1vRSjhuBl5SCEfFlppGx4LEr3n7UWbo_II67xnxbADwcvWSpLxm4cQ305Vb9oY1zE0MzywZ-ll4gjEhCtMYQ-2Ca2I1dSkLllHHTaGhQ34BCMEHbIlZV8TOTcJCQsBdfahA",
+               "width" : 1500
+            }
+         ],
+         "place_id" : "ChIJa6aMRsdcFkcRGOpRkJJaWC0",
+         "plus_code" : {
+            "compound_code" : "2W7H+J7 Kraków",
+            "global_code" : "9F2X2W7H+J7"
+         },
+         "rating" : 4.4,
+         "reference" : "ChIJa6aMRsdcFkcRGOpRkJJaWC0",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 681,
+         "vicinity" : "Zakopiańska 105, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0128817,
+               "lng" : 20.0192389
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.01423152989273,
+                  "lng" : 20.02058872989272
+               },
+               "southwest" : {
+                  "lat" : 50.01153187010728,
+                  "lng" : 20.01788907010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "f09f91f08cf1eb6f1a833adceb2909251eb27847",
+         "name" : "Fitness Platinium",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 853,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/106256428560037840911\"\u003eFitness Platinium\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAA9B5fq5QtG1tADYIOYQrlBiDqMBBobJ_P962d7IqW_Ti3fty1SW2xUfXhDcR1LkzYKsCg_vQpLRC7llKO_n9goD7BoLNI76fuCLg7JkMRSX9Vihukl7MiCdX_zXTGVB-HEhAZ91iecZ-l8g-Lk7YhMSLEGhQ3YML56N1M_2DipWmg8IIGVNfFcA",
+               "width" : 1280
+            }
+         ],
+         "place_id" : "ChIJ26dPrYNDFkcRlribRadpL6s",
+         "plus_code" : {
+            "compound_code" : "2279+5M Kraków",
+            "global_code" : "9G222279+5M"
+         },
+         "rating" : 4.4,
+         "reference" : "ChIJ26dPrYNDFkcRlribRadpL6s",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 495,
+         "vicinity" : "Aleksandry 11, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.066711,
+               "lng" : 19.9685269
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.06800572989272,
+                  "lng" : 19.96987532989272
+               },
+               "southwest" : {
+                  "lat" : 50.06530607010728,
+                  "lng" : 19.96717567010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "d0b6c383951678befbbd9340f7814ba2117ff6cf",
+         "name" : "\"RELAX\" Body Club- gym, fitness center, sauna",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 3464,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/111063498002838589643\"\u003eMichał Sokołowski\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAyWHmra8GnWfSVhHSOa_YyUUxXM3gaynPUwvPC8lx0tyPhcPhIDWmd2C-E5wFIZz5PkF7w4o-aKmR6J0HFZUHhcvgPL8xelXehOEDvCd6Ke-Zccv3BzFWjXbflkTwDr9NEhDaQXesKCVC8UoxWTRApdMqGhSyVRUfnnuxbg-uRkYKguUwsu-TSA",
+               "width" : 4618
+            }
+         ],
+         "place_id" : "ChIJsQi1ICRbFkcRtQMNcOT8fSw",
+         "plus_code" : {
+            "compound_code" : "3X89+MC Kraków",
+            "global_code" : "9F2X3X89+MC"
+         },
+         "rating" : 4.4,
+         "reference" : "ChIJsQi1ICRbFkcRtQMNcOT8fSw",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "spa", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 221,
+         "vicinity" : "Mogilska 70, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.084148,
+               "lng" : 19.995979
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.08549782989272,
+                  "lng" : 19.99732882989272
+               },
+               "southwest" : {
+                  "lat" : 50.08279817010727,
+                  "lng" : 19.99462917010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "c13efeb184750a5b5a7f62e5cb3a6ea5b0aad38a",
+         "name" : "Fitness Club SQUARE",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 480,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105431374700835601898\"\u003eKlub Fitness KWADRAT\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAt833swN7CnOzMwq3YTXDble7-j-h-RwaPolAdcO2xkeUQTP4g5BOwlmWsCjygZ2wRaxIHQlFqMTtm07Zw6MlZQpzr0pBe00HShZhBoTbkzlj0vy9VSXfHWQtotFt6goUEhBna1JamKU0jqHeSsUePYi3GhQRqxvNngmjNwGutY-WcYHlcSUBuQ",
+               "width" : 720
+            }
+         ],
+         "place_id" : "ChIJZ7KH6MtaFkcRz94xb8INqt4",
+         "plus_code" : {
+            "compound_code" : "3XMW+M9 Kraków",
+            "global_code" : "9F2X3XMW+M9"
+         },
+         "rating" : 4.9,
+         "reference" : "ChIJZ7KH6MtaFkcRz94xb8INqt4",
+         "scope" : "GOOGLE",
+         "types" : [
+            "gym",
+            "spa",
+            "school",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 13,
+         "vicinity" : "Stanisława Skarżyńskiego 1, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.092931,
+               "lng" : 19.8977091
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.09437427989272,
+                  "lng" : 19.89911997989272
+               },
+               "southwest" : {
+                  "lat" : 50.09167462010728,
+                  "lng" : 19.89642032010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "339ec8f3037dabd97a65e9eca516c37813ae6055",
+         "name" : "Siłownia Fitness Platinium GALERIA BRONOWICE",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 3456,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/108159688747148835708\"\u003eSandra Śliwa\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAZ5pPEbwG3-kZKJfXLW-buQrKs0cCcOzRZRBzh7egAlzLXY6z2kPjB0h7w_5m7bZAywb_iDJIJmo0xiInXvKqLzQIgUosz3na6iKPqyHi248boK1stxyRSg2xO9QaAbfKEhBrAaeA3BiHbSCMDQbRsbJiGhSnxfCFUQL2ZiaBfph76PxDaTzFFg",
+               "width" : 4608
+            }
+         ],
+         "place_id" : "ChIJrwj_yzFaFkcRshmQFI65NvY",
+         "plus_code" : {
+            "compound_code" : "3VVX+53 Kraków",
+            "global_code" : "9F2X3VVX+53"
+         },
+         "rating" : 4.6,
+         "reference" : "ChIJrwj_yzFaFkcRshmQFI65NvY",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 19,
+         "vicinity" : "Stawowa 55, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0194711,
+               "lng" : 19.890143
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.02077642989271,
+                  "lng" : 19.89146752989273
+               },
+               "southwest" : {
+                  "lat" : 50.01807677010727,
+                  "lng" : 19.88876787010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "7f853b1d6511209552ae045b7013881f7e1a9f31",
+         "name" : "My Fitness Place Kraków | Siłownia | Dot Office",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 533,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/107515668290931692181\"\u003eA Google User\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAh10JpqF_jt4yugw4ct66w2SZzCyg7Rw0WfLIJ7b9T5YOQPQ_UhJUwZPyMcRO4WLnHUv0lIauVkhlUJGZnHAZEZW3Cx6qOITcssmFlF_qk-EY76fVY2evbPwpurgtG5eTEhChPuXiAIafzi0pKEBbtJsZGhS-_3W1g8TNeXsDBvMvjQIfQJSOOg",
+               "width" : 800
+            }
+         ],
+         "place_id" : "ChIJ1Yvhgl9cFkcRYmfocCPjOkk",
+         "plus_code" : {
+            "compound_code" : "2V9R+Q3 Kraków",
+            "global_code" : "9F2X2V9R+Q3"
+         },
+         "rating" : 4.6,
+         "reference" : "ChIJ1Yvhgl9cFkcRYmfocCPjOkk",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 58,
+         "vicinity" : "Czerwone Maki 83, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0777469,
+               "lng" : 19.9069733
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.07907867989272,
+                  "lng" : 19.90841782989273
+               },
+               "southwest" : {
+                  "lat" : 50.07637902010728,
+                  "lng" : 19.90571817010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "9d00e4c1664292b9157e4b001561edac26707c79",
+         "name" : "Fitness Glamour",
+         "photos" : [
+            {
+               "height" : 250,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/116060976909815628288\"\u003eFitness Glamour\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAOiJcUcEcjGknrQQ4XibRT33yW3nqPscnlSobGqn1-T8MF9GldXzg_2ge7ecZq1qwNy0jA-Ti_duehr8WG6M1K0wcJaya3xh2Y5AIOw_rx11rc0i7uGKRt--RJaVj-cX9EhBsOXvQHebDLp0p6wyqEUMpGhSDI02ojm5RHjqC4GMtKJv2QLs1aQ",
+               "width" : 450
+            }
+         ],
+         "place_id" : "ChIJm9cWO7RbFkcRiKhGhdH8fRo",
+         "plus_code" : {
+            "compound_code" : "3WH4+3Q Kraków",
+            "global_code" : "9F2X3WH4+3Q"
+         },
+         "rating" : 1,
+         "reference" : "ChIJm9cWO7RbFkcRiKhGhdH8fRo",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 1,
+         "vicinity" : "Bartosza Głowackiego 16, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0492307,
+               "lng" : 19.9593757
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.05060437989273,
+                  "lng" : 19.96077627989272
+               },
+               "southwest" : {
+                  "lat" : 50.04790472010728,
+                  "lng" : 19.95807662010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "3b178d9c9abdc9152c78eb57851666ac7f10ff62",
+         "name" : "Saturn Fitness",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 3840,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/115974382602596561921\"\u003eMarcin\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAHWXYVddRvMxo26uw9h7a5W3mDSiL55SSrAoR8nClxUDKy2SW5KjysCli8pUayMTdi9Vv1P-N-3iMkvAunEYAX8ysfz5jPs3Y_MANm8_sthTZwoazBSEJh-K5PkextNeKEhAkjs_Yi6mmmPN-emaX-ztEGhRk_gf4T7rJzorlSVrxYeRtQPi65A",
+               "width" : 5120
+            }
+         ],
+         "place_id" : "ChIJOV9JQkZbFkcRd-wsJnM7iGI",
+         "plus_code" : {
+            "compound_code" : "2XX5+MQ Kraków",
+            "global_code" : "9F2X2XX5+MQ"
+         },
+         "rating" : 4.4,
+         "reference" : "ChIJOV9JQkZbFkcRd-wsJnM7iGI",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 475,
+         "vicinity" : "Przemysłowa 4, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.0530626,
+               "lng" : 19.9544015
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.05441242989273,
+                  "lng" : 19.95575132989272
+               },
+               "southwest" : {
+                  "lat" : 50.05171277010729,
+                  "lng" : 19.95305167010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "b94802c9613e7638a805f949d7fef5a5df264498",
+         "name" : "Calypso Fitness Club",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 1960,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/100989236398906844927\"\u003eJacek Mars\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAVtv0fitdOCZkWUbaOVKZYjsEoCF6Kll1QhpF9e7pQw_I7lbuNkAxkqqq4NMXV1-_FFmb3El8EJ2jrOMM1C-teS6x32Drb4CUvpxJQDouCxqqp2s24GwQDs_m56lrnPX4EhCKXwyyHLDpLR9h3gwsI4ETGhRFsJVTzkHu_XhxhPuNQCB2_ww3Cg",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJN8PeFT9bFkcR9C7wB52Yli8",
+         "plus_code" : {
+            "compound_code" : "3X33+6Q Kraków",
+            "global_code" : "9F2X3X33+6Q"
+         },
+         "rating" : 4,
+         "reference" : "ChIJN8PeFT9bFkcR9C7wB52Yli8",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 193,
+         "vicinity" : "Podgórska 34, Kraków"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 49.9734704,
+               "lng" : 19.8303866
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 49.97464982989273,
+                  "lng" : 19.83174917989272
+               },
+               "southwest" : {
+                  "lat" : 49.97195017010728,
+                  "lng" : 19.82904952010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "26582d0b8a10287ca19933484090fbb1d767642c",
+         "name" : "Xtreme Fitness Skawina",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 533,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105542929875539065317\"\u003eA Google User\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAEiXExQ_9pU-XWXIpNW64atzXcuNMm3HnurjU1_qUBgkkIdysLOMr9X_3392oLLjV2EKMJ4O_t4mKj-Xn969nkSnQTPUdz8TxFQVNww-4cYGj6JUtVEANhBSUXVc2TS55EhCWlS2tYFzx5Apd_xX7CjbdGhQn5p1ZGw9UgxfliwRx9o4GK4NA7Q",
+               "width" : 800
+            }
+         ],
+         "place_id" : "ChIJ74XdjotdFkcRY73voUiI7Lk",
+         "plus_code" : {
+            "compound_code" : "XRFJ+95 Skawina",
+            "global_code" : "8FXXXRFJ+95"
+         },
+         "rating" : 4.3,
+         "reference" : "ChIJ74XdjotdFkcRY73voUiI7Lk",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 77,
+         "vicinity" : "29 Listopada 21, Skawina"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.04966899999999,
+               "lng" : 19.937431
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 50.05103907989272,
+                  "lng" : 19.93885532989272
+               },
+               "southwest" : {
+                  "lat" : 50.04833942010728,
+                  "lng" : 19.93615567010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "08ef255f552c40a6c6e22ad5e9e7f05108300feb",
+         "name" : "Fitness Bodybuilding \"CHAMPION\"",
+         "opening_hours" : {
+            "open_now" : false
+         },
+         "photos" : [
+            {
+               "height" : 2988,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/118214055858047189060\"\u003eSiłownia Kulturystyczna &quot;CHAMPION&quot;\u003c/a\u003e"
+               ],
+               "photo_reference" : "CmRaAAAAOmLASIM7i_ncf2CcW21Bm2IXqCxiIq_b2poYdnjs7CchxanvTQxGmBoRKNCrJL9Ip1gpF3c7NhZsU0oYNykv823PMAnbzfWvSXtK1KBe3fRRYFShtti7yqXZT--lEu_nEhBKtWSWj8oSZNDM_Xxf4k_CGhRlFaym402S5iJKObXm53wKRzghKQ",
+               "width" : 5312
+            }
+         ],
+         "place_id" : "ChIJ98-zSmlbFkcR67UZD3WC55w",
+         "plus_code" : {
+            "compound_code" : "2WXP+VX Kraków",
+            "global_code" : "9F2X2WXP+VX"
+         },
+         "rating" : 4.5,
+         "reference" : "ChIJ98-zSmlbFkcR67UZD3WC55w",
+         "scope" : "GOOGLE",
+         "types" : [ "gym", "health", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 37,
+         "vicinity" : "Księdza Augustyna Kordeckiego 7, Kraków"
+      }
+   ],
+   "status" : "OK"
+}
+

@@ -33,6 +33,8 @@ class SlickMeasurementRepository(implicit db: Database, ec: ExecutionContext, cs
       result <- getFirstEntityByMatcherAction(_.id === measurement.id)
     } yield toDomain(result.get))
 
+  def batchInsert(m: List[Measurement]) = runIO(batchInsertAction(m.map(toDTO).toSeq: _*))
+
   override def getAllFor(clientId: ClientId): IO[List[Measurement]] =
     runIO(getEntriesAction(limit = Int.MaxValue, offset = 0, _.clientId === clientId, None)).map(_.map(toDomain).toList)
 

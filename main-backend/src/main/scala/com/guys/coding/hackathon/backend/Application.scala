@@ -34,6 +34,7 @@ import com.guys.coding.hackathon.backend.infrastructure.slick.user.CoachSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.user.ClientSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.user.ClientCoachCooperationSchema
 import com.guys.coding.hackathon.backend.infrastructure.slick.user.MeasurementsSchema
+import com.guys.coding.hackathon.backend.api.Fakerendpoint
 
 class Application(config: ConfigValues)(
     implicit ec: ExecutionContext,
@@ -82,7 +83,7 @@ class Application(config: ConfigValues)(
     jwtTokenService
   )
 
-  val graphqlRoute   = new GraphqlRoute(services)
+  val graphqlRoute = new GraphqlRoute(services)
 
   def start()(implicit t: Timer[IO]): IO[ExitCode] = {
 
@@ -96,6 +97,7 @@ class Application(config: ConfigValues)(
                      CORS(
                        Router(
                          "/graphql" -> graphqlRoute.route,
+                         "/faker"   -> Fakerendpoint.route(services),
                          "/assets"  -> fileService[IO](FileService.Config("/assets", blocker))
                        ).orNotFound
                      )

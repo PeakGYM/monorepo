@@ -9,6 +9,6 @@ case class Gym(
     id: GymId,
     name: String,
     location: Location,
-    imgurl:Option[String],
+    imgurl: Option[String],
     coachIds: List[CoachId]
 )
