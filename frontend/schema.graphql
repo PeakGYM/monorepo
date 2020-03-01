@@ -1,5 +1,5 @@
 # source: https://api-wwh.codevillains.me/graphql
-# timestamp: Sun Mar 01 2020 02:18:10 GMT+0100 (czas środkowoeuropejski standardowy)
+# timestamp: Sun Mar 01 2020 02:22:35 GMT+0100 (Central European Standard Time)
 
 type Client {
   id: String!
@@ -88,9 +88,29 @@ type Mutation {
   addWorkout(training: WorkoutInput!): Workout
   updateWorkout(training: WorkoutInput!): Workout
   addCoach(coachName: String!, coachPictureUrl: String!): Coach!
-  addClient(clientName: String!, clientHeight: Int!, clientPictureUrl: String!): Client!
+  addClient(
+    clientName: String!
+    clientHeight: Int!
+    clientPictureUrl: String!
+  ): Client!
   addCooperation(coachId: String!, clientId: String!): ClientCoachCooperation!
-  addMeasurement(clientId: String!, timestamp: Long!, weight: Float, neck: Float, leftBicep: Float, rightBicep: Float, leftForearm: Float, rightForearm: Float, chest: Float, waist: Float, hip: Float, rightThigh: Float, leftThigh: Float, rightCalf: Float, leftCalf: Float): Measurement!
+  addMeasurement(
+    clientId: String!
+    timestamp: Long!
+    weight: Float
+    neck: Float
+    leftBicep: Float
+    rightBicep: Float
+    leftForearm: Float
+    rightForearm: Float
+    chest: Float
+    waist: Float
+    hip: Float
+    rightThigh: Float
+    leftThigh: Float
+    rightCalf: Float
+    leftCalf: Float
+  ): Measurement!
 }
 
 type PlannedExercise {
@@ -112,7 +132,12 @@ input PlannedExerciseInput {
 
 type Query {
   gyms(lat: Float!, lng: Float!): [Gym!]!
-  workouts(from: Long!, to: Long!, coachId: String, clientId: String): [Workout!]!
+  workouts(
+    from: Long!
+    to: Long!
+    coachId: String
+    clientId: String
+  ): [Workout!]!
   workout(workoutId: String!): Workout
   exercises: [Exercise!]!
   getCoachesByIds(ids: [String!]!): [Coach!]!

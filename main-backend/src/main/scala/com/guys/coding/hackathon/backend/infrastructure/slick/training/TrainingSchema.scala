@@ -81,7 +81,7 @@ object TrainingSchema extends SlickSchemas with DtoMappings with NewtypeTranscod
     case "Shoulders" => Shoulders
     case "Arms"      => Arms
     case "Legs"      => Legs
-    case _           => throw new IllegalArgumentException("invalid muslce group")
+    case other       => throw new IllegalArgumentException(s"invalid muslce group $other")
 
   }
 

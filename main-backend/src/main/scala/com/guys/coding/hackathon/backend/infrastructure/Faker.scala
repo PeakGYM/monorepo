@@ -90,9 +90,9 @@ object Faker {
 
         val res = mean.copy(id = m.id, clientId = m.clientId, timestamp = m.timestamp)
 
-        queue.appended(res)
+        queue.enqueue(res)
         if (queue.size > cumSumWindow) {
-          val _ = queue.removeHead()
+          queue.dequeue()
         }
 
         res

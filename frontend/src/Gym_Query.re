@@ -15,18 +15,18 @@ module Gym = [%graphql
        lng
      }
      coachIds
+     coaches {
+       id
+       name
+       pictureUrl
+     }
     }
   }
 |}
 ];
 
 let use = (~lat, ~lng) => {
-  let variables =
-    Gym.makeVariables(
-      ~lat=lat,
-      ~lng=lng,
-      (),
-    );
+  let variables = Gym.makeVariables(~lat, ~lng, ());
 
   ApolloHooks.useQuery(~variables, Gym.definition);
 };

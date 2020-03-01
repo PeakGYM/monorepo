@@ -24,7 +24,7 @@ object ClientCoachCooperationSchema extends SlickSchemas {
   def toDTO(cooperation: ClientCoachCooperation): ClientCoachCooperationDTO =
     ClientCoachCooperationDTO(cooperation.id, cooperation.clientId, cooperation.coachId)
 
-  class ClientCoachCooperations(tag: Tag) extends Table[ClientCoachCooperationDTO](tag, "client") {
+  class ClientCoachCooperations(tag: Tag) extends Table[ClientCoachCooperationDTO](tag, "client_to_coach") {
 
     def id       = column[String]("id", O.PrimaryKey)
     def clientId = column[ClientId]("client_id")

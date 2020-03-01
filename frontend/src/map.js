@@ -2,9 +2,13 @@ import React from "react";
 import { render } from "react-dom";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-const position = [50.0265321, 19.9489974];
+let myPosition = [50.0265321, 19.9489974];
 
-export function loadMap(gyms) {
+let textStyle = {
+  textSize: "24px"
+};
+
+export function loadMap(position, gyms, onMapClick, onMarkerClick) {
   let clientIcon = new L.Icon({
     iconUrl:
       "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png",
@@ -24,23 +28,38 @@ export function loadMap(gyms) {
 
   let gymMarkers = gyms.map(gym => {
     let pos = [gym.location.lat, gym.location.lng];
+    let text = `${gym.name} - ${formatCoachCount(gym.coachIds)}`
 
     return (
-      <Marker riseOnHover={true} position={pos}>
+      <Marker
+        key={gym.id}
+        riseOnHover={true}
+        position={pos}
+        onClick={_ => onMarkerClick(gym)}
+      >
         <Popup>
-          {gym.name} - {formatCoachCount(gym.coachIds)}
+          <div style={textStyle}>
+            {text}
+          </div>
         </Popup>
       </Marker>
     );
   });
 
   let map = (
-    <Map center={position} zoom={16} minZoom={0} maxZoom={17}>
+    <Map
+      center={position}
+      zoom={16}
+      minZoom={0}
+      maxZoom={17}
+      onClick={onMapClick}
+      doubleClickZoom={false}
+    >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker icon={clientIcon} position={position}>
+      <Marker icon={clientIcon} position={myPosition}>
         <Popup>Your location</Popup>
       </Marker>
       {gymMarkers}
