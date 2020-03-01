@@ -86,7 +86,7 @@ let make = (~setLocation) => {
       ~justifyContent="center",
       ~alignItems="center",
       ~width="100%",
-      ~height="5rem",
+      ~height="8rem",
       (),
     )}>
     <Antd.Select

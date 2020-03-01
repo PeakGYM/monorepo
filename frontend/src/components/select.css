@@ -1,0 +1,12 @@
+.ant-select {
+  font-size: 36px !important;
+}
+
+.ant-select-selector {
+   height: 5rem !important;
+}
+
+
+.ant-select > input {
+  font-size: 36px !important;
+}
