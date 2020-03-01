@@ -24,6 +24,7 @@ let make = () => {
            | DayEdit(id) => <Day_Edit_View id />
            | DayLog(id) => <Day_Log_View id />
            | Pick(id) => <Pick_View id />
+           | Statistics => <Statistics_View />
            | Map => <Map_View />
            | SetupVisit(coachId) => <SetupVisit_View id=coachId />
            }}

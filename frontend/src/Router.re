@@ -5,6 +5,7 @@ type t =
   | DayEdit(string)
   | Pick(string)
   | SetupVisit(string)
+  | Statistics
   | Map;
 
 let toRoute = (v: ReasonReactRouter.url) => {
@@ -17,6 +18,7 @@ let toRoute = (v: ReasonReactRouter.url) => {
   | ["pick", day] => Pick(day)
   | ["map"] => Map
   | ["setup-visit", coachId] => SetupVisit(coachId)
+  | ["statistics"] => Statistics
   | _ => Main
   };
 };
@@ -29,6 +31,7 @@ let toUrl =
   | DayEdit(day) => {j|/trainings/$day/edit|j}
   | Pick(day) => {j|/pick/$day|j}
   | SetupVisit(coachId) => {j|/setup-visit/$coachId|j}
+  | Statistics => {j|/statistics|j}
   | Map => "/map";
 
 let go = route => route->toUrl->ReasonReactRouter.push;

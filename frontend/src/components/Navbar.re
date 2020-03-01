@@ -71,6 +71,7 @@ let make = () =>
       />
     </div>
     <div
+      onClick={_ => Router.go(Router.Statistics)}
       className=TW.(
         [
           Display(Flex),

@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-let myPosition = [50.0265321, 19.9489974];
+let myPosition = [50.0262886, 19.9518396];
 
 export function loadMap(position, gyms, onMapClick, onMarkerClick) {
   let gymIcon = new L.Icon({
@@ -47,7 +47,7 @@ export function loadMap(position, gyms, onMapClick, onMarkerClick) {
         onClick={_ => onMarkerClick(gym)}
       >
         <Popup>
-          <div style={{fontSize: "28px"}}>{text}</div>
+          <div style={{ fontSize: "28px" }}>{text}</div>
         </Popup>
       </Marker>
     );
@@ -67,7 +67,9 @@ export function loadMap(position, gyms, onMapClick, onMarkerClick) {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       <Marker icon={clientIcon} position={myPosition}>
-        <Popup>Your location</Popup>
+        <Popup>
+          <div style={{ fontSize: "28px" }}>Your location</div>
+        </Popup>
       </Marker>
       {gymMarkers}
     </Map>

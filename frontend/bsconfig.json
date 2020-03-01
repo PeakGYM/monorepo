@@ -22,7 +22,8 @@
     "reason-react",
     "bs-moment",
     "bs-fetch",
-    "re-debouncer"
+    "re-debouncer",
+    "@ahrefs/bs-recharts"
   ],
   "warnings": {
     "error": "+101"
