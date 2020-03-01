@@ -40,19 +40,16 @@ import com.guys.coding.hackathon.backend.infrastructure.slick.user.MeasurementsS
 import com.guys.coding.hackathon.backend.api.Fakerendpoint
 import io.codeheroes.herochat.environment.facebook.`package`.FacebookSenderId
 import akka.actor.Props
-import com.guys.coding.bitehack.chat.ChatActor
+import com.guys.coding.wwh.chat.ChatActor
 import io.codeheroes.herochat.Chat
 import io.codeheroes.herochat.environment.facebook.FacebookRequest
 import io.codeheroes.herochat.environment.facebook.FacebookResponse
 import akka.actor.ActorSystem
-import io.codeheroes.herochat.core.ChatActorRepository
 import io.codeheroes.herochat.`package`.PassivationConfig
 import io.codeheroes.herochat.infrastructure.inmem.InMemChatRepository
-import com.guys.coding.bitehack.api.core.EndpointsWrapper
-import com.guys.coding.bitehack.api.core.HttpServer
-import akka.stream.Materializer
+import com.guys.coding.wwh.api.core.EndpointsWrapper
+import com.guys.coding.wwh.api.core.HttpServer
 import akka.stream.ActorMaterializer
-import hero.common.akka.journal.postgres.JournalTablesInitializer
 
 class Application(config: ConfigValues)(
     implicit ec: ExecutionContext,
@@ -122,7 +119,7 @@ class Application(config: ConfigValues)(
     val routes = new EndpointsWrapper(pathPrefix("chat")(chat.routes)).routing
     val server = new HttpServer("0.0.0.0", 8090, routes)
 
-    IO{server.start()}
+    IO { server.start() }
   }
 
   def start()(implicit t: Timer[IO]): IO[ExitCode] = {
@@ -145,7 +142,6 @@ class Application(config: ConfigValues)(
                    )
                    .resource
       } yield server
-    import cats.syntax.parallel._
 
     app
       .use(_ => appLogger.info(s"Started server at ${config.app.bindHost}:${config.app.bindPort}").flatMap(_ => IO.never))

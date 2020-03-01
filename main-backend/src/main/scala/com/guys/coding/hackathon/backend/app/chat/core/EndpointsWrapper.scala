@@ -1,4 +1,4 @@
-package com.guys.coding.bitehack.api.core
+package com.guys.coding.wwh.api.core
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model.HttpMethods._
@@ -16,7 +16,6 @@ import scala.collection.immutable.Seq
 import scala.util.control.NonFatal
 
 class EndpointsWrapper(endpoints: server.Route*)(implicit system: ActorSystem) extends Json4sSupport with StrictLogging {
-
 
   private val allowedCorsMethods = Seq(GET, POST, PUT, DELETE, OPTIONS)
   private val routingSettings    = RoutingSettings(system.settings.config)

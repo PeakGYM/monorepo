@@ -1,3 +1,3 @@
-package com.guys.coding.bitehack.chat
+package com.guys.coding.wwh.chat
 
 trait ChatEvent {}

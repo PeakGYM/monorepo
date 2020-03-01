@@ -1,9 +1,9 @@
-package com.guys.coding.bitehack.chat
+package com.guys.coding.wwh.chat
 
 import com.guys.coding.hackathon.backend.domain.training.Training
 import io.codeheroes.herochat.environment.facebook.Buttons.{MessengerExtension, UrlButton}
 import io.codeheroes.herochat.environment.facebook.FacebookResponse.{Buttons, QuickReplies, Simple}
-import io.codeheroes.herochat.environment.facebook.{FacebookResponse, MessengerExtensionHeights, QuickReplies => QR}
+import io.codeheroes.herochat.environment.facebook.{MessengerExtensionHeights, QuickReplies => QR}
 
 import scala.util.Random
 
@@ -78,7 +78,6 @@ object Responses {
   val completedAllData  = Simple("Nice, you did it 🙃 We've gathered all data I needed to know. Do you want to create a JIRA issue?")
 
   def issuePreview(uri: String) = Buttons("Here's the summary of your issue.", MessengerExtension("Issue", uri, MessengerExtensionHeights.Full))
-
 
   val askIsaDuplicateMessage = QuickReplies(
     "Is it a dupliacte issue?",

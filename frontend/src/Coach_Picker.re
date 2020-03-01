@@ -1,8 +1,15 @@
+let trimName = (name: string) =>
+  if (String.length(name) > 20) {
+    String.sub(name, 0, 18) ++ "...";
+  } else {
+    name;
+  };
+
 [@react.component]
 let make = (~gym) => {
   let position =
     switch (gym) {
-    | Some(_) => "0px"
+    | Some(_) => "-5rem"
     | None => "-2000px"
     };
 
@@ -16,16 +23,7 @@ let make = (~gym) => {
             style={ReactDOMRe.Style.make(
               ~display="flex",
               ~justifyContent="left",
-              ~position="fixed",
-              ~marginBottom="0",
-              ~marginTop="auto",
-              ~padding="2rem",
               ~width="100%",
-              ~height="55%",
-              ~zIndex="1000",
-              ~bottom=position,
-              ~background="white",
-              ~transition="all 0.2s",
               (),
             )}>
             <div
@@ -50,7 +48,7 @@ let make = (~gym) => {
                 src={coach##pictureUrl}
               />
               <div style={ReactDOMRe.Style.make(~marginLeft="2rem", ())}>
-                {ReasonReact.string(coach##name)}
+                {ReasonReact.string(trimName(coach##name))}
               </div>
             </div>
           </div>
@@ -67,11 +65,15 @@ let make = (~gym) => {
       ~width="100%",
       ~height="55%",
       ~zIndex="1000",
+      ~padding="2rem",
       ~background="white",
       ~borderRadius="5rem",
-      ~transition="all 0.2s",
+      ~transition="all 0.25s",
+      ~overflowY="scroll",
+      ~bottom=position,
       (),
     )}>
     {ReasonReact.array(coaches)}
+    <div style={ReactDOMRe.Style.make(~height="10rem", ())} />
   </div>;
 };

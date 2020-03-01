@@ -1,26 +1,11 @@
-package com.guys.coding.bitehack.chat
+package com.guys.coding.wwh.chat
 
-import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, LocalDateTime, ZoneId}
-
-import akka.actor.Status
 import akka.persistence.{PersistentActor, RecoveryCompleted}
-import cats.data.NonEmptyList
-import cats.instances.future._
 import com.typesafe.scalalogging.StrictLogging
-import io.codeheroes.herochat.environment.facebook.service.FacebookService
-import io.codeheroes.herochat.environment.facebook.{FacebookRequest, FacebookResponse, FacebookSenderId}
-import java.util.Base64
+import io.codeheroes.herochat.environment.facebook.{FacebookRequest, FacebookSenderId}
 
-import akka.Done
+import scala.concurrent.ExecutionContext
 
-import scala.concurrent.duration._
-import scala.concurrent.{Await, ExecutionContext}
-import scala.language.postfixOps
-import scala.util.{Failure, Success, Try}
-import cats.data.OptionT
-
-import scala.concurrent.Future
 import com.guys.coding.hackathon.backend.Services
 import com.guys.coding.hackathon.backend.domain.training.Training
 
@@ -43,10 +28,10 @@ class ChatActor(
 
   override def receiveCommand: Receive = initial
 
-  private def nextWorkoutFor(clientId: String) : Option[Training]={
-    services.trainingRepository.getNextTraining(clientId)
+  private def nextWorkoutFor(clientId: String): Option[Training] =
+    services.trainingRepository
+      .getNextTraining(clientId)
       .unsafeRunSync()
-  }
 
   def initial: Receive = {
     case FacebookRequest.Message(v) =>

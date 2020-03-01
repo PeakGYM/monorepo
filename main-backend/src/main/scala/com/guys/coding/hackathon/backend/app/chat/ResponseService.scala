@@ -1,4 +1,4 @@
-package com.guys.coding.bitehack.chat
+package com.guys.coding.wwh.chat
 
 import akka.Done
 import io.codeheroes.herochat.ChatResponse

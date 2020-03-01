@@ -1,9 +1,6 @@
-package com.guys.coding.bitehack.api.core
-
-import java.time.LocalDate
+package com.guys.coding.wwh.api.core
 
 import org.json4s.CustomSerializer
-import org.json4s.JsonAST.{JInt, JLong, JString}
 
 object DomainFormatters {
 

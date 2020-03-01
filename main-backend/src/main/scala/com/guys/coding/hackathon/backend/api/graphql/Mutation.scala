@@ -9,7 +9,6 @@ import cats.effect.IO
 import com.guys.coding.hackathon.backend.api.graphql.schema.gym.TrainingMutation
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.CoachMutation
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.ClientMutation
-import com.guys.coding.hackathon.backend.api.graphql.schema.user.ClientCoachCooperationQuery
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.ClientCoachCooperationMutation
 import com.guys.coding.hackathon.backend.api.graphql.schema.user.MeasurementMutation
 

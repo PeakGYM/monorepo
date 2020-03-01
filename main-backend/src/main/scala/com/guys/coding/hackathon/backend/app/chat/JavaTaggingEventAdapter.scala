@@ -1,4 +1,4 @@
-package com.guys.coding.bitehack.infrastructure.akka.persistence
+package com.guys.coding.wwh.infrastructure.akka.persistence
 
 import akka.persistence.journal.{EventAdapter, EventSeq, Tagged}
 import com.typesafe.scalalogging.StrictLogging
