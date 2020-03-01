@@ -23,6 +23,7 @@ let make = (~gym) => {
             className=TW.(
               [BoxShadow(ShadowMd), BorderRadius(RoundedLg)] |> make
             )
+            onClick={_ => Router.go(Router.SetupVisit(coach##id))}
             style={ReactDOMRe.Style.make(
               ~display="flex",
               ~justifyContent="left",

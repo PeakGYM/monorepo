@@ -146,3 +146,8 @@ module D = {
     React.element =
     "Select";
 };
+
+module DatePicker = {
+  [@react.component] [@bs.module "antd"]
+  external make: (~size: string=?) => React.element = "DatePicker";
+};

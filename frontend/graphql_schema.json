@@ -872,25 +872,25 @@
               "deprecationReason": null
             },
             {
-              "name": "Back",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "Chest",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "Arms",
+              "name": "Legs",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "Legs",
+              "name": "Back",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "Arms",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -1533,6 +1533,57 @@
                     "ofType": {
                       "kind": "INPUT_OBJECT",
                       "name": "WorkoutInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Workout",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "addTestWorkout",
+              "description": null,
+              "args": [
+                {
+                  "name": "from",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Long",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "coachId",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "clientId",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
                       "ofType": null
                     }
                   },

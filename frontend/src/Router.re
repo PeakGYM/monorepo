@@ -4,6 +4,7 @@ type t =
   | DayLog(string)
   | DayEdit(string)
   | Pick(string)
+  | SetupVisit(string)
   | Map;
 
 let toRoute = (v: ReasonReactRouter.url) => {
@@ -15,6 +16,7 @@ let toRoute = (v: ReasonReactRouter.url) => {
   | ["trainings", day, "edit"] => DayEdit(day)
   | ["pick", day] => Pick(day)
   | ["map"] => Map
+  | ["setup-visit", coachId] => SetupVisit(coachId)
   | _ => Main
   };
 };
@@ -26,39 +28,8 @@ let toUrl =
   | DayLog(day) => {j|/trainings/$day/log|j}
   | DayEdit(day) => {j|/trainings/$day/edit|j}
   | Pick(day) => {j|/pick/$day|j}
+  | SetupVisit(coachId) => {j|/setup-visit/$coachId|j}
   | Map => "/map";
-
-// let toKey =
-//   fun
-//   | TransferInListInternal => "0"
-//   | TransferInListExternal => "1"
-//   | TransferInSettle => "2"
-//   | TransferOutListInternal => "3"
-//   | TransferOutListExternal => "4"
-//   | TransferOutSettle => "5"
-//   | TransferOutPlanned => "6"
-//   | InternalTransferList => "7"
-//   | Balances => "8"
-//   | Modifications => "9"
-//   | Users => "10"
-//   | Settings => "11"
-//   | _ => "-1";
-
-// let fromKey =
-//   fun
-//   | "0" => Some(TransferInListInternal)
-//   | "1" => Some(TransferInListExternal)
-//   | "2" => Some(TransferInSettle)
-//   | "3" => Some(TransferOutListInternal)
-//   | "4" => Some(TransferOutListExternal)
-//   | "5" => Some(TransferOutSettle)
-//   | "6" => Some(TransferOutPlanned)
-//   | "7" => Some(InternalTransferList)
-//   | "8" => Some(Balances)
-//   | "9" => Some(Modifications)
-//   | "10" => Some(Users)
-//   | "11" => Some(Settings)
-//   | _ => None;
 
 let go = route => route->toUrl->ReasonReactRouter.push;
 

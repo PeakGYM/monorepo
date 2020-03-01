@@ -332,7 +332,6 @@ module View = {
         Day_Mutation.UpdateWorkout.definition,
       );
 
-    Js.log(state);
 
     <div>
       {state.exercises
@@ -376,36 +375,7 @@ let make = (~id) => {
     {switch (data) {
      | Data(data) =>
        let workout = data##workout;
-       Js.log(workout);
-       //  let workout =
-       //    Some({
-       //      id: "1",
-       //      name: "asd",
-       //      clientId: "2",
-       //      coachId: Some("2"),
-       //      dateFrom: Js.Date.now(),
-       //      dateTo: Js.Date.now(),
-       //      muscleGroup: [|`Arms|],
-       //      exercises: [|
-       //        {
-       //          id: "1",
-       //          exercise:
-       //            Some({
-       //              id: "1",
-       //              name: {j|Biceps - na ławeczce|j},
-       //              imgurl: defaultImg,
-       //            }),
 
-       //          plannedSeries: [|
-       //            {id: "1", reps: 12, rest: 30, weight: Some(70)},
-       //          |],
-       //          doneSeries: [|
-       //            {id: "1", reps: 12, rest: 30, weight: Some(70)},
-       //          |],
-       //          restAfter: 30,
-       //        },
-       //      |],
-       //    });
        workout
        ->Option.map(workout => <View workout defaultState=workout />)
        ->Option.getWithDefault(React.null);

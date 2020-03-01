@@ -1,5 +1,5 @@
 # source: https://api-wwh.codevillains.me/graphql
-# timestamp: Sun Mar 01 2020 02:22:35 GMT+0100 (Central European Standard Time)
+# timestamp: Sun Mar 01 2020 08:54:17 GMT+0100 (czas środkowoeuropejski standardowy)
 
 type Client {
   id: String!
@@ -77,16 +77,17 @@ type Measurement {
 
 enum MuscleGroup {
   Shoulders
-  Back
   Chest
-  Arms
   Legs
+  Back
+  Arms
 }
 
 type Mutation {
   addExample(example: ExampleInput!): CreateExampleResult!
   addWorkout(training: WorkoutInput!): Workout
   updateWorkout(training: WorkoutInput!): Workout
+  addTestWorkout(from: Long!, coachId: String, clientId: String!): Workout
   addCoach(coachName: String!, coachPictureUrl: String!): Coach!
   addClient(
     clientName: String!

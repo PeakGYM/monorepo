@@ -23,12 +23,12 @@ module Training = [%graphql
 |}
 ];
 
-let use = (~from, ~to_, ~clientId) => {
+let use = (~from, ~to_) => {
   let variables =
     Training.makeVariables(
       ~from=from->Time.toJSON,
       ~to_=to_->Time.toJSON,
-      ~clientId="3",
+      ~clientId="1",
       (),
     );
 

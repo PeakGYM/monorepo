@@ -52,7 +52,7 @@ let make = () => {
     React.useState(() => startMonth(MomentRe.momentNow()));
   let (to_, setTo) = React.useState(() => endMonth(MomentRe.momentNow()));
 
-  let (data, full) = Schedule_Query.use(~from, ~to_, ~clientId=None);
+  let (data, full) = Schedule_Query.use(~from, ~to_);
 
   <div className=TW.([Padding(P8)] |> make)>
     <Calendar

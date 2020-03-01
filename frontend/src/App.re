@@ -25,6 +25,7 @@ let make = () => {
            | DayLog(id) => <Day_Log_View id />
            | Pick(id) => <Pick_View id />
            | Map => <Map_View />
+           | SetupVisit(coachId) => <SetupVisit_View id=coachId />
            }}
         </div>
         <Navbar />

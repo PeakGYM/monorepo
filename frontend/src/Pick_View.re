@@ -37,5 +37,5 @@ let make = (~id) => {
                                           )}
                                         />
                                       </button>
-                                    </div> /*Loguje workout - wysyalem planned jakie bylo a done, dodajesz*/ /*Edytuje workout - to nie dodaje do zrobione, edytuje planned, done - nie rusza*/;
+                                    </div> /*Edytuje workout - to nie dodaje do zrobione, edytuje planned, done - nie rusza*/ /*Loguje workout - wysyalem planned jakie bylo a done, dodajesz*/;
 };
