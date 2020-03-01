@@ -24,7 +24,7 @@ import com.guys.coding.hackathon.backend.Services
 
 class ChatActor(
     id: FacebookSenderId,
-    services:Services,
+    services: Services
 ) extends PersistentActor
     with StrictLogging {
 
@@ -42,10 +42,15 @@ class ChatActor(
   override def receiveCommand: Receive = initial
 
   def initial: Receive = {
-    case FacebookRequest.Message(_) =>
+    case FacebookRequest.Message(v) =>
+      logger.info(s"received $v")
       logger.info(s"I AM [$id]")
       logger.info(s"I AM [$self]")
       sender ! Responses.helloMessage
+
+    case FacebookRequest.Location(lat, lng) =>
+      logger.info(s"lat $lat, lng $lng")
+      sender ! Responses.ok
 
   }
 }

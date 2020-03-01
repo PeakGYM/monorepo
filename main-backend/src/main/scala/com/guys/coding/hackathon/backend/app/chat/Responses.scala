@@ -10,17 +10,23 @@ import scala.util.Random
 object Responses {
 
   val helloMessage = QuickReplies(
-    "Would you like to raport an issue? 🤔",
+    "Where are you bro?",
     QR.Text("Yes ✔️", "FOUND_NEW_BUG"),
     QR.Text("Nope ❌", "NOTHING_NEW")
+    // find trainers neraby -> apke
+
+    // Get next training
+
+    // QR.Location // not working
   )
 
-  def giveMeMoreInfo(about: String): Simple =
+  def ok: Simple =
     Simple(
       Random
         .shuffle(
           List(
-            "ala"
+            "Ok",
+            "Cool"
           )
         )
         .head
