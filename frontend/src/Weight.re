@@ -1,5 +1,5 @@
 let toNumber = v =>
   switch (v) {
-  | Some(v) => Some(v / 10)
+  | Some(v) => Some(v)
   | None => None
   };

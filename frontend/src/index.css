@@ -45,3 +45,14 @@ button {
 .ant-checkbox-wrapper span {
   font-size: 36px;
 }
+
+.ant-steps-item-icon {
+  transform: scale(1.25);
+  transform-origin: 50% 50%;
+}
+
+.ant-steps-item-icon > .ant-steps-icon {
+  top: -4px;
+  transform: scale(1.5);
+  transform-origin: 50% 50%;
+}

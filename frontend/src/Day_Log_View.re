@@ -106,9 +106,9 @@ module Serie = {
           onChange={_ => {
             setChecked(change => !change);
             onDone(p.id, true);
-            update();
+            update() |> Js.Promise.then_(_ => {Js.Promise.resolve()}) |> ignore;
           }}>
-    <Text content="Done" />
+          <Text content="Done" />
         </Checkbox>
       </div>
       <div
@@ -227,6 +227,54 @@ module Exercise = {
               />
             </button>
           }>
+          <Steps.Steps
+            direction="vertical" current={exercise.doneSeries->Array.length}>
+            {exercise.doneSeries
+             ->Array.mapWithIndex((index, p) => {
+                 <Steps.Step
+                   title={
+                     <Text
+                       content={j|Series |j}
+                       style={ReactDOMRe.Style.make(~fontSize="36px", ())}
+                     />
+                   }
+                   description={
+                     <div
+                       className=TW.(
+                         [
+                           Display(Flex),
+                           Padding(P8),
+                           JustifyContent(JustifyBetween),
+                         ]
+                         |> make
+                       )>
+                       <Block
+                         title={j|Reps|j}
+                         value={Some(p.reps)}
+                         className={TW.Margin(Mx0)}
+                         type_=`none
+                         serieId={p.id}
+                       />
+                       <Block
+                         title={j|Weight|j}
+                         value={p.weight}
+                         className={TW.Margin(Mx8)}
+                         type_=`kg
+                         serieId={p.id}
+                       />
+                       <Block
+                         title={j|Rest|j}
+                         value={Some(p.rest)}
+                         className={TW.Margin(Mx0)}
+                         type_=`s
+                         serieId={p.id}
+                       />
+                     </div>
+                   }
+                 />
+               })
+             ->React.array}
+          </Steps.Steps>
           {exercise.plannedSeries
            ->Array.mapWithIndex((index, p) => {
                let index =
@@ -251,51 +299,21 @@ module Exercise = {
                    </React.Fragment>;
              })
            ->React.array}
-          {exercise.doneSeries
-           ->Array.mapWithIndex((index, p) => {
-               <>
-                 <Text
-                   content={j|Series |j}
-                   style={ReactDOMRe.Style.make(~fontSize="36px", ())}
-                 />
-                 <div
-                   className=TW.(
-                     [
-                       Display(Flex),
-                       Padding(P8),
-                       JustifyContent(JustifyBetween),
-                     ]
-                     |> make
-                   )>
-                   <Block
-                     title={j|Reps|j}
-                     value={Some(p.reps)}
-                     className={TW.Margin(Mx0)}
-                     type_=`none
-                     serieId={p.id}
-                   />
-                   <Block
-                     title={j|Weight|j}
-                     value={p.weight}
-                     className={TW.Margin(Mx8)}
-                     type_=`kg
-                     serieId={p.id}
-                   />
-                   <Block
-                     title={j|Rest|j}
-                     value={Some(p.rest)}
-                     className={TW.Margin(Mx0)}
-                     type_=`s
-                     serieId={p.id}
-                   />
-                 </div>
-               </>
-             })
-           ->React.array}
           <div className=TW.([TextAlign(TextCenter)] |> make)>
             <div className=TW.([TextAlign(TextCenter)] |> make)>
               <button
-                onClick={_ => update()}
+                onClick={_ =>
+                  update()
+                  |> Js.Promise.then_(_ => {
+                       Message.success({
+                         "content": {j|Succesfully updated|j},
+                         "icon": <Ok />,
+                         "top": 64,
+                       });
+                       Js.Promise.resolve();
+                     })
+                  |> ignore
+                }
                 className=TW.(
                   [
                     TextTransform(Uppercase),
@@ -463,18 +481,7 @@ module View = {
              onDone={(serieId, value) => {
                dispatch(SetDone(e.id, serieId, value))
              }}
-             update={() => {
-               mutation()
-               |> Js.Promise.then_(_ => {
-                    Message.success({
-                      "content": {j|Succesfully updated|j},
-                      "icon": <Ok />,
-                      "top": 64,
-                    });
-                    Js.Promise.resolve();
-                  })
-               |> ignore
-             }}
+             update={() => mutation()}
              exercise=e
              onRepeatChange={(serieId, value) =>
                dispatch(UpdateReps(e.id, serieId, value))
